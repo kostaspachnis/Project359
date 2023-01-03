@@ -1,0 +1,118 @@
+
+
+        <div id="form1">
+
+            <form id="post_books" onsubmit='postBook();return false;'>
+
+                <label for="isbn">ISBN:</label> <br>
+                <input type="text" id="isbn" name="isbn">
+
+                <br><br>
+
+                <label for="title">Title:</label> <br>
+                <input type="text" id="title" name="title">
+
+                <br><br>
+
+                <label for="authors">Authors:</label> <br>
+                <input type="text" id="authors" name="authors">
+
+                <br><br>
+
+                <label for="genre">Genre:</label> <br>
+                <input type="text" id="genre" name="genre">
+
+                <br><br>
+
+                <label for="pages">Pages:</label> <br>
+                <input type="number" id="pages" name="pages">
+
+                <br><br>
+
+                <label for="publicationyear">Publication Year:</label> <br>
+                <input type="number" id="publicationyear" name="publicationyear">
+
+                <br><br>
+
+                <label for="url">Url:</label> <br>
+                <input type="url" id="url" name="url">
+
+                <br><br>
+
+                <label for="photo">Photo:</label> <br>
+                <input type="url" id="photo" name="photo">
+
+                <br><br>
+               
+                <button type="submit" id="poster">Post Book</button> <br>
+                <div id = "out1"></div>
+            </form>
+
+        </div>
+
+
+
+        <div id="form2">
+
+            <form id="get_books" onsubmit='getBook();return false;'>
+
+                <label for="genre2">Genre:</label> <br>
+                <input type="text" id="genre2" name="genre2">
+
+                <br><br>
+
+                <label for="year1">Publication Year From:</label> <br>
+                <input id="year1" name="year1" type = "text">
+
+                <br><br>
+
+                <label for="year2">Publication Year To:</label> <br>
+                <input type="text" id="year2" name="year2">
+
+                <br><br>
+                <button type="submit" id="getter">Get Book</button> <br>
+                <div id = "out2"></div>
+                <div id = "output2"></div>
+            </form>
+
+        </div>
+
+
+
+
+        <div id="form3" onsubmit="updateBook();return false;">
+
+            <form id="put_books">
+
+                <label for="isbn3">ISBN:</label> <br>
+                <input type="text" id="isbn3" name="isbn3">
+
+                <br><br>
+
+                <label for="pages3">Pages:</label> <br>
+                <input type="text" id="pages3" name="pages3">
+
+                <br><br>
+                <button type="submit" id="updater">Update Book</button> <br>
+                <div id = "out3"></div>
+            </form>
+
+        </div>
+
+
+
+        <div id="form4" onsubmit="deleteBook();return false;">
+
+            <form id="delete_books">
+
+                <label for="isbn4">ISBN:</label> <br>
+                <input type="text" id="isbn4" name="isbn4">
+
+                <br><br>
+                
+                <button type="submit" id="deleter">Delete Book</button> <br>
+                <div id = "out4"></div>
+                
+            </form>
+
+        </div>

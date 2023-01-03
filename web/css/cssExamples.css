@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+}
+
+table, tr{
+    border: 2px solid black;
+    font-size: 11px;
+    text-align: center;
+    
+}
+.row {
+width:100%;
+ 
+}
+
+#form1{
+    margin: auto;
+    border: 2px solid;
+    border-color:black;
+    border-radius:8px;
+    background: white;
+    font-family: Verdana;
+}
+
+#form2{
+    margin: auto;
+    border: 2px solid;
+    border-color:black;
+    border-radius:8px;
+    background: white;
+    font-family: Verdana;
+}
+
+#form3{
+    margin: auto;
+    border: 2px solid;
+    border-color:black;
+    border-radius:8px;
+    background: white;
+    font-family: Verdana;
+}
+
+#form4{
+    margin: auto;
+    border: 2px solid;
+    border-color:black;
+    border-radius:8px;
+    background: white;
+    font-family: Verdana;
+}
+
+#welcome{
+    margin: auto;
+    border: 2px solid;
+    border-color:black;
+    border-radius:8px;
+    background: khaki;
+    font-family: Verdana;
+    width:1000px;
+    height:600px
+}
+
+img {
+    border:2px solid;
+    border-radius: 8px;
+    width: 800px;
+    height:400px;
+    
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  display:inline-block;
+  float: left;
+  padding: 10px;
+ /* 	text-align: center;*/
+  border: 5px solid black;
+  border-radius: 8px;
+  margin-right:2%;
+  margin-left:2%;
+  min-height:400px;
+}
+
+.column1Width {
+width: 30%;
+}
+
+.column3Width {
+width: 99%;
+}
+
+.column2Width {
+width: 60%;
+}
+
+.subColumn {
+float: left;
+  width: 45%;
+  padding: 10px;
+  border: 5px solid black;
+  border-radius: 8px;
+  margin-right:10px;
+  margin-left:10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+}
+
+
+
+h2{
+	text-align: center;
+}
+
+.button {
+  background-color: #ffffff; 
+  border: 5px solid black;
+  border-radius: 8px;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
