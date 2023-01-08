@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "XSServlet", urlPatterns = {"/XSServlet"})
 public class XSServlet extends HttpServlet {

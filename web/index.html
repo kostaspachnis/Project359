@@ -385,7 +385,7 @@
             <h1 style="text-align: center">Login Page</h1>
             <div class="row">
             <div class="column column1Width" id="choices" style="background-color:#ADD8E6;">           
-            <form id="loginForm" name="loginForm" onsubmit='getUser();return false;'>
+            <form id="loginForm" name="loginForm" onsubmit='login();return false;'>
                     <label for="username_log">username:</label><br>
                     <input type="text"  id="username_log" name="username_log" required><br>
                     <label for="password_log">password:</label><br>
@@ -401,19 +401,22 @@
         </div>
         </div>
         
+        <button type="button" onclick="getLibrarians()">Lib Admin</button> <br> <br>
+        
         <div id="logged_in" style="display:none">
             <button type="button" onclick="showUpdate()">My Account</button> <br> <br>
-            <button type="button" onclick="getBooks()">Available Books</button><br> <br>
-            <button type="button" onclick="logOut()">Logout</button>
+            <button type="button" onclick="booksGenreChart()">Available Books</button><br> <br>
+            <button type="button" onclick="studentTypeChart()">Logout</button> <br> <br>
+            <button type="button" onclick="booksInLibChart()">Malakai</button>
         </div>
         
         <br>
         
         <div id="update_user_info" style="display:none">
-            <form id="newForm" name="newForm" onsubmit="updateUser(); return false;">
+            <form id="newForm" name="newForm" onsubmit="deleteStudent(); return false;">
                 
                 <label for="username_new" style="display:none">username:</label><br>
-                <input id="username_new" type = "text" name="username_new" style="display:none">
+                <input id="username_new" type = "text" name="username_new">
                 <label for="password_new">Password:</label> <br> 
                 <input type="password" id="password_new" name="password_new" pattern="(?=^.{8,12}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="8" maxlength="12" title="8 to 12 characters, with at least one character, one number and one symbol" > 
                 <span id="message1"></span> <br> <br>

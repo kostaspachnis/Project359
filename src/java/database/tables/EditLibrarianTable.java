@@ -221,4 +221,66 @@ public class EditLibrarianTable {
         }
     }
 
+    // librariansToJson converter (Project Function)
+    public ArrayList<String> librariansToJson(ArrayList<Librarian> lbs) {
+        ArrayList<String> librarians = new ArrayList<String>();
+        for (int i = 0; i < lbs.size(); i++) {
+            Gson gson = new Gson();
+            String json = gson.toJson(lbs.get(i), Librarian.class);
+            librarians.add(json);
+        }
+        return librarians;
+    }
+
+    // Returns username, firstname and lastname of all librarians in a table (Project Function)
+    public ArrayList<Librarian> databaseToLibrariansAdmin() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Librarian> librarians = new ArrayList<Librarian>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT username, firstname, lastname FROM librarians");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                System.out.println(json);
+                Gson gson = new Gson();
+                Librarian librarian = gson.fromJson(json, Librarian.class);
+                librarians.add(librarian);
+            }
+            return librarians;
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    // Delete librarian from database (Project Function)
+    public void deleteLibrarian(String username) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        String update = "DELETE FROM librarians WHERE username='" + username + "'";
+        stmt.executeUpdate(update);
+    }
+
+    // (Project Function)
+    public Librarian databaseToLibrarianID(int id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM librarians WHERE library_id = '" + id + "'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            Librarian lib = gson.fromJson(json, Librarian.class);
+            return lib;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 }

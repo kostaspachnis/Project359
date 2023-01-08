@@ -1,5 +1,20 @@
 'use strict';
 
+var isAdmin = 0; // This var will be used in order to know when we can call
+                 // the admin functions
+// Admin Login or Normal Login (Project Function)
+function login() {
+    username = document.getElementById("username_log").value;
+    password = document.getElementById("password_log").value;
+    if(username.toString() === "admin" && password.toString() === "admin12*") {
+        document.getElementById("ajaxContent1").innerHTML = "Successful Login. Admin mode activated!";
+        isAdmin = 1;
+    }
+    else {
+        getUser();
+    }
+}
+
 function book_api(){
     document.getElementById("ex4").style.display = "block";
     $("#ex4").load("ex4.html");
@@ -87,7 +102,63 @@ function createBooksTableFromJSON(data) {
     }
     html += "</table>";
     return html;
+}
 
+// Create a table with ALL students or ALL librarians (Project Function)
+function createUsersTableFromJSON(data) {
+    var html = "<table><tr><th>username</th><th>firstname</th><th>lastname</th></tr>";
+    let yoho= data.toString();
+    let help = yoho.split("}"); 
+    
+    for(var i=0; i<help.length-1; i++){
+        html += "<tr>";
+        console.log(help.length);
+        let ok = help[i].concat("}");
+        let ok1 = ok.slice(1);
+        console.log(ok1);
+        let helper = JSON.parse(ok1.toString());   
+        for (const x in helper) {     
+                var value = helper[x];
+                html += "<td>" + value + "</td>";
+            }
+        html+="</tr>";
+    }
+    html += "</table>";
+    return html;
+}
+
+// Return the table with ALL students (Project Function)
+function getStudents() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("outputdiv").style.display="block";
+            $("#outputdiv").html(createUsersTableFromJSON((xhr.responseText)));
+        } else if (xhr.status !== 200) {
+             $("#ouputdiv").html("Error!");
+        }
+    };
+
+    xhr.open('GET', 'GetStudentsForAdmin?');
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+// Return the table with ALL librarians (Project Function)
+function getLibrarians() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("outputdiv").style.display="block";
+            $("#outputdiv").html(createUsersTableFromJSON((xhr.responseText)));
+        } else if (xhr.status !== 200) {
+             $("#ouputdiv").html("Error!");
+        }
+    };
+
+    xhr.open('GET', 'GetLibrariansForAdmin?');
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
 }
 
 function getBooks() {
@@ -126,7 +197,6 @@ function getUser() {
 }
 
 function updateUser() {
-    
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -142,6 +212,98 @@ function updateUser() {
     var data = $('#newForm').serialize();
     console.log(data);
     xhr.open('POST', 'UpdateUser?'+data);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+// Delete Student (Project Function)
+function deleteStudent() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("outputdive").style.display = "block";
+            document.getElementById("outputdive").innerHTML = "Success.";
+        } else if (xhr.status !== 200) {
+            document.getElementById("outputdive").style.display = "block";
+            document.getElementById("outputdive").innerHTML = "Failed."; 
+        }
+    };
+    var data = $('#newForm').serialize();
+    console.log(data);
+    xhr.open('POST', 'DeleteStudentForAdmin?'+data);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+// Delete Librarian (Project Function)
+function deleteLibrarian() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("outputdive").style.display = "block";
+            document.getElementById("outputdive").innerHTML = "Success.";
+        } else if (xhr.status !== 200) {
+            document.getElementById("outputdive").style.display = "block";
+            document.getElementById("outputdive").innerHTML = "Failed."; 
+        }
+    };
+    var data = $('#newForm').serialize();
+    console.log(data);
+    xhr.open('POST', 'DeleteLibrarianForAdmin?'+data);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+// Pie Chart for Books Genre (Project Function)
+function booksGenreChart() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("update_user_info").style.display = "none";
+            document.getElementById("outputdiv").style.display="block";
+            $("#outputdiv").html(xhr.responseText);
+        } else if (xhr.status !== 200) {
+             $("#ouputdiv").html("Error!");
+        }
+    };
+
+    xhr.open('GET', 'GetBooksGenreForAdmin?');
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+// Pie Chart for Student Type (Project Function)
+function studentTypeChart() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("update_user_info").style.display = "none";
+            document.getElementById("outputdiv").style.display="block";
+            $("#outputdiv").html(xhr.responseText);
+        } else if (xhr.status !== 200) {
+             $("#ouputdiv").html("Error!");
+        }
+    };
+
+    xhr.open('GET', 'GetStudentsTypeForAdmin?');
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+// Pie Chart for Books In Libraries (Project Function)
+function booksInLibChart() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("update_user_info").style.display = "none";
+            document.getElementById("outputdiv").style.display="block";
+            $("#outputdiv").html(xhr.responseText);
+        } else if (xhr.status !== 200) {
+             $("#ouputdiv").html("Error!");
+        }
+    };
+
+    xhr.open('GET', 'GetBooksInEachLibraryForAdmin?');
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }

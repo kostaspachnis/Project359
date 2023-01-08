@@ -8,14 +8,13 @@ package database.tables;
 import com.google.gson.Gson;
 import database.tables.EditBooksTable;
 import database.DB_Connection;
-import database.tables.EditReviewsTable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mainClasses.Book;
 import mainClasses.BookInLibrary;
 
 /**
@@ -115,4 +114,28 @@ public class EditBooksInLibraryTable {
             Logger.getLogger(EditBooksTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    // (Project Function)
+    public ArrayList<BookInLibrary> databaseToBooksInLibrary() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<BookInLibrary> bkl = new ArrayList<BookInLibrary>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM booksinlibraries");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                BookInLibrary tr = gson.fromJson(json, BookInLibrary.class);
+                bkl.add(tr);
+            }
+            return bkl;
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
 }

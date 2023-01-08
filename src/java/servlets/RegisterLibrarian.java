@@ -18,7 +18,7 @@ import mainClasses.Librarian;
 import database.tables.EditStudentsTable;
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "RegisterLibrarian", urlPatterns = {"/RegisterLibrarian"})
 public class RegisterLibrarian extends HttpServlet {
