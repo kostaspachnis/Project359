@@ -308,6 +308,27 @@ function booksInLibChart() {
     xhr.send();
 }
 
+// Add new Book in the library (Project Function)
+function InsertNewBook() {
+    let bookForm = document.getElementById('bookForm');
+    let formData = new FormData(bookForm);
+    const data = {}
+    formData.forEach((value, key) => (data[key] = value));
+    var jsonData = JSON.stringify(data);
+    var xhr = new XMLHttpRequest();
+    
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+                $('#ajaxContent').html("Successful Book Insertion!");
+            } else if (xhr.status !== 200) {
+                $('#ajaxContent').html("ERROR!");
+            }
+        };
+    xhr.open('POST', 'InsertBookForLibrarian');
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send(jsonData);
+}
+
 function RegisterNewStudent() {
     if(document.getElementById("user_type").value === "student"){
         let myForm = document.getElementById('myForm');
