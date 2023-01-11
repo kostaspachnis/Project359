@@ -7,8 +7,6 @@ function createUsersTableFromJSON() {
 
     getStudents();
     getLibrarians();
-
-    return html;
 }
 
 function createInnerUsersTableFromJSON(data) {
