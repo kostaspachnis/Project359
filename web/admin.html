@@ -32,7 +32,16 @@
     <div class="top_container">
 
 
-        <p id="usersTable"></p>
+        <div id="usersTableDiv" style="display:none; text-align: center;">
+        
+            <table id="usersTable" class="table table-striped">
+                <tr>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                </tr>
+            </table>
+        </div>
 
         <script onload="createUsersTableFromJSON();"></script>
     
