@@ -137,5 +137,24 @@ public class EditBooksInLibraryTable {
         }
         return null;
     }
+    
+    // Returns a book in library based on ISBN (Project Function)
+    public BookInLibrary databaseToBookInLibraryISBN(String isbn) throws SQLException, ClassNotFoundException{
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM booksinlibraries WHERE isbn= '" + isbn + "'");
+            rs.next();
+            String json=DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            BookInLibrary tr  = gson.fromJson(json, BookInLibrary.class);
+            return tr;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 
 }

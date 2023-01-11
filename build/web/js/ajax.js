@@ -178,6 +178,7 @@ function getBooks() {
     xhr.send();
 }
 
+// Returns the logged in student or librarian (servlet name is wrong)
 var name_global="";
 function getUser() {
     var xhr = new XMLHttpRequest();
@@ -196,6 +197,7 @@ function getUser() {
     xhr.send();
 }
 
+// Update User (Project Function)
 function updateUser() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -212,6 +214,27 @@ function updateUser() {
     var data = $('#newForm').serialize();
     console.log(data);
     xhr.open('POST', 'UpdateUser?'+data);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+// Update Librarian (Project Function)
+function updateLibrarian() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("outputdive").style.display = "block";
+            document.getElementById("outputdive").innerHTML = "Success.";
+            $("#ajaxContent1").html(createTableFromJSON(JSON.parse(xhr.responseText)));
+        } else if (xhr.status !== 200) {
+            document.getElementById("outputdive").style.display = "block";
+            document.getElementById("outputdive").innerHTML = "Failed."; 
+        }
+    };
+    document.getElementById("username_new").value = name_global;
+    var data = $('#newForm').serialize();
+    console.log(data);
+    xhr.open('POST', 'UpdateLibrarian?'+data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }

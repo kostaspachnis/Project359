@@ -382,4 +382,24 @@ public class EditLibrarianTable {
         String update = "UPDATE librarians SET personalpage='" + pp + "' WHERE username = '" + username + "'";
         stmt.executeUpdate(update);
     }
+    
+    // Returns the library_id of a librarian (Project Function)
+    public Librarian databaseToLibrarianId(String username) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT library_id FROM librarians WHERE username = '" + username + "'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            Librarian lib = gson.fromJson(json, Librarian.class);
+            return lib;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 }

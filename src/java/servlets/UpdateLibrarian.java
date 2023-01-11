@@ -68,7 +68,8 @@ public class UpdateLibrarian extends HttpServlet {
         String address = request.getParameter("address_new");
         String personalpage = request.getParameter("personalpage_new");
         String gender = request.getParameter("gender_new");
-        String birthdate = request.getParameter("birthdate_new");
+        String libname = request.getParameter("libname_new");
+        String libinfo = request.getParameter("libinfo_new");
         String country = request.getParameter("country_new");
         String city = request.getParameter("city_new");
         String phone = request.getParameter("telephone_new");
@@ -82,7 +83,10 @@ public class UpdateLibrarian extends HttpServlet {
         EditLibrarianTable libTable = new EditLibrarianTable();
 
         try {
-
+            
+            if(!email.equals(""))
+                   libTable.updateLibrarianEmail(username, email);
+            
             if (!password.equals("")) {
                 libTable.updateLibrarianPass(username, password);
             }
@@ -99,39 +103,40 @@ public class UpdateLibrarian extends HttpServlet {
                 libTable.updateLibrarianSex(username, gender);
             }
 
-            if (!birthdate.equals("")) {
-                libTable.updateLi(username, birthdate);
+            if (!libname.equals("")) {
+                libTable.updateLibrarianLibname(username, libname);
+            }
+            
+            if (!libinfo.equals("")) {
+                libTable.updateLibrarianLibinfo(username, libinfo);
             }
 
             if (!country.equals("")) {
-                libTable.updateStudentCountry(username, country);
+                libTable.updateLibrarianCountry(username, country);
             }
 
             if (!city.equals("")) {
-                libTable.updateStudentCity(username, city);
+                libTable.updateLibrarianCity(username, city);
             }
             if (!firstname.equals("")) {
-                libTable.updateStudentFN(username, firstname);
+                libTable.updateLibrarianFN(username, firstname);
             }
 
             if (!lastname.equals("")) {
-                libTable.updateStudentLN(username, lastname);
+                libTable.updateLibrarianLN(username, lastname);
             }
             if (!phone.equals("")) {
-                libTable.updateStudentPhone(username, phone);
+                libTable.updateLibrarianTel(username, phone);
             }
 
             if (!lon.equals("")) {
-                libTable.updateStudentLon(username, lon);
+                libTable.updateLibrarianLon(username, lon);
             }
 
             if (!lat.equals("")) {
-                libTable.updateStudentLat(username, lat);
+                libTable.updateLibrarianLat(username, lat);
             }
 
-            student = libTable.databaseToStudent_ret(username);
-            String output = libTable.studentToJSON(student);
-            out.print(output);
             response.setStatus(200);
 
         } catch (ClassNotFoundException | SQLException e) {
