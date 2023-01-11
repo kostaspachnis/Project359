@@ -18,7 +18,7 @@ import mainClasses.Student;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "UpdateUser", urlPatterns = {"/UpdateUser"})
 public class UpdateUser extends HttpServlet {

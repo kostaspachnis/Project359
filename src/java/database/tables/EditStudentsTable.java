@@ -5,6 +5,7 @@
  */
 package database.tables;
 
+import java.util.ArrayList;
 import mainClasses.Student;
 import com.google.gson.Gson;
 import database.DB_Connection;
@@ -264,7 +265,7 @@ public class EditStudentsTable {
     }
 
 
-     public void createStudentsTable() throws SQLException, ClassNotFoundException {
+    public void createStudentsTable() throws SQLException, ClassNotFoundException {
 
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
@@ -346,6 +347,68 @@ public class EditStudentsTable {
         }
     }
 
-   
+    // studentsToJson converter (Project Function)
+    public ArrayList<String> studentsToJson(ArrayList<Student> stds) {
+        ArrayList<String> students = new ArrayList<String>();
+        for (int i = 0; i < stds.size(); i++) {
+            Gson gson = new Gson();
+            String json = gson.toJson(stds.get(i), Student.class);
+            students.add(json);
+        }
+        return students;
+    }
 
+    // Returns username, firstname and lastname of all students in a table (Project Function)
+    public ArrayList<Student> databaseToStudentsAdmin() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Student> students = new ArrayList<Student>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT username, firstname, lastname FROM students");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Student student = gson.fromJson(json, Student.class);
+                students.add(student);
+            }
+            return students;
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    // Delete student from database (Project Function)
+    public void deleteStudent(String username) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        String update = "DELETE FROM students WHERE username='" + username + "'";
+        stmt.executeUpdate(update);
+    }
+
+    // Returns all students in a table (Project Function)
+    public ArrayList<Student> databaseToStudents() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Student> students = new ArrayList<Student>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM students");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Student student = gson.fromJson(json, Student.class);
+                students.add(student);
+            }
+            return students;
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 }

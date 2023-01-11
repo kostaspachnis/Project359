@@ -19,7 +19,7 @@ import mainClasses.Student;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "RegisterStudent", urlPatterns = {"/RegisterStudent"})
 public class RegisterStudent extends HttpServlet {
