@@ -12,6 +12,7 @@ function createUsersTableFromJSON() {
 function createInnerUsersTableFromJSON(data) {
     var html = "";
     let yoho= data.toString();
+    console.log(data);
     let help = yoho.split("}"); 
     
     for(var i=0; i<help.length-1; i++){
