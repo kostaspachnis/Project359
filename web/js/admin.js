@@ -3,14 +3,12 @@
 
 function createUsersTableFromJSON() {
 
-    var html = "<table class=\"table table-striped\"><tr><th>username</th><th>firstname</th><th>lastname</th></tr>";
+    getStudents();
+    getLibrarians();
 
-    html += getStudents();
-    html += getLibrarians();
+    document.getElementById("usersTableDiv").style.display="block";
 
-    html += "</table>";
-
-    document.getElementById("usersTable").innerHTML = html;
+    return html;
 }
 
 function createInnerUsersTableFromJSON(data) {
@@ -39,10 +37,9 @@ function getStudents() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById("outputdiv").style.display="block";
-            $("#outputdiv").html(createInnerUsersTableFromJSON((xhr.responseText)));
+            $("#usersTable tr:last").after(createInnerUsersTableFromJSON((xhr.responseText)));
         } else if (xhr.status !== 200) {
-             $("#ouputdiv").html("Error!");
+             $("#usersTable").html("Error!");
         }
     };
 
@@ -57,10 +54,9 @@ function getLibrarians() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById("outputdiv").style.display="block";
-            $("#outputdiv").html(createUsersTableFromJSON((xhr.responseText)));
+            $("#usersTable tr:last").after(createInnerUsersTableFromJSON((xhr.responseText)));
         } else if (xhr.status !== 200) {
-             $("#ouputdiv").html("Error!");
+             $("#usersTable").html("Error!");
         }
     };
 
