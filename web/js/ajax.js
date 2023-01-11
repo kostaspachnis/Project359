@@ -178,6 +178,24 @@ function getBooks() {
     xhr.send();
 }
 
+// Return the available books for the guest user (Project Function)
+function getBooksGuest() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("update_user_info").style.display = "none";
+            document.getElementById("outputdiv").style.display="block";
+            $("#outputdiv").html(createBooksTableFromJSON((xhr.responseText)));
+        } else if (xhr.status !== 200) {
+             $("#ouputdiv").html("Error!");
+        }
+    };
+
+    xhr.open('GET', 'GuestUserShowBooks?');
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
 // Returns the logged in student or librarian (servlet name is wrong)
 var name_global="";
 function getUser() {
