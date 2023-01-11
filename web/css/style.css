@@ -1,0 +1,22 @@
+
+
+nav {
+    padding: 0px;
+    margin: 0px;
+    background-color: #181D31;
+}
+
+
+
+.top_container {
+    background-color: #E6DDC4;
+    position: relative;
+    padding-top: 100px;
+}
+
+
+#nav_name {
+    color: #E6DDC4;
+    margin-left: 2%;
+}
+
