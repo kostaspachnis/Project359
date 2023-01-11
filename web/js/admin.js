@@ -3,10 +3,12 @@
 
 function createUsersTableFromJSON() {
 
+    document.getElementById("usersTableDiv").style.display="block";
+
+    $("#usersTable tr:last").after("<tr><td>petrosTsal</td><td>Petros</td><td>Tsalikis</td></tr>");
+
     getStudents();
     getLibrarians();
-
-    document.getElementById("usersTableDiv").style.display="block";
 
     return html;
 }
