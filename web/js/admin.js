@@ -9,7 +9,8 @@ function createUsersTableFromJSON() {
     html += getLibrarians();
 
     html += "</table>";
-    return html;
+
+    document.getElementById("usersTable").innerHTML = html;
 }
 
 function createInnerUsersTableFromJSON(data) {
