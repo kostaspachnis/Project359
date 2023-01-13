@@ -1,0 +1,36 @@
+
+
+body {
+    margin: 0px;
+    text-align: center;
+    color: #40514E;
+}
+
+h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    padding: 30px;
+    color: #181D31!important;
+}
+
+
+.top_container {
+    background-color: #E6DDC4;
+    position: relative;
+    padding-top: 100px;
+    padding-bottom: 20%;
+}
+
+.bottom_container {
+    background-color: #678983;
+    position: relative;
+    padding-top: 100px;
+}
+
+
+#loginDiv {
+    padding: 0 40%;
+}
+
+

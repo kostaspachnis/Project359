@@ -1,5 +1,15 @@
 
+function authenticate() {
+    
+    var user = document.getElementById("username").value;
+    var pass = document.getElementById("password").value;
 
+    if(user === "admin" && pass === "admin12*") {
+        createUsersTableFromJSON();
+        document.getElementById("loginDiv").style.display="none";
+        document.getElementById("adminDiv").style.display="block";
+    }
+}
 
 function createUsersTableFromJSON() {
 
