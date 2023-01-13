@@ -239,7 +239,7 @@ public class EditLibrarianTable {
         ArrayList<Librarian> librarians = new ArrayList<Librarian>();
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT username, firstname, lastname FROM librarians");
+            rs = stmt.executeQuery("SELECT library_id, username, firstname, lastname FROM librarians");
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 System.out.println(json);

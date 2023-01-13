@@ -365,7 +365,7 @@ public class EditStudentsTable {
         ArrayList<Student> students = new ArrayList<Student>();
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT username, firstname, lastname FROM students");
+            rs = stmt.executeQuery("SELECT user_id, username, firstname, lastname FROM students");
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 Gson gson = new Gson();

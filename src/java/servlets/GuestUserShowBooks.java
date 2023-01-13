@@ -5,13 +5,21 @@
  */
 package servlets;
 
+import database.tables.EditBooksInLibraryTable;
+import database.tables.EditBooksTable;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mainClasses.Book;
+import mainClasses.BookInLibrary;
 
 /**
  *
@@ -31,19 +39,6 @@ public class GuestUserShowBooks extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GuestUserShowBooks</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GuestUserShowBooks at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,7 +53,38 @@ public class GuestUserShowBooks extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        response.setContentType("text/html;charset=UTF-8");
+
+        try (PrintWriter out = response.getWriter()) {
+            EditBooksInLibraryTable blt = new EditBooksInLibraryTable();
+            EditBooksTable bt = new EditBooksTable();
+            ArrayList<BookInLibrary> bltList = blt.databaseToBooksInLibraryAvailable();
+            ArrayList<Book> btList = new ArrayList<>();
+
+            for (int i = 0; i < bltList.size(); i++) {
+                String isbn = bltList.get(i).getIsbn();
+                Book book = bt.databaseToBooksISBNBook(isbn);
+
+                if (btList.contains(book)) {
+                    continue;
+                } else {
+                    btList.add(book);
+                }
+            }
+
+            if (!btList.isEmpty()) {
+                response.setStatus(200);
+                out.println(bt.booksToJson(btList));
+            } else {
+                response.setStatus(403);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GuestUserShowBooks.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GuestUserShowBooks.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -72,7 +98,7 @@ public class GuestUserShowBooks extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // processRequest(request, response);
     }
 
     /**

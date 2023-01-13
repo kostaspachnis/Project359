@@ -157,4 +157,27 @@ public class EditBooksInLibraryTable {
         return null;
     }
 
+    // Returns all available books (Project Function)
+    public ArrayList<BookInLibrary> databaseToBooksInLibraryAvailable() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<BookInLibrary> bkl = new ArrayList<BookInLibrary>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM booksinlibraries where available=true");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                BookInLibrary tr = gson.fromJson(json, BookInLibrary.class);
+                bkl.add(tr);
+            }
+            return bkl;
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
 }
