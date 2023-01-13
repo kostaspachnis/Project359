@@ -102,7 +102,7 @@ function drawChart() {
     var options = {'title':'Browser market shares at a specific website, 2014', 'width':550, 'height':400};
 
     // Instantiate and draw the chart.
-    var chart = new google.visualization.PieChart(document.getElementById ('container'));
+    var chart = new google.visualization.PieChart(document.getElementById ("booksPerLibDiv"));
     chart.draw(data, options);
  }
  google.charts.setOnLoadCallback(drawChart);
