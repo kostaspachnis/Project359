@@ -5,18 +5,11 @@ function authenticate() {
     var pass = document.getElementById("password").value;
 
     if(user === "admin" && pass === "admin12*") {
-        createUsersTableFromJSON();
+        getStudents();
+        getLibrarians();
         document.getElementById("loginDiv").style.display="none";
         document.getElementById("adminDiv").style.display="block";
     }
-}
-
-function createUsersTableFromJSON() {
-
-    document.getElementById("usersTableDiv").style.display="block";
-
-    getStudents();
-    getLibrarians();
 }
 
 function createInnerUsersTableFromJSON(data) {
@@ -46,9 +39,9 @@ function getStudents() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            $("#usersTable tr:last").after(createInnerUsersTableFromJSON((xhr.responseText)));
+            $("#studentsTable tr:last").after(createInnerUsersTableFromJSON((xhr.responseText)));
         } else if (xhr.status !== 200) {
-             $("#usersTable").html("Error!");
+             $("#studentsTable").html("Error!");
         }
     };
 
@@ -63,9 +56,9 @@ function getLibrarians() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            $("#usersTable tr:last").after(createInnerUsersTableFromJSON((xhr.responseText)));
+            $("#librariansTable tr:last").after(createInnerUsersTableFromJSON((xhr.responseText)));
         } else if (xhr.status !== 200) {
-             $("#usersTable").html("Error!");
+             $("#librariansTable").html("Error!");
         }
     };
 
