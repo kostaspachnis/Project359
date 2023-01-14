@@ -88,7 +88,7 @@ function drawChart() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Library');
     data.addColumn('number', 'Percentage');
-    data.addRows($("#booksPerLibP").value());
+    data.addRows(document.getElementById("booksPerLibP").value);
     
     // Set chart options
     var options = {'title':'Books per Library', 'width':550, 'height':400};
