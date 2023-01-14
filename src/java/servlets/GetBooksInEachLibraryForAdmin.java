@@ -97,7 +97,9 @@ public class GetBooksInEachLibraryForAdmin extends HttpServlet {
                     result.put(s, (k == null) ? 1 : k + 1);
                 }
 
-                out.println(result);
+                Gson gson = new Gson();
+                String json = gson.toJson(result, Map.class);
+                out.println(json);
             } else {
                 response.setStatus(403);
             }
