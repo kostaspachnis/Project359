@@ -8,7 +8,6 @@ function authenticate() {
     if(user === "admin" && pass === "admin12*") {
         getStudents();
         getLibrarians();
-        getNoBooksPerLibrary();
         document.getElementById("loginDiv").style.display="none";
         document.getElementById("adminDiv").style.display="block";
     }
