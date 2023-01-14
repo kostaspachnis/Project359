@@ -82,7 +82,7 @@ function drawLibraryChart() {
         data.addRow([table[i][0], parseInt(table[i][1])]);
     }
     // Set chart options
-    var options = {'title':'Books per Library', 'width':550, 'height':400};
+    var options = {'title':'Books per Library', 'width':550, 'height':400, 'backgroundColor': '#E6DDC4', 'is3D': true};
 
     // Instantiate and draw the chart.
     var chart = new google.visualization.PieChart(document.getElementById ("booksPerLibDiv"));
@@ -98,7 +98,7 @@ function drawGenreChart() {
         data.addRow([table[i][0], parseInt(table[i][1])]);
     }
     // Set chart options
-    var options = {'title':'Books per Genre', 'width':550, 'height':400};
+    var options = {'title':'Books per Genre', 'width':550, 'height':400, 'backgroundColor': '#E6DDC4', 'is3D': true};
 
     // Instantiate and draw the chart.
     var chart = new google.visualization.PieChart(document.getElementById ("booksPerCatDiv"));
@@ -114,7 +114,7 @@ function drawStudentsChart() {
         data.addRow([table[i][0], parseInt(table[i][1])]);
     }
     // Set chart options
-    var options = {'title':'Students per Type', 'width':550, 'height':400};
+    var options = {'title':'Students per Type', 'width':550, 'height':400, 'backgroundColor': '#E6DDC4', 'is3D': true};
 
     // Instantiate and draw the chart.
     var chart = new google.visualization.PieChart(document.getElementById ("studentChartDiv"));

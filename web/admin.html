@@ -80,73 +80,73 @@
                 </table>
             </div>
 
-            <div id="booksPerLibDiv">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12" id="booksPerLibDiv">
 
-                <script id="booksPerLibScript" language="JavaScript">
-                    function getNoBooksPerLibrary() {
-    
-                        var xhr = new XMLHttpRequest();
-                        xhr.onload = function () {
-                            if (xhr.readyState === 4 && xhr.status === 200) {
-                                table = Object.entries(JSON.parse(xhr.responseText));
-                                google.charts.setOnLoadCallback(drawLibraryChart);
-                            } else if (xhr.status !== 200) {
-                                alert('Request failed.  Returned status of ' + xhr.status);
-                            }
-                        };
-    
-                        xhr.open('GET', 'GetBooksInEachLibraryForAdmin?');
-                        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-                        xhr.send();
-                    }
-                </script>
-
-            </div>
-            
-            <div id="booksPerCatDiv">
-                <script id="booksPerCatScript" language="JavaScript">
-                    function getNoBooksPerCategory() {
-    
-                        var xhr = new XMLHttpRequest();
-                        xhr.onload = function () {
-                            if (xhr.readyState === 4 && xhr.status === 200) {
-                                table = Object.entries(JSON.parse(xhr.responseText));
-                                google.charts.setOnLoadCallback(drawGenreChart);
-                            } else if (xhr.status !== 200) {
-                                alert('Request failed.  Returned status of ' + xhr.status);
-                            }
-                        };
-
-                        xhr.open('GET', 'GetBooksGenreForAdmin?');
-                        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-                        xhr.send();
-                    }
-                </script>
-
-            </div>
-
-            
-            <h2>Student chart</h2>
-            <div id="studentChartDiv">
-                <script language="JavaScript">
-                    function getNoStudentsPerType() {
-    
-                        var xhr = new XMLHttpRequest();
-                        xhr.onload = function () {
-                            if (xhr.readyState === 4 && xhr.status === 200) {
-                                table = Object.entries(JSON.parse(xhr.responseText));
-                                google.charts.setOnLoadCallback(drawStudentsChart);
-                            } else if (xhr.status !== 200) {
-                                alert('Request failed.  Returned status of ' + xhr.status);
-                            }
-                        };
-
-                        xhr.open('GET', 'GetStudentsTypeForAdmin?');
-                        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-                        xhr.send();
-                    }
-                </script>
+                    <script id="booksPerLibScript" language="JavaScript">
+                        function getNoBooksPerLibrary() {
         
+                            var xhr = new XMLHttpRequest();
+                            xhr.onload = function () {
+                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                    table = Object.entries(JSON.parse(xhr.responseText));
+                                    google.charts.setOnLoadCallback(drawLibraryChart);
+                                } else if (xhr.status !== 200) {
+                                    alert('Request failed.  Returned status of ' + xhr.status);
+                                }
+                            };
+        
+                            xhr.open('GET', 'GetBooksInEachLibraryForAdmin?');
+                            xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                            xhr.send();
+                        }
+                    </script>
+
+                </div>
+                
+                <div class="col-lg-4 col-md-6 col-sm-12" id="booksPerCatDiv">
+                    <script id="booksPerCatScript" language="JavaScript">
+                        function getNoBooksPerCategory() {
+        
+                            var xhr = new XMLHttpRequest();
+                            xhr.onload = function () {
+                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                    table = Object.entries(JSON.parse(xhr.responseText));
+                                    google.charts.setOnLoadCallback(drawGenreChart);
+                                } else if (xhr.status !== 200) {
+                                    alert('Request failed.  Returned status of ' + xhr.status);
+                                }
+                            };
+
+                            xhr.open('GET', 'GetBooksGenreForAdmin?');
+                            xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                            xhr.send();
+                        }
+                    </script>
+
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12" id="studentChartDiv">
+                    <script language="JavaScript">
+                        function getNoStudentsPerType() {
+        
+                            var xhr = new XMLHttpRequest();
+                            xhr.onload = function () {
+                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                    table = Object.entries(JSON.parse(xhr.responseText));
+                                    google.charts.setOnLoadCallback(drawStudentsChart);
+                                } else if (xhr.status !== 200) {
+                                    alert('Request failed.  Returned status of ' + xhr.status);
+                                }
+                            };
+
+                            xhr.open('GET', 'GetStudentsTypeForAdmin?');
+                            xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                            xhr.send();
+                        }
+                    </script>
+            
+                </div>
             </div>
 
             
