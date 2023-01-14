@@ -53,7 +53,10 @@ function deleteStudent(btn) {
         }
     };
 
-    xhr.open('POST', 'DeleteStudentForAdmin?');
+    var data = $("#delete_username").serialize();
+
+
+    xhr.open('POST', 'DeleteStudentForAdmin?' + data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
@@ -72,7 +75,9 @@ function deleteLibrarian(btn) {
         }
     };
 
-    xhr.open('POST', 'DeleteLibrarianForAdmin?');
+    var data = $("#delete_username").serialize();
+
+    xhr.open('POST', 'DeleteLibrarianForAdmin?' + data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
