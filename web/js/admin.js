@@ -1,3 +1,4 @@
+var booksperlibTable;
 
 function authenticate() {
     
@@ -72,7 +73,7 @@ function getNoBooksPerLibrary() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            $("#booksPerLibP").html(new Array(Object.entries(JSON.parse(xhr.responseText))));
+            booksperlibTable = new Array(Object.entries(JSON.parse(xhr.responseText)));
         } else if (xhr.status !== 200) {
             $("#booksPerLibP").html("Error!");
         }
@@ -88,7 +89,7 @@ function drawChart() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Library');
     data.addColumn('number', 'Percentage');
-    data.addRows(document.getElementById("booksPerLibP").value);
+    data.addRows(booksperlibTable);
     
     // Set chart options
     var options = {'title':'Books per Library', 'width':550, 'height':400};
