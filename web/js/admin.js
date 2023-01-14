@@ -73,7 +73,7 @@ function getNoBooksPerLibrary() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            booksperlibTable = new Array(Object.entries(JSON.parse(xhr.responseText)));
+            booksperlibTable = Object.entries(JSON.parse(xhr.responseText));
             console.log(booksperlibTable);
         } else if (xhr.status !== 200) {
             $("#booksPerLibP").html("Error!");
