@@ -103,9 +103,6 @@
 
             </div>
             
-            
-
-            <h2>Books per category</h2>
             <div id="booksPerCatDiv">
                 <script id="booksPerCatScript" language="JavaScript">
                     function getNoBooksPerCategory() {
@@ -114,7 +111,7 @@
                         xhr.onload = function () {
                             if (xhr.readyState === 4 && xhr.status === 200) {
                                 table = Object.entries(JSON.parse(xhr.responseText));
-                                google.charts.setOnLoadCallback(drawChart);
+                                google.charts.setOnLoadCallback(drawLibraryChart);
                             } else if (xhr.status !== 200) {
                                 alert('Request failed.  Returned status of ' + xhr.status);
                             }
@@ -130,11 +127,30 @@
 
             
             <h2>Student chart</h2>
-            <div id="studentChartDiv"></div>
+            <div id="studentChartDiv">
+                <script language="JavaScript">
+                    google.charts.setOnLoadCallback(drawChart3);
+                    function getNoBooksPerCategory() {
+    
+                        var xhr = new XMLHttpRequest();
+                        xhr.onload = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                table = Object.entries(JSON.parse(xhr.responseText));
+                                google.charts.setOnLoadCallback(drawGenreChart);
+                            } else if (xhr.status !== 200) {
+                                alert('Request failed.  Returned status of ' + xhr.status);
+                            }
+                        };
 
-            <script language="JavaScript">
-                google.charts.setOnLoadCallback(drawChart3);
-            </script>
+                        xhr.open('GET', 'GetBooksGenreForAdmin?');
+                        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                        xhr.send();
+                    }
+                </script>
+        
+            </div>
+
+            
 
         </div>
 
