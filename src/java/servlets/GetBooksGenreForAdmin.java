@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import com.google.gson.Gson;
 import database.tables.EditBooksTable;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -81,6 +82,8 @@ public class GetBooksGenreForAdmin extends HttpServlet {
                     }
                     genreCounts.put(genre, genre_count);
                 }
+                Gson gson = new Gson();
+                String json = gson.toJson(genreCounts, Dictionary.class);
                 out.println(genreCounts);
             } else {
                 response.setStatus(403);

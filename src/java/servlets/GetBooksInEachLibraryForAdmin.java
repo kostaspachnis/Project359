@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import com.google.gson.Gson;
 import database.tables.EditBooksInLibraryTable;
 import database.tables.EditBooksTable;
 import database.tables.EditLibrarianTable;

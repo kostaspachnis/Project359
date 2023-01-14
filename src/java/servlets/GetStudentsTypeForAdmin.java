@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import com.google.gson.Gson;
 import database.tables.EditStudentsTable;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -82,6 +83,8 @@ public class GetStudentsTypeForAdmin extends HttpServlet {
                 result.add("PHd");
                 result.add(Integer.toString(phd));
 
+                Gson gson = new Gson();
+                String json = gson.toJson(result, ArrayList.class);
                 out.println(result);
 
             } else {
