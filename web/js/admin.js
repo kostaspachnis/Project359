@@ -15,8 +15,7 @@ function authenticate() {
 
 function createInnerUsersTableFromJSON(data) {
     var html = "";
-    let yoho= data.toString();
-    console.log(data);
+    let yoho = data.toString();
     let help = yoho.split("}"); 
     
     for(var i=0; i<help.length-1; i++){
@@ -73,9 +72,9 @@ function getNoBooksPerLibrary() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            $("#noBooksPerLibraryTable tr:last").after(createInnerUsersTableFromJSON((xhr.responseText)));
+            $("#booksPerLibP").html(new Map(Object.entries(JSON.parse(xhr.responseText))));
         } else if (xhr.status !== 200) {
-            $("#noBooksPerLibraryTable").html("Error!");
+            $("#booksPerLibP").html("Error!");
         }
     };
 
@@ -87,16 +86,9 @@ function getNoBooksPerLibrary() {
 function drawChart() {
     // Define the chart to be drawn.
     var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Browser');
+    data.addColumn('string', 'Library');
     data.addColumn('number', 'Percentage');
-    data.addRows([
-    ['Firefox', 45.0],
-    ['IE', 26.8],
-    ['Chrome', 12.8],
-    ['Safari', 8.5],
-    ['Opera', 6.2],
-    ['Others', 0.7]
-    ]);
+    data.addRows($("#booksPerLibP").html());
     
     // Set chart options
     var options = {'title':'Browser market shares at a specific website, 2014', 'width':550, 'height':400};
