@@ -1,6 +1,3 @@
-include('https://www.gstatic.com/charts/loader.js');
-google.charts.load('current', {packages: ['corechart']});
-
 var booksperlibTable;
 
 function authenticate() {
@@ -77,7 +74,8 @@ function getNoBooksPerLibrary() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             booksperlibTable = Object.entries(JSON.parse(xhr.responseText));
             console.log(booksperlibTable);
-            google.charts.setOnLoadCallback(drawChart);
+            $("#booksPerCatScript").html("google.charts.setOnLoadCallback(drawChart);");
+            //google.charts.setOnLoadCallback(drawChart);
         } else if (xhr.status !== 200) {
             $("#booksPerLibP").html("Error!");
         }
