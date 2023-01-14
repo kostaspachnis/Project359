@@ -32,10 +32,49 @@ function createInnerUsersTableFromJSON(data) {
             var value = helper[x];
             html += "<td>" + value + "</td>";
         }
+        html += "<td><button type='button' class='btn btn-danger' onclick='deleteStudent(this); deleteLibrarian(this)'>Delete</button></td>";
         html+="</tr>";
     }
     
     return html;
+}
+
+function deleteStudent(btn) {
+
+    var row = btn.parentNode.parentNode;
+    var username = row.cells[1].innerHTML;
+    document.getElementById("delete_username").value = username;
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            row.parentNode.removeChild(row);
+        } else if (xhr.status !== 200) {
+            //alert("Error!");
+        }
+    };
+
+    xhr.open('POST', 'DeleteStudentForAdmin?');
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+function deleteLibrarian(btn) {
+
+    var row = btn.parentNode.parentNode;
+    var username = row.cells[1].innerHTML;
+    document.getElementById("delete_username").value = username;
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            row.parentNode.removeChild(row);
+        } else if (xhr.status !== 200) {
+            //alert("Error!");
+        }
+    };
+
+    xhr.open('POST', 'DeleteLibrarianForAdmin?');
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
 }
 
 

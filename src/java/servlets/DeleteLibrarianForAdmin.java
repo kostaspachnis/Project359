@@ -60,7 +60,7 @@ public class DeleteLibrarianForAdmin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username_new");
+        String username = request.getParameter("delete_username");
         EditLibrarianTable studentsTable = new EditLibrarianTable();
 
         try {
