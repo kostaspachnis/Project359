@@ -68,24 +68,7 @@ function getLibrarians() {
     xhr.send();
 }
 
-function getNoBooksPerLibrary() {
 
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            booksperlibTable = Object.entries(JSON.parse(xhr.responseText));
-            console.log(booksperlibTable);
-            $("#booksPerCatScript").html("google.charts.setOnLoadCallback(drawChart);");
-            //google.charts.setOnLoadCallback(drawChart);
-        } else if (xhr.status !== 200) {
-            $("#booksPerLibP").html("Error!");
-        }
-    };
-
-    xhr.open('GET', 'GetBooksInEachLibraryForAdmin?');
-    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-    xhr.send();
-}
 
 function drawChart() {
     // Define the chart to be drawn.

@@ -85,7 +85,23 @@
             <div id="booksPerLibDiv"></div>
             
             <script id="booksPerCatScript" language="JavaScript">
-                
+                function getNoBooksPerLibrary() {
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.onload = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            booksperlibTable = Object.entries(JSON.parse(xhr.responseText));
+                            console.log(booksperlibTable);
+                            google.charts.setOnLoadCallback(drawChart);
+                        } else if (xhr.status !== 200) {
+                            $("#booksPerLibP").html("Error!");
+                        }
+                    };
+
+                    xhr.open('GET', 'GetBooksInEachLibraryForAdmin?');
+                    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                    xhr.send();
+                }
             </script>
 
             <h2>Books per category</h2>
