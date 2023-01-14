@@ -91,7 +91,7 @@ function drawChart() {
     data.addRows($("#booksPerLibP").html());
     
     // Set chart options
-    var options = {'title':'Browser market shares at a specific website, 2014', 'width':550, 'height':400};
+    var options = {'title':'Books per Library', 'width':550, 'height':400};
 
     // Instantiate and draw the chart.
     var chart = new google.visualization.PieChart(document.getElementById ("booksPerLibDiv"));
