@@ -104,4 +104,20 @@ function drawGenreChart() {
     chart.draw(data, options);
 }
 
+function drawStudentsChart() {
+    // Define the chart to be drawn.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Type');
+    data.addColumn('number', 'Percentage');
+    for (var i = 0; i < table.length; i++) {
+        data.addRow([table[i][0], parseInt(table[i][1])]);
+    }
+    // Set chart options
+    var options = {'title':'Students per Type', 'width':550, 'height':400};
+
+    // Instantiate and draw the chart.
+    var chart = new google.visualization.PieChart(document.getElementById ("studentChartDiv"));
+    chart.draw(data, options);
+}
+
 

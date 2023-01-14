@@ -89,7 +89,7 @@
                         xhr.onload = function () {
                             if (xhr.readyState === 4 && xhr.status === 200) {
                                 table = Object.entries(JSON.parse(xhr.responseText));
-                                google.charts.setOnLoadCallback(drawChart);
+                                google.charts.setOnLoadCallback(drawLibraryChart);
                             } else if (xhr.status !== 200) {
                                 alert('Request failed.  Returned status of ' + xhr.status);
                             }
@@ -111,7 +111,7 @@
                         xhr.onload = function () {
                             if (xhr.readyState === 4 && xhr.status === 200) {
                                 table = Object.entries(JSON.parse(xhr.responseText));
-                                google.charts.setOnLoadCallback(drawLibraryChart);
+                                google.charts.setOnLoadCallback(drawCategoryChart);
                             } else if (xhr.status !== 200) {
                                 alert('Request failed.  Returned status of ' + xhr.status);
                             }
@@ -129,20 +129,19 @@
             <h2>Student chart</h2>
             <div id="studentChartDiv">
                 <script language="JavaScript">
-                    google.charts.setOnLoadCallback(drawChart3);
-                    function getNoBooksPerCategory() {
+                    function getNoStudentsPerType() {
     
                         var xhr = new XMLHttpRequest();
                         xhr.onload = function () {
                             if (xhr.readyState === 4 && xhr.status === 200) {
                                 table = Object.entries(JSON.parse(xhr.responseText));
-                                google.charts.setOnLoadCallback(drawGenreChart);
+                                google.charts.setOnLoadCallback(drawStudentsChart);
                             } else if (xhr.status !== 200) {
                                 alert('Request failed.  Returned status of ' + xhr.status);
                             }
                         };
 
-                        xhr.open('GET', 'GetBooksGenreForAdmin?');
+                        xhr.open('GET', 'GetStudentsTypeForAdmin?');
                         xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
                         xhr.send();
                     }
