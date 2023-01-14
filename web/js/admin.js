@@ -1,4 +1,5 @@
-var booksperlibTable;
+var table;
+
 
 function authenticate() {
     
@@ -9,6 +10,7 @@ function authenticate() {
         getStudents();
         getLibrarians();
         getNoBooksPerLibrary();
+        getNoBooksPerCategory();
         document.getElementById("loginDiv").style.display="none";
         document.getElementById("adminDiv").style.display="block";
     }
@@ -70,13 +72,13 @@ function getLibrarians() {
 
 
 
-function drawChart() {
+function drawLibraryChart() {
     // Define the chart to be drawn.
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Library');
     data.addColumn('number', 'Percentage');
-    for (var i = 0; i < booksperlibTable.length; i++) {
-        data.addRow([booksperlibTable[i][0], parseInt(booksperlibTable[i][1])]);
+    for (var i = 0; i < table.length; i++) {
+        data.addRow([table[i][0], parseInt(table[i][1])]);
     }
     // Set chart options
     var options = {'title':'Books per Library', 'width':550, 'height':400};
@@ -85,3 +87,21 @@ function drawChart() {
     var chart = new google.visualization.PieChart(document.getElementById ("booksPerLibDiv"));
     chart.draw(data, options);
 }
+
+function drawGenreChart() {
+    // Define the chart to be drawn.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Genre');
+    data.addColumn('number', 'Percentage');
+    for (var i = 0; i < table.length; i++) {
+        data.addRow([table[i][0], parseInt(table[i][1])]);
+    }
+    // Set chart options
+    var options = {'title':'Books per Genre', 'width':550, 'height':400};
+
+    // Instantiate and draw the chart.
+    var chart = new google.visualization.PieChart(document.getElementById ("booksPerCatDiv"));
+    chart.draw(data, options);
+}
+
+

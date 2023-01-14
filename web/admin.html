@@ -80,37 +80,55 @@
                 </table>
             </div>
 
-            <h2>Books per library</h2>
-            <p id="booksPerLibP" style="display: none;"></p>
-            <div id="booksPerLibDiv"></div>
+            <div id="booksPerLibDiv">
+
+                <script id="booksPerLibScript" language="JavaScript">
+                    function getNoBooksPerLibrary() {
+    
+                        var xhr = new XMLHttpRequest();
+                        xhr.onload = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                table = Object.entries(JSON.parse(xhr.responseText));
+                                google.charts.setOnLoadCallback(drawChart);
+                            } else if (xhr.status !== 200) {
+                                alert('Request failed.  Returned status of ' + xhr.status);
+                            }
+                        };
+    
+                        xhr.open('GET', 'GetBooksInEachLibraryForAdmin?');
+                        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                        xhr.send();
+                    }
+                </script>
+
+            </div>
             
-            <script id="booksPerCatScript" language="JavaScript">
-                function getNoBooksPerLibrary() {
-
-                    var xhr = new XMLHttpRequest();
-                    xhr.onload = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            booksperlibTable = Object.entries(JSON.parse(xhr.responseText));
-                            console.log(booksperlibTable);
-                            google.charts.setOnLoadCallback(drawChart);
-                        } else if (xhr.status !== 200) {
-                            $("#booksPerLibP").html("Error!");
-                        }
-                    };
-
-                    xhr.open('GET', 'GetBooksInEachLibraryForAdmin?');
-                    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-                    xhr.send();
-                }
-            </script>
+            
 
             <h2>Books per category</h2>
-            <div id="booksPerCatDiv"></div>
+            <div id="booksPerCatDiv">
+                <script id="booksPerCatScript" language="JavaScript">
+                    function getNoBooksPerCategory() {
+    
+                        var xhr = new XMLHttpRequest();
+                        xhr.onload = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                table = Object.entries(JSON.parse(xhr.responseText));
+                                google.charts.setOnLoadCallback(drawChart);
+                            } else if (xhr.status !== 200) {
+                                alert('Request failed.  Returned status of ' + xhr.status);
+                            }
+                        };
 
-            <script language="JavaScript">
-                google.charts.setOnLoadCallback(drawChart2);
-            </script>
+                        xhr.open('GET', 'GetBooksGenreForAdmin?');
+                        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                        xhr.send();
+                    }
+                </script>
 
+            </div>
+
+            
             <h2>Student chart</h2>
             <div id="studentChartDiv"></div>
 
