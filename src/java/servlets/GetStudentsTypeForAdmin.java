@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -58,7 +60,7 @@ public class GetStudentsTypeForAdmin extends HttpServlet {
             EditStudentsTable studTable = new EditStudentsTable();
             ArrayList<Student> studList = studTable.databaseToStudents();
             int bsc = 0, msc = 0, phd = 0;
-            ArrayList<String> result = new ArrayList<>();
+            Dictionary result = new Hashtable();
 
             if (!studList.isEmpty()) {
                 response.setStatus(200);
@@ -76,16 +78,13 @@ public class GetStudentsTypeForAdmin extends HttpServlet {
                     }
                 }
 
-                result.add("BSc");
-                result.add(Integer.toString(bsc));
-                result.add("MSc");
-                result.add(Integer.toString(msc));
-                result.add("PHd");
-                result.add(Integer.toString(phd));
+                result.put("BSc", bsc);
+                result.put("MSc", msc);
+                result.put("PHd", phd);
 
                 Gson gson = new Gson();
-                String json = gson.toJson(result, ArrayList.class);
-                out.println(result);
+                String json = gson.toJson(result);
+                out.println(json);
 
             } else {
                 response.setStatus(403);

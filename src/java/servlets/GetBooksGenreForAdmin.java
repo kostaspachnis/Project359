@@ -83,8 +83,8 @@ public class GetBooksGenreForAdmin extends HttpServlet {
                     genreCounts.put(genre, genre_count);
                 }
                 Gson gson = new Gson();
-                String json = gson.toJson(genreCounts, Dictionary.class);
-                out.println(genreCounts);
+                String json = gson.toJson(genreCounts);
+                out.println(json);
             } else {
                 response.setStatus(403);
             }
