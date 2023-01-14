@@ -11,6 +11,7 @@ function authenticate() {
         getLibrarians();
         getNoBooksPerLibrary();
         getNoBooksPerCategory();
+        getNoStudentsPerType();
         document.getElementById("loginDiv").style.display="none";
         document.getElementById("adminDiv").style.display="block";
     }
