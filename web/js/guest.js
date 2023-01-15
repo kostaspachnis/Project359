@@ -22,9 +22,9 @@ function createBooksTablePerGenreFromJSON(data) {
             html += "<td>" + books[i].title + "</td>";
             html += "<td>" + books[i].authors + "</td>";
             html += "<td>" + books[i].url + "</td>";
-            html += "<td>" + books[i].photo + "</td>";
+            html += '<td><img src="' + books[i].photo + '" alt="book photo"></td>';
             html += "<td>" + books[i].pages + "</td>";
-            html += "<td>" + books[i].publicationyear + "</td>";
+            html += '<td>' + books[i].publicationyear + "</td>";
             html += "</tr>";
         }
         else {
@@ -42,7 +42,7 @@ function createBooksTablePerGenreFromJSON(data) {
             html += "<td>" + books[i].title + "</td>";
             html += "<td>" + books[i].authors + "</td>";
             html += "<td>" + books[i].url + "</td>";
-            html += "<td>" + books[i].photo + "</td>";
+            html += '<td><img src="' + books[i].photo + '" alt="book photo"></td>';
             html += "<td>" + books[i].pages + "</td>";
             html += "<td>" + books[i].publicationyear + "</td>";
             html += "</tr>";
