@@ -6,7 +6,14 @@
             <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/GetBooksInEachLibraryForAdmin.java</file>
             <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/GetBooksGenreForAdmin.java</file>
             <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/GetStudentsTypeForAdmin.java</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/DeleteStudentForAdmin.java</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/UpdateLibrarian.java</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/GetStudent.java</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/web/frontpage.html</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/web/admin.html</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/RegisterLibrarian.java</file>
             <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/web/js/ajax.js</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/web/js/admin.js</file>
         </group>
     </open-files>
 </project-private>

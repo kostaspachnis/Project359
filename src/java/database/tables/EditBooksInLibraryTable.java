@@ -164,7 +164,7 @@ public class EditBooksInLibraryTable {
         ArrayList<BookInLibrary> bkl = new ArrayList<BookInLibrary>();
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM booksinlibraries where available=true");
+            rs = stmt.executeQuery("SELECT * FROM booksinlibraries WHERE available='true'");
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 Gson gson = new Gson();
