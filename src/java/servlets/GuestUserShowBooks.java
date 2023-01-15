@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -41,6 +42,10 @@ public class GuestUserShowBooks extends HttpServlet {
             throws ServletException, IOException {
     }
 
+    public boolean containsName(final ArrayList<Book> list, final String isbn) {
+        return list.stream().filter(o -> o.getIsbn().equals(isbn)).findFirst().isPresent();
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -59,6 +64,7 @@ public class GuestUserShowBooks extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             EditBooksInLibraryTable blt = new EditBooksInLibraryTable();
             EditBooksTable bt = new EditBooksTable();
+
             ArrayList<BookInLibrary> bltList = blt.databaseToBooksInLibraryAvailable();
             ArrayList<Book> btList = new ArrayList<>();
 
@@ -66,12 +72,12 @@ public class GuestUserShowBooks extends HttpServlet {
                 String isbn = bltList.get(i).getIsbn();
                 Book book = bt.databaseToBooksISBNBook(isbn);
 
-                if (btList.contains(book)) {
-                    continue;
-                } else {
+                if (!containsName(btList, isbn)) {
                     btList.add(book);
                 }
             }
+
+            Collections.sort(btList, (o1, o2) -> (o1.getGenre().compareTo(o2.getGenre())));
 
             if (!btList.isEmpty()) {
                 response.setStatus(200);

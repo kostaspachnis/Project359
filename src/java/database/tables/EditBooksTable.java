@@ -261,6 +261,7 @@ public class EditBooksTable {
 
         try {
             rs = stmt.executeQuery("SELECT * FROM books WHERE isbn= '" + isbn + "'");
+            rs.next();
             String json = DB_Connection.getResultsToJSON(rs);
             Gson gson = new Gson();
             Book book = gson.fromJson(json, Book.class);
