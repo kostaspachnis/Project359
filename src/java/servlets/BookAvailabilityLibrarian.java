@@ -75,11 +75,11 @@ public class BookAvailabilityLibrarian extends HttpServlet {
             String book_isbn = request.getParameter("isbn");
             BookInLibrary book = blt.databaseToBookInLibraryISBN(book_isbn);
             
-            if (book.getAvailable().equals("true")) {
+            if (book.getAvailable().equals("true") && book.getLibrary_id() == id) {
                 book.setAvailable("false");
                 blt.updateBookAv(book.getIsbn(), "false");
             }
-            else if (book.getAvailable().equals("false")) {
+            else if (book.getAvailable().equals("false") && book.getLibrary_id() == id) {
                 book.setAvailable("true");
                 blt.updateBookAv(book.getIsbn(), "true");
             }

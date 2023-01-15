@@ -225,13 +225,15 @@ function getUser() {
             document.getElementById("librarian_div").style.display="block";
         } else if (xhr.readyState === 4 && xhr.status === 201) {
             // $("#ajaxContent1").html(createTableFromJSON(JSON.parse(xhr.responseText)));
+            document.getElementById("loginDiv").style.display="none";
+            document.getElementById("logoutOpt").style.display="block";
             document.getElementById("student_div").style.display="block";
         } else if (xhr.status !== 200) {
             // $("#ajaxContent1").html("User not exists or incorrect password");
         }
     };
     // name_global = document.getElementById("username").value;
-    var data = $('#loginFormLib').serialize();
+    var data = $('#loginForm').serialize();
     console.log(data);
     xhr.open('GET', 'GetStudent?'+data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
