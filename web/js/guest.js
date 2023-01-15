@@ -6,6 +6,7 @@ function createBooksTablePerGenreFromJSON(data) {
     var i = 0;
     var books = JSON.parse(data);
     var genre = '';
+    var html = '';
 
     if(books.length === 0) return "No books found!";
 
