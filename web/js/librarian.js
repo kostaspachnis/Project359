@@ -33,6 +33,8 @@ function availability(btn) {
     var row = btn.parentNode.parentNode;
     var isbn = row.cells[0].innerHTML;
 
+    console.log("MPHKAAAAAAA");
+
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
