@@ -191,10 +191,10 @@ public class EditBooksInLibraryTable {
     }
 
     // Set availability to true (Project Function)
-    public void updateBookAv(String isbn, String av) throws SQLException, ClassNotFoundException {
+    public void updateBookAv(String isbn, String av, int libid) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        String update = "UPDATE booksinlibraries SET available='" + av + "' WHERE isbn = '" + isbn + "'";
+        String update = "UPDATE booksinlibraries SET available='" + av + "' WHERE isbn = '" + isbn + "' AND library_id = '" + libid + "'";
         stmt.executeUpdate(update);
     }
 

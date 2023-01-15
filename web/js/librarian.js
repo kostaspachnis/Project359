@@ -50,11 +50,16 @@ function availability(btn) {
         }
     };
 
-    var data = "username=" + username + "&isbn=" + isbn;
+    const data = {};
+    data["username"] = username;
+    data["isbn"] = isbn;
+    
+    var jsondata = JSON.stringify(data);
+    console.log(jsondata);
 
-    xhr.open('POST', 'ChangeAvailability?' + JSON.stringify(data));
+    xhr.open('POST', 'BookAvailabilityLibrarian');
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-    xhr.send();
+    xhr.send(jsondata);
 }
 
 function createBooksTable(data) {

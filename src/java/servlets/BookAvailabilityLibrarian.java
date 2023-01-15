@@ -16,7 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mainClasses.BookAvailabilityData;
 import mainClasses.BookInLibrary;
+import mainClasses.JSON_Converter;
 import mainClasses.Librarian;
 
 /**
@@ -67,21 +69,26 @@ public class BookAvailabilityLibrarian extends HttpServlet {
             throws ServletException, IOException {
         
         try {
-            String librarian_username = request.getParameter("username");
+            // String librarian_username = request.getParameter("username");
+            JSON_Converter jc = new JSON_Converter();
+            System.out.println("ok");
+            BookAvailabilityData stats = jc.jsonToBookAv(request.getReader());
+
+            System.out.println("ok1");
             EditLibrarianTable lbt = new EditLibrarianTable();
-            Librarian lib = lbt.databaseToLibrarianId(librarian_username);
+            Librarian lib = lbt.databaseToLibrarianId(stats.getUsernameData());
             int id = lib.getLibrary_id();
             EditBooksInLibraryTable blt = new EditBooksInLibraryTable();
-            String book_isbn = request.getParameter("isbn");
-            BookInLibrary book = blt.databaseToBookInLibraryISBN(book_isbn);
+            // String book_isbn = request.getParameter("isbn");
+            BookInLibrary book = blt.databaseToBookInLibraryISBN(stats.getIsbnData());
             
             if (book.getAvailable().equals("true") && book.getLibrary_id() == id) {
                 book.setAvailable("false");
-                blt.updateBookAv(book.getIsbn(), "false");
+                blt.updateBookAv(book.getIsbn(), "false", id);
             }
             else if (book.getAvailable().equals("false") && book.getLibrary_id() == id) {
                 book.setAvailable("true");
-                blt.updateBookAv(book.getIsbn(), "true");
+                blt.updateBookAv(book.getIsbn(), "true", id);
             }
             
             response.setStatus(200);
