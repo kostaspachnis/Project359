@@ -38,10 +38,10 @@ function availability(btn) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             if(btn.className === 'btn btn-danger') {
                 btn.className = 'btn btn-success';
-                row.cells[1].value = 'false';
+                row.cells[1].innerHTML = '<td>false</td>';
             } else {
                 btn.className = 'btn btn-danger';
-                row.cells[1].value = 'true';
+                row.cells[1].innerHTML = '<td>true</td>';
             }
         } else if (xhr.status !== 200) {
             //alert("Error!");
