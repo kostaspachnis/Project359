@@ -54,7 +54,7 @@ function getBooks() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById("outputdiv").style.display="block";
+            document.getElementById("book_tables").style.display="block";
             $("#book_tables").html(createBooksTablePerGenreFromJSON((xhr.responseText)));
         } else if (xhr.status !== 200) {
              $("#book_tables").html("Error!");
