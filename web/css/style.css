@@ -1,4 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald);
 
+
+body {
+    text-align: center;
+}
 
 nav {
     padding: 0px;
@@ -7,18 +12,92 @@ nav {
 }
 
 
-
 .top_container {
     background-color: #E6DDC4;
     position: relative;
-    padding-top: 100px;
-    padding-bottom: 20%;
+    padding-top: 10%;
+    padding-bottom: 30%;
 }
 
 .bottom_container {
     background-color: #678983;
     position: relative;
-    padding-top: 100px;
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+.links {
+    margin: 0 auto;
+  }
+
+.link {
+    display: block;
+    width: 100px;
+    height: 34px;
+    line-height: 36px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #F0E9D2;
+    letter-spacing: 0.1em;
+    text-align: center;
+    font-size: 0.8rem;
+    margin: 10px auto;
+    position: relative;
+}
+
+.link span {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
+.wipe,
+.opacity {
+    border: 2px solid #fff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.opacity {
+    -webkit-transition: background-color 0.3s linear, color 0.3s linear;
+    transition: background-color 0.3s linear, color 0.3s linear;
+    background: rgba(255, 255, 255, 0);
+}
+.opacity:hover {
+    color: #124a58;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.wipe {
+    -webkit-transition: color 0.3s ease-out;
+    transition: color 0.3s ease-out;
+}
+.wipe::after {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #fff;
+    content: " ";
+    position: absolute;
+    top: 0;
+    -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: -webkit-transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    -webkit-transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+    -webkit-transform: translateY(34px);
+    transform: translateY(34px);
+    z-index: -1;
+}
+.wipe:hover {
+    color: #124a58;
+}
+.wipe:hover::after {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
 }
 
 
