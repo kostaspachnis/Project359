@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" id="logoutOpt" href="admin.html" style="display: none;">Logout</a>
+                    <a class="nav-link" id="logoutOpt" href="index.html" style="display: none;">Logout</a>
                 </li>
             </ul>
         </div>
@@ -36,11 +36,11 @@
             <form id="loginForm" onsubmit="getUser(); return false;">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username">
+                    <input type="text" class="form-control" id="username"  name="username">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password">
+                    <input type="password" class="form-control" id="password" name="password">
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
                 <button type="button" class="btn btn-link" onclick="signup(); return false;">Sign up</button>
