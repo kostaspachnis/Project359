@@ -218,14 +218,19 @@ var name_global="";
 function getUser() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            $("#ajaxContent1").html(createTableFromJSON(JSON.parse(xhr.responseText)));
-            document.getElementById("logged_in").style.display="block";
+        if (xhr.readyState === 4 && xhr.status === 202) {
+            // $("#ajaxContent1").html(createTableFromJSON(JSON.parse(xhr.responseText)));
+            document.getElementById("loginDiv").style.display="none";
+            document.getElementById("logoutOpt").style.display="block";
+            document.getElementById("librarian_div").style.display="block";
+        } else if (xhr.readyState === 4 && xhr.status === 201) {
+            // $("#ajaxContent1").html(createTableFromJSON(JSON.parse(xhr.responseText)));
+            document.getElementById("student_div").style.display="block";
         } else if (xhr.status !== 200) {
-             $("#ajaxContent1").html("User not exists or incorrect password");
+            // $("#ajaxContent1").html("User not exists or incorrect password");
         }
     };
-    name_global = document.getElementById("username_log").value;
+    name_global = document.getElementById("username").value;
     var data = $('#loginForm').serialize();
     xhr.open('GET', 'GetStudent?'+data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');

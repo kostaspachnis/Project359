@@ -55,7 +55,6 @@ public class GetStudent extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String username = request.getParameter("username_log");
         String password = request.getParameter("password_log");
-        //double maria = Double.parseDouble(lon);
         try (PrintWriter out = response.getWriter()) {
             EditStudentsTable eut = new EditStudentsTable();
             EditLibrarianTable elt = new EditLibrarianTable();
@@ -65,13 +64,13 @@ public class GetStudent extends HttpServlet {
             if ((su == null) && (lib == null)) {
                 response.setStatus(403);
             } else if (lib == null && su != null) {
-                String json = eut.studentToJSON(su);
-                out.println(json);
-                response.setStatus(200);
+                // String json = eut.studentToJSON(su);
+                // out.println(json);
+                response.setStatus(201);
             } else if (su == null && lib != null) {
-                String json = elt.librarianToJSON(lib);
-                out.println(json);
-                response.setStatus(200);
+                // String json = elt.librarianToJSON(lib);
+                // out.println(json);
+                response.setStatus(202);
             } else {
                 response.setStatus(403);
             }
