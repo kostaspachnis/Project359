@@ -8,7 +8,6 @@ package servlets;
 import database.tables.EditBooksInLibraryTable;
 import database.tables.EditLibrarianTable;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,9 +77,11 @@ public class BookAvailabilityLibrarian extends HttpServlet {
             
             if (book.getAvailable().equals("true")) {
                 book.setAvailable("false");
+                blt.updateBookAv(book.getIsbn(), "false");
             }
             else if (book.getAvailable().equals("false")) {
                 book.setAvailable("true");
+                blt.updateBookAv(book.getIsbn(), "true");
             }
             
             response.setStatus(200);
