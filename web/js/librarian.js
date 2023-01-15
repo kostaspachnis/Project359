@@ -33,17 +33,15 @@ function availability(btn) {
     var row = btn.parentNode.parentNode;
     var isbn = row.cells[0].innerHTML;
 
-    console.log("MPHKAAAAAAA");
-
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             if(btn.className === 'btn btn-danger') {
                 btn.className = 'btn btn-success';
-                btn.parentNode.availability = 'false';
+                btn.parentNode.Available = 'false';
             } else {
-                btn.className = 'btn btn-success';
-                btn.parentNode.availability = 'true';
+                btn.className = 'btn btn-danger';
+                btn.parentNode.Available = 'true';
             }
         } else if (xhr.status !== 200) {
             //alert("Error!");
