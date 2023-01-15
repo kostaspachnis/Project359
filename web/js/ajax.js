@@ -230,8 +230,9 @@ function getUser() {
             // $("#ajaxContent1").html("User not exists or incorrect password");
         }
     };
-    name_global = document.getElementById("username").value;
-    var data = $('#loginForm').serialize();
+    // name_global = document.getElementById("username").value;
+    var data = $('#loginFormLib').serialize();
+    console.log(data);
     xhr.open('GET', 'GetStudent?'+data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();

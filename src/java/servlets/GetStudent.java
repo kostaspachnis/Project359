@@ -53,8 +53,8 @@ public class GetStudent extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String username = request.getParameter("username_log");
-        String password = request.getParameter("password_log");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         try (PrintWriter out = response.getWriter()) {
             EditStudentsTable eut = new EditStudentsTable();
             EditLibrarianTable elt = new EditLibrarianTable();
@@ -64,12 +64,8 @@ public class GetStudent extends HttpServlet {
             if ((su == null) && (lib == null)) {
                 response.setStatus(403);
             } else if (lib == null && su != null) {
-                // String json = eut.studentToJSON(su);
-                // out.println(json);
                 response.setStatus(201);
             } else if (su == null && lib != null) {
-                // String json = elt.librarianToJSON(lib);
-                // out.println(json);
                 response.setStatus(202);
             } else {
                 response.setStatus(403);
