@@ -5,13 +5,14 @@ function createBooksTablePerGenreFromJSON(data) {
 
     var i = 0;
     var books = JSON.parse(data);
+    var genre = '';
 
     if(books.length === 0) return "No books found!";
 
-    var genre = books[0].genre;
-    var html = "<table class='table table-striped table-bordered table-hover' id='booksTable'>";
-    html += "<thead><tr><th>ISBN</th><th>Title</th><th>Authors</th><th>URL</th><th>Photo</th><th>Pages</th><th>Year</th></tr></thead>";
-    html += "<tbody>";
+    // var genre = books[0].genre;
+    // var html = "<table class='table table-striped table-bordered table-hover' id='booksTable'>";
+    // html += "<thead><tr><th>ISBN</th><th>Title</th><th>Authors</th><th>URL</th><th>Photo</th><th>Pages</th><th>Year</th></tr></thead>";
+    // html += "<tbody>";
 
     for(var i = 0; i < books.length; i++) {
         if(books[i].genre === genre) {
@@ -26,9 +27,11 @@ function createBooksTablePerGenreFromJSON(data) {
             html += "</tr>";
         }
         else {
-
             html += "</tbody></table>";
             genre = books[i].genre;
+            genre[0].toUpperCase(); //+ genre.slice(1).toLowerCase();
+            genre = books[i].genre;
+            html += "<h3>" + genre + "</h3>";
             html += "<table class='table table-striped table-bordered table-hover' id='booksTable'>";
             html += "<thead><tr><th>ISBN</th><th>Title</th><th>Authors</th><th>URL</th><th>Photo</th><th>Pages</th><th>Year</th></tr></thead>";
             html += "<tbody>";
