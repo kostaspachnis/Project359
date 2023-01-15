@@ -50,7 +50,7 @@ function availability(btn) {
         }
     };
 
-    var data = "isbn=" + isbn + "&username=" + username;
+    var data = "username=" + username + "&isbn=" + isbn;
 
     xhr.open('POST', 'ChangeAvailability?' + JSON.stringify(data));
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
