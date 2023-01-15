@@ -29,7 +29,30 @@ function authenticate() {
 }
 
 function availability(btn) {
-    return;
+    
+    var row = btn.parentNode.parentNode;
+    var isbn = row.cells[0].innerHTML;
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            if(btn.className === 'btn btn-danger') {
+                btn.className = 'btn btn-success';
+                btn.parentNode.availability = 'false';
+            } else {
+                btn.className = 'btn btn-success';
+                btn.parentNode.availability = 'true';
+            }
+        } else if (xhr.status !== 200) {
+            //alert("Error!");
+        }
+    };
+
+    var data = "isbn=" + isbn + "&username=" + username;
+
+    xhr.open('POST', 'ChangeAvailability?' + JSON.stringify(data));
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
 }
 
 function createBooksTable(data) {
