@@ -78,8 +78,8 @@ function getBooks() {
              $("#lib_books").html("Error!");
         }
     };
-
-    xhr.open('GET', 'ReturnAvailableBooksLibrarian?' + JSON.Stringify(username));
+    var data = $('#loginForm').serialize();
+    xhr.open('GET', 'ReturnAvailableBooksLibrarian?' + data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
