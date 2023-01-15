@@ -42,4 +42,16 @@ public class JSON_Converter {
         Book msg = gson.fromJson(json, Book.class);
         return msg;
     }
+
+    public BookInLibrary jsonToBookInLibrary(BufferedReader json) {
+        Gson gson = new Gson();
+        BookInLibrary msg = gson.fromJson(json, BookInLibrary.class);
+        return msg;
+    }
+
+    public BookAvailabilityData jsonToBookAv(BufferedReader json) {
+        Gson gson = new Gson();
+        BookAvailabilityData msg = gson.fromJson(json, BookAvailabilityData.class);
+        return msg;
+    }
 }
