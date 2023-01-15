@@ -8,12 +8,7 @@ function createBooksTablePerGenreFromJSON(data) {
     var genre = '';
     var html = '';
 
-    if(books.length === 0) return "No books found!";
-
-    // var genre = books[0].genre;
-    // var html = "<table class='table table-striped table-bordered table-hover' id='booksTable'>";
-    // html += "<thead><tr><th>ISBN</th><th>Title</th><th>Authors</th><th>URL</th><th>Photo</th><th>Pages</th><th>Year</th></tr></thead>";
-    // html += "<tbody>";
+    if(books.length === 0) return;
 
     for(var i = 0; i < books.length; i++) {
         if(books[i].genre === genre) {
@@ -30,7 +25,7 @@ function createBooksTablePerGenreFromJSON(data) {
         else {
             html += "</tbody></table>";
             genre = books[i].genre;
-            genre[0].toUpperCase(); //+ genre.slice(1).toLowerCase();
+            genre[0].toUpperCase();
             genre = books[i].genre;
             html += "<h3>" + genre + "</h3>";
             html += "<table class='table table-striped table-bordered table-hover' id='booksTable'>";
@@ -59,7 +54,7 @@ function getBooks() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById("book_tables").style.display="block";
-            $("#book_tables").html(createBooksTablePerGenreFromJSON((xhr.responseText)));
+            $("#book_tables").html(createBooksTablePerGenreFromJSON(xhr.responseText));
         } else if (xhr.status !== 200) {
              $("#book_tables").html("Error!");
         }
