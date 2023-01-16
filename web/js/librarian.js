@@ -154,8 +154,10 @@ function checkBook() {
             // $("#lib_books").html("Error!");
         }
     };
+    var data = username + " " + document.getElementById("book_isbn").value;
+    var jsondata = JSON.stringify(data);
     // var data = $('#newBookForm').serialize();
-    xhr.open('GET', 'SearchIfBookExistsLibrarian?');
+    xhr.open('GET', 'SearchIfBookExistsLibrarian?' + jsondata);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }

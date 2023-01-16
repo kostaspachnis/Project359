@@ -59,6 +59,9 @@ public class SearchIfBookExistsLibrarian extends HttpServlet {
             String username = request.getParameter("username");
             String isbn = request.getParameter("book_isbn");
 
+            System.out.println("username: " + username);
+            System.out.println("isbn: " + isbn);
+            
             EditLibrarianTable lt = new EditLibrarianTable();
             Librarian l = lt.databaseToLibrarianId(username);
             int id = l.getLibrary_id();

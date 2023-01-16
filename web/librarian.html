@@ -59,7 +59,7 @@
                         <label for="book_isbn" class="form-label">Title</label>
                         <input type="text" class="form-control" id="book_isbn" name="book_isbn">
                     </div>
-                    <button id="insert_button" type="submit" class="btn btn-primary" data-bs-toggle="none" data-bs-toogle="popover" onsubmit="checkBook();">Insert</button>
+                    <button id="insert_button" type="submit" class="btn btn-primary" data-bs-toggle="none" data-bs-toogle="popover" onsubmit="checkBook(); return false;">Insert</button>
                     <button type="button" class="btn btn-success" onclick="registerBook(); return false;">Register</button>
                     <button type="button" class="btn btn-danger" onclick="insertCancel(); return false;">Cancel</button>
                 </form>
