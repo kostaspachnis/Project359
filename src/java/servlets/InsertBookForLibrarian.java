@@ -84,9 +84,13 @@ public class InsertBookForLibrarian extends HttpServlet {
             book2.setLibrary_id(id);
             EditBooksTable bkt = new EditBooksTable();
 
-            bkt.createNewBook(book);
-            blt.createNewBookInLibrary(book2);
-            response.setStatus(200);
+            if (bkt.databaseToBooksISBNBook(book.getIsbn()) != null) {
+                response.setStatus(407);
+            } else {
+                bkt.createNewBook(book);
+                blt.createNewBookInLibrary(book2);
+                response.setStatus(200);
+            }
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
         } catch (SQLException ex) {
