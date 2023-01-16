@@ -131,24 +131,13 @@ function checkBook() {
             document.getElementById("newBookTitle").style.display="none";
             document.getElementById("newBookDiv").style.display="none";
             // getBooks(); PREPEI NA VALW KAI TO BOOK NA EMFANIZETAI STO TABLE
-            const popover = new bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
-            popover.disable();
+            $('#modalMessage').modal({show:false});
         } else if (xhr.readyState === 4 && xhr.status === 205) {
-            const popover = bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
-            popover.enable();
-            popover.setContent({
-                '.popover-header': 'Cannot insert book',
-                '.popover-body': 'Book already exists'
-            })
-            popover.show();
+            $("#messageModal").modal({show:true});
+            $("#modalMessage").html("Book already exists");
         } else if (xhr.readyState === 4 && xhr.status !== 206) {
-            const popover = bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
-            popover.enable();
-            popover.setContent({
-                '.popover-header': 'Cannot insert book',
-                '.popover-body': 'Book does not exist, please register a new book'
-            })
-            popover.show();
+            $("#messageModal").modal({show:true});
+            $("#modalMessage").html("Book does not exist");
         } else if (xhr.status !== 200) {
             // $("#lib_books").html("Error!");
         }
