@@ -59,11 +59,10 @@
                         <label for="book_isbn" class="form-label">ISBN</label>
                         <input type="text" class="form-control" id="book_isbn" name="book_isbn">
                     </div>
-                    <button id="insert_button" type="submit" class="btn btn-primary" data-bs-toogle="popover" data-bs-placement="bottom" onsubmit="checkBook(); return false;">Insert</button>
 
                     <!-- Button trigger modal -->
-                    <button type="button" id="insertButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal">
-                        Launch demo modal
+                    <button type="button" id="insertButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal" onsubmit="checkBook(); return false;">
+                        Insert
                     </button>
                     
                     <!-- Modal -->
