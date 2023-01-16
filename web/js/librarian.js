@@ -133,7 +133,7 @@ function checkBook() {
             // getBooks(); PREPEI NA VALW KAI TO BOOK NA EMFANIZETAI STO TABLE
             const popover = new bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
             popover.disable();
-        } else if (xhr.readyState === 4 && xhr.status === 405) {
+        } else if (xhr.readyState === 4 && xhr.status === 205) {
             const popover = bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
             popover.enable();
             popover.setContent({
@@ -141,7 +141,7 @@ function checkBook() {
                 '.popover-body': 'Book already exists'
             });
             popover.show();
-        } else if (xhr.readyState === 4 && xhr.status !== 406) {
+        } else if (xhr.readyState === 4 && xhr.status !== 206) {
             const popover = bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
             popover.enable();
             popover.setContent({
