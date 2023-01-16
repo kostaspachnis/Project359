@@ -135,7 +135,7 @@ function checkBook() {
         } else if (xhr.readyState === 4 && xhr.status === 205) {
             $("#messageModal").modal({show:true});
             $("#modalMessage").html("Book already exists");
-        } else if (xhr.readyState === 4 && xhr.status !== 206) {
+        } else if (xhr.readyState === 4 && xhr.status === 206) {
             $("#messageModal").modal({show:true});
             $("#modalMessage").html("Book does not exist");
         } else if (xhr.status !== 200) {
