@@ -125,6 +125,7 @@ function insertCancel() {
 }
 
 function checkBook() {
+    console.log("D1");
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 201) {
@@ -134,6 +135,7 @@ function checkBook() {
             const popover = new bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
             popover.disable();
         } else if (xhr.readyState === 4 && xhr.status === 405) {
+            console.log("D2");
             const popover = new bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
             popover.enable();
             popover.setContent({
