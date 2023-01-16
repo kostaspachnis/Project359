@@ -57,7 +57,7 @@ public class SearchIfBookExistsLibrarian extends HttpServlet {
 
         try {
             String username = request.getParameter("username");
-            String isbn = request.getParameter("isbn");
+            String isbn = request.getParameter("book_isbn");
 
             EditLibrarianTable lt = new EditLibrarianTable();
             Librarian l = lt.databaseToLibrarianId(username);
@@ -73,6 +73,7 @@ public class SearchIfBookExistsLibrarian extends HttpServlet {
 
             if (book != null) {
                 elt.createNewBookInLibrary(book2);
+                response.setStatus(201);
             } else {
                 response.setStatus(406);
             }
