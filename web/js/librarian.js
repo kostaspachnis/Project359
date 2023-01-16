@@ -139,7 +139,7 @@ function checkBook() {
             popover.setContent({
                 '.popover-header': 'Cannot insert book',
                 '.popover-body': 'Book already exists'
-            });
+            })
             popover.show();
         } else if (xhr.readyState === 4 && xhr.status !== 206) {
             const popover = bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
@@ -147,7 +147,7 @@ function checkBook() {
             popover.setContent({
                 '.popover-header': 'Cannot insert book',
                 '.popover-body': 'Book does not exist, please register a new book'
-            });
+            })
             popover.show();
         } else if (xhr.status !== 200) {
             // $("#lib_books").html("Error!");
