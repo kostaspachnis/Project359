@@ -220,4 +220,30 @@ public class EditBooksInLibraryTable {
         }
         return null;
     }
+
+    //
+    public int isBookin(String isbn, int libid) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<BookInLibrary> bkl = new ArrayList<BookInLibrary>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM booksinlibraries WHERE library_id = '" + libid + "' AND isbn = '" + isbn + "'");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                BookInLibrary tr = gson.fromJson(json, BookInLibrary.class);
+                bkl.add(tr);
+            }
+
+            if (!bkl.isEmpty()) {
+                return 1;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return 0;
+    }
 }
