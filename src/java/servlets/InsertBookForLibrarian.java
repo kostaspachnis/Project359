@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import database.tables.EditBooksInLibraryTable;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import mainClasses.JSON_Converter;
 import mainClasses.Book;
 import database.tables.EditBooksTable;
+import database.tables.EditLibrarianTable;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mainClasses.BookInLibrary;
+import mainClasses.Librarian;
 
 /**
  *
@@ -61,15 +68,29 @@ public class InsertBookForLibrarian extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        JSON_Converter jc = new JSON_Converter();
-        Book book = jc.jsonToBook(request.getReader());
-        EditBooksTable bkt = new EditBooksTable();
-
+        
         try {
+            String username = request.getParameter("username");
+            EditLibrarianTable lt = new EditLibrarianTable();
+            Librarian libman = lt.databaseToLibrarianId(username);
+            int id = libman.getLibrary_id();
+            JSON_Converter jc = new JSON_Converter();
+            Book book = jc.jsonToBook(request.getReader());
+            EditBooksInLibraryTable blt = new EditBooksInLibraryTable();
+            BookInLibrary book2 = new BookInLibrary();
+
+            book2.setIsbn(book.getIsbn());
+            book2.setAvailable("false");
+            book2.setLibrary_id(id);
+            EditBooksTable bkt = new EditBooksTable();
+
             bkt.createNewBook(book);
+            blt.createNewBookInLibrary(book2);
             response.setStatus(200);
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertBookForLibrarian.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

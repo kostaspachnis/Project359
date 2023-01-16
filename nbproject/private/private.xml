@@ -3,17 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/GetBooksInEachLibraryForAdmin.java</file>
-            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/GetBooksGenreForAdmin.java</file>
-            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/GetStudentsTypeForAdmin.java</file>
-            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/DeleteStudentForAdmin.java</file>
-            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/UpdateLibrarian.java</file>
-            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/GetStudent.java</file>
-            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/web/frontpage.html</file>
-            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/web/admin.html</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/web/js/librarian.js</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/InsertBookForLibrarian.java</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/mainClasses/BookAvailabilityData.java</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/mainClasses/Book.java</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/mainClasses/JSON_Converter.java</file>
             <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/RegisterLibrarian.java</file>
+            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/src/java/servlets/BookAvailabilityLibrarian.java</file>
             <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/web/js/ajax.js</file>
-            <file>file:/C:/ask3/ServletWithDatabaseConnection2022_2023/web/js/admin.js</file>
         </group>
     </open-files>
 </project-private>
