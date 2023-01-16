@@ -24,7 +24,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" id="book_insert" href="" onclick="insertBook();">New Book</a>
+                    <a class="nav-link" id="book_insert" href="" onclick="insertBook(); return false;">New Book</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" id="logoutOpt" href="index.html" style="display: none;">Logout</a>
                 </li>
             </ul>
@@ -50,8 +52,8 @@
 
         <div id="librarian_div" style="display: none;">
             
-            <h2 class="newBookTitle" style="display: none;">New Book</h2>
-            <div class="newBookDiv" style="display: none;">
+            <h2 id="newBookTitle" style="display: none;">New Book</h2>
+            <div id="newBookDiv" style="display: none;">
                 <form action="">
                     <div class="mb-3">
                         <label for="book_isbn" class="form-label">Title</label>
