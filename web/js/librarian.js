@@ -111,3 +111,53 @@ function getBooks() {
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
+
+
+function insertBook() {
+    document.getElementById("newBookTitle").style.display="block";
+    document.getElementById("newBookDiv").style.display="block";   
+}
+
+function insertCancel() {
+    document.getElementById("newBookTitle").style.display="none";
+    document.getElementById("newBookDiv").style.display="none";
+}
+
+function checkBook() {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 201) {
+            document.getElementById("newBookTitle").style.display="none";
+            document.getElementById("newBookDiv").style.display="none";
+            // getBooks(); PREPEI NA VALW KAI TO BOOK NA EMFANIZETAI STO TABLE
+            const popover = new bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
+            popover.disable();
+        } else if (xhr.status === 405) {
+            const popover = new bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
+            popover.enable();
+            popover.setContent({
+                '.popover-header': 'Cannot insert book',
+                '.popover-body': 'Book already exists'
+            })
+            popover.show();
+        } else if (xhr.status !== 406) {
+            const popover = new bootstrap.Popover.getOrCreateInstance(document.getElementById("insert_button"));
+            popover.enable();
+            popover.setContent({
+                '.popover-header': 'Cannot insert book',
+                '.popover-body': 'Book does not exist, please register a new book'
+            })
+            popover.show();
+        } else if (xhr.status !== 200) {
+            // $("#lib_books").html("Error!");
+        }
+    };
+    // var data = $('#newBookForm').serialize();
+    xhr.open('GET', 'SearchIfBookExistsLibrarian?');
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+<button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>

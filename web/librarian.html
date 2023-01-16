@@ -24,6 +24,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
+                    <a class="nav-link" id="book_insert" href="" onclick="insertBook();">New Book</a>
                     <a class="nav-link" id="logoutOpt" href="index.html" style="display: none;">Logout</a>
                 </li>
             </ul>
@@ -49,10 +50,22 @@
 
         <div id="librarian_div" style="display: none;">
             
+            <h2 class="newBookTitle" style="display: none;">New Book</h2>
+            <div class="newBookDiv" style="display: none;">
+                <form action="">
+                    <div class="mb-3">
+                        <label for="book_isbn" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="book_isbn" name="book_isbn">
+                    </div>
+                    <button id="insert_button" type="submit" class="btn btn-primary" data-bs-toggle="none" data-bs-toogle="popover" onsubmit="checkBook();">Insert</button>
+                    <button type="button" class="btn btn-success" onclick="registerBook();">Register</button>
+                    <button type="button" class="btn btn-danger" onclick="insertCancel();">Cancel</button>
+                </form>
+            </div>
+
             <h2>Books</h2>
             <div id="lib_books"></div> 
             
-
         </div>
 
     </div>
