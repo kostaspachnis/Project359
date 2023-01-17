@@ -131,7 +131,7 @@ function checkBook() {
             $("#modalMessage").html("Book inserted in library successfully");
             document.getElementById("newBookTitle").style.display="none";
             document.getElementById("newBookDiv").style.display="none";
-            getBooks();
+            // getBooks();
         } else if (xhr.readyState === 4 && xhr.status === 205) {
             $("#modalMessage").html("Book already exists");
         } else if (xhr.readyState === 4 && xhr.status === 206) {
