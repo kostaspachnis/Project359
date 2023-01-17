@@ -136,10 +136,10 @@ function checkBook() {
         } else if (xhr.readyState === 4 && xhr.status === 205) {
             console.log("AAAAAAAAAAAAAAAAAAAA");
             $("#messageModal").modal({show: true});
-            $("modalMessage").html("Book already exists");
+            $("#modalMessage").html("Book already exists");
         } else if (xhr.readyState === 4 && xhr.status === 206) {
             $("#messageModal").modal({show: true});
-            $("modalMessage").html("Book does not exist");
+            $("#modalMessage").html("Book does not exist");
         } else if (xhr.status !== 200) {
             // $("#lib_books").html("Error!");
         }
