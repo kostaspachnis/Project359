@@ -134,6 +134,7 @@ function checkBook() {
             document.getElementById("newBookDiv").style.display="none";
             // getBooks();
         } else if (xhr.readyState === 4 && xhr.status === 205) {
+            console.log("AAAAAAAAAAAAAAAAAAAA");
             $("#messageModal").modal({show: true});
             document.getElementById("modalMessage").innerHTML("Book already exists");
         } else if (xhr.readyState === 4 && xhr.status === 206) {
