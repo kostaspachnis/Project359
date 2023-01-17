@@ -134,8 +134,10 @@ function checkBook() {
             document.getElementById("newBookDiv").style.display="none";
             // getBooks();
         } else if (xhr.readyState === 4 && xhr.status === 205) {
+            $("#messageModal").modal({show: true});
             $("#modalMessage").html("Book already exists");
         } else if (xhr.readyState === 4 && xhr.status === 206) {
+            $("#messageModal").modal({show: true});
             $("#modalMessage").html("Book does not exist");
         } else if (xhr.status !== 200) {
             // $("#lib_books").html("Error!");
