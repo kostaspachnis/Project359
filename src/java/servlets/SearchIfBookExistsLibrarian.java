@@ -78,9 +78,9 @@ public class SearchIfBookExistsLibrarian extends HttpServlet {
                 elt.createNewBookInLibrary(book2);
                 response.setStatus(201);
             } else if (elt.isBookin(isbn, id) == 1) {
-                response.setStatus(405);
+                response.setStatus(205);
             } else {
-                response.setStatus(406);
+                response.setStatus(206);
             }
         } catch (SQLException ex) {
             Logger.getLogger(SearchIfBookExistsLibrarian.class.getName()).log(Level.SEVERE, null, ex);
