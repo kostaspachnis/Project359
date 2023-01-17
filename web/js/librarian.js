@@ -159,12 +159,15 @@ function registerButton() {
 }
 
 function registerBook() {
-    let bookForm = document.getElementById('registerBookForm');
-    let formData = new FormData(bookForm);
-    const data = {}
-    formData.forEach((value, key) => (data[key] = value));
-    var jsonData = JSON.stringify(data);
-    var user = "username="+username;
+    var isbn = document.getElementById("isbn").value;
+    var title = document.getElementById("title").value;
+    var authors = document.getElementById("authors").value;
+    var genre = document.getElementById("genre").value;
+    var pages = document.getElementById("pages").value;
+    var pyear = document.getElementById("publicationyear").value;
+    var url = document.getElementById("url").value;
+    var photo = document.getElementById("photo").value;
+    var sendata = "username="+username+"&isbn="+isbn+"&title="+title+"&authors="+authors+"&genre="+genre+"&pages="+pages+"&publicationyear="+pyear+"&url="+url+"&photo="+photo;
     var xhr = new XMLHttpRequest();
     
     xhr.onload = function () {
@@ -179,10 +182,10 @@ function registerBook() {
             // $('#ajaxContent').html("ERROR!");
         }
     };
-
-    xhr.open('POST', 'InsertBookForLibrarian' + user);
+    
+    xhr.open('POST', 'InsertBookForLibrarian?' + sendata);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-    xhr.send(jsonData);
+    xhr.send();
 }
 
 function registerCancel() {
