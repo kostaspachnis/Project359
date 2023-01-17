@@ -102,7 +102,7 @@ function getBooks() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log(xhr.responseText);
-            $("#lib_books").after(createBooksTable(xhr.responseText));
+            $("#lib_books").html(createBooksTable(xhr.responseText));
         } else if (xhr.status !== 200) {
              $("#lib_books").html("Error!");
         }
