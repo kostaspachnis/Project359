@@ -130,9 +130,9 @@ function checkBook() {
         if (xhr.readyState === 4 && xhr.status === 201) {
             document.getElementById("newBookTitle").style.display="none";
             document.getElementById("newBookDiv").style.display="none";
-            getBooks();
             $('#modalMessage').modal({show:true});
             $("#modalMessage").html("Book inserted in library successfully");
+            getBooks();
         } else if (xhr.readyState === 4 && xhr.status === 205) {
             $("#messageModal").modal({show:true});
             $("#modalMessage").html("Book already exists");
