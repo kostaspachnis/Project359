@@ -143,7 +143,7 @@ function checkBook() {
             // $("#lib_books").html("Error!");
         }
     };
-    var isbn = ndocument.getElementById("book_isbn").value;
+    var isbn = document.getElementById("book_isbn").value;
     var data = "username="+username+"&book_isbn="+isbn;
     xhr.open('GET', 'SearchIfBookExistsLibrarian?' + data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
