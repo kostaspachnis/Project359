@@ -129,17 +129,17 @@ function checkBook() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 201) {
             $("#messageModal").modal({show: true});
-            document.getElementById("modalMessage").innerHTML("Book inserted in library successfully");
+            $("#modalMessage").html("Book inserted in library successfully");
             document.getElementById("newBookTitle").style.display="none";
             document.getElementById("newBookDiv").style.display="none";
             // getBooks();
         } else if (xhr.readyState === 4 && xhr.status === 205) {
             console.log("AAAAAAAAAAAAAAAAAAAA");
             $("#messageModal").modal({show: true});
-            document.getElementById("modalMessage").innerHTML("Book already exists");
+            $("modalMessage").html("Book already exists");
         } else if (xhr.readyState === 4 && xhr.status === 206) {
             $("#messageModal").modal({show: true});
-            document.getElementById("modalMessage").innerHTML("Book does not exist");
+            $("modalMessage").html("Book does not exist");
         } else if (xhr.status !== 200) {
             // $("#lib_books").html("Error!");
         }
