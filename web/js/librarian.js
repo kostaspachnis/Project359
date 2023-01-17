@@ -151,22 +151,41 @@ function checkBook() {
     xhr.send();
 }
 
-function InsertNewBook() {
+function registerButton() {
+    document.getElementById("newBookTitle").style.display="none";
+    document.getElementById("newBookDiv").style.display="none";
+    document.getElementById("registerBookTitle").style.display="block";
+    document.getElementById("new_book").style.display="block";
+}
+
+function registerBook() {
     let bookForm = document.getElementById('new_book');
     let formData = new FormData(bookForm);
     const data = {}
     formData.forEach((value, key) => (data[key] = value));
     var jsonData = JSON.stringify(data);
+    var user = "username="+username;
     var xhr = new XMLHttpRequest();
     
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-                $('#ajaxContent').html("Successful Book Insertion!");
-            } else if (xhr.status !== 200) {
-                $('#ajaxContent').html("ERROR!");
-            }
-        };
-    xhr.open('POST', 'InsertBookForLibrarian');
+            $("#messageModal").modal({show: true});
+            $('#registerMessage').html("Successful Book Insertion!");
+            getBooks();
+        } else if (xhr.readyState === 4 && xhr.status === 205) {
+            $("#messageModal").modal({show: true});
+            $('#registerMessage').html("Book already exists!");
+        } else if (xhr.status !== 200) {
+            // $('#ajaxContent').html("ERROR!");
+        }
+    };
+
+    xhr.open('POST', 'InsertBookForLibrarian' + user);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send(jsonData);
+}
+
+function registerCancel() {
+    document.getElementById("registerBookTitle").style.display="none";
+    document.getElementById("new_book").style.display="none";
 }

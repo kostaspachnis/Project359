@@ -85,7 +85,7 @@ public class InsertBookForLibrarian extends HttpServlet {
             EditBooksTable bkt = new EditBooksTable();
 
             if (bkt.databaseToBooksISBNBook(book.getIsbn()) != null) {
-                response.setStatus(407);
+                response.setStatus(205);
             } else {
                 bkt.createNewBook(book);
                 blt.createNewBookInLibrary(book2);
