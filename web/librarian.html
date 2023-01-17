@@ -53,9 +53,9 @@
         <div id="librarian_div" style="display: none;">
             
             <h2 id="newBookTitle" style="display: none;">New Book</h2>
-            <h2 id="registerBookTitle" style="display: none;">Register Book</h2>
+            <h2 id="registerBookTitle" style="display: none;">Register New Book</h2>
             <div id="newBookDiv" style="display: none;">
-                <form action="">
+                <form action="" id="newBookForm">
                     <div class="mb-3">
                         <label for="book_isbn" class="form-label">ISBN</label>
                         <input type="text" class="form-control" id="book_isbn" name="book_isbn">
@@ -85,11 +85,11 @@
                     </div>
 
 
-                    <button type="button" class="btn btn-success" onclick="registerButton(); return false;">Register</button>
+                    <button type="button" class="btn btn-success" onclick="registerButton(); return false;">Register New Book</button>
                     <button type="button" class="btn btn-danger" onclick="insertCancel(); return false;">Cancel</button>
                 </form>
 
-                <form action="" id="new_book" style="display: none;">
+                <form action="" id="registerBookForm" style="display: none;">
                     <div class="mb-3">
                         <label for="isbn" class="form-label"></label>
                         <input type="text" class="form-control" id="isbn" name="isbn">
@@ -151,7 +151,7 @@
                         </div>
                         </div>
                     </div>
-                    
+
                     <button type="button" class="btn btn-danger" onclick="registerCancel(); return false;">Cancel</button>
                 </form>
             </div>

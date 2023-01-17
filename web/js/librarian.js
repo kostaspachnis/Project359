@@ -153,13 +153,13 @@ function checkBook() {
 
 function registerButton() {
     document.getElementById("newBookTitle").style.display="none";
-    document.getElementById("newBookDiv").style.display="none";
+    document.getElementById("newBookForm").style.display="none";
     document.getElementById("registerBookTitle").style.display="block";
-    document.getElementById("new_book").style.display="block";
+    document.getElementById("registerBookForm").style.display="block";
 }
 
 function registerBook() {
-    let bookForm = document.getElementById('new_book');
+    let bookForm = document.getElementById('registerBookForm');
     let formData = new FormData(bookForm);
     const data = {}
     formData.forEach((value, key) => (data[key] = value));
@@ -187,5 +187,5 @@ function registerBook() {
 
 function registerCancel() {
     document.getElementById("registerBookTitle").style.display="none";
-    document.getElementById("new_book").style.display="none";
+    document.getElementById("registerBookForm").style.display="none";
 }
