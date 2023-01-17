@@ -130,8 +130,8 @@ function checkBook() {
         if (xhr.readyState === 4 && xhr.status === 201) {
             document.getElementById("newBookTitle").style.display="none";
             document.getElementById("newBookDiv").style.display="none";
-            // getBooks(); PREPEI NA VALW KAI TO BOOK NA EMFANIZETAI STO TABLE
-            $('#modalMessage').modal({show:false});
+            getBooks();
+            $('#modalMessage').modal('hide');
         } else if (xhr.readyState === 4 && xhr.status === 205) {
             $("#messageModal").modal({show:true});
             $("#modalMessage").html("Book already exists");
