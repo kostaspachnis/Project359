@@ -131,7 +131,8 @@ function checkBook() {
             document.getElementById("newBookTitle").style.display="none";
             document.getElementById("newBookDiv").style.display="none";
             getBooks();
-            $('#modalMessage').modal('hide');
+            $('#modalMessage').modal({show:true});
+            $("#modalMessage").html("Book inserted in library successfully");
         } else if (xhr.readyState === 4 && xhr.status === 205) {
             $("#messageModal").modal({show:true});
             $("#modalMessage").html("Book already exists");
@@ -142,10 +143,9 @@ function checkBook() {
             // $("#lib_books").html("Error!");
         }
     };
-    var data = username + " " + document.getElementById("book_isbn").value;
-    var jsondata = JSON.stringify(data);
-    // var data = $('#newBookForm').serialize();
-    xhr.open('GET', 'SearchIfBookExistsLibrarian?' + jsondata);
+    var isbn = ndocument.getElementById("book_isbn").value;
+    var data = "username="+username+"&book_isbn="+isbn;
+    xhr.open('GET', 'SearchIfBookExistsLibrarian?' + data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
