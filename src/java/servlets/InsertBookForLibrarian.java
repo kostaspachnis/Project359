@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mainClasses.JSON_Converter;
 import mainClasses.Book;
 import database.tables.EditBooksTable;
 import database.tables.EditLibrarianTable;
@@ -71,11 +70,27 @@ public class InsertBookForLibrarian extends HttpServlet {
         
         try {
             String username = request.getParameter("username");
+            String isbn = request.getParameter("isbn");
+            String title = request.getParameter("title");
+            String authors = request.getParameter("authors");
+            String genre = request.getParameter("genre");
+            String pages = request.getParameter("pages");
+            String pyear = request.getParameter("publicationyear");
+            String url = request.getParameter("url");
+            String photo = request.getParameter("photo");
             EditLibrarianTable lt = new EditLibrarianTable();
             Librarian libman = lt.databaseToLibrarianId(username);
             int id = libman.getLibrary_id();
-            JSON_Converter jc = new JSON_Converter();
-            Book book = jc.jsonToBook(request.getReader());
+            Book book = new Book();
+            book.setAuthors(authors);
+            book.setGenre(genre);
+            book.setIsbn(isbn);
+            book.setPages(Integer.parseInt(pages));
+            book.setPhoto(photo);
+            book.setPublicationyear(Integer.parseInt(pyear));
+            book.setTitle(title);
+            book.setUrl(url);
+            System.out.println(book.getTitle());
             EditBooksInLibraryTable blt = new EditBooksInLibraryTable();
             BookInLibrary book2 = new BookInLibrary();
 
