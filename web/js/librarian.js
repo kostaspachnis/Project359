@@ -128,6 +128,7 @@ function checkBook() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 201) {
+            $("#messageModal").modal({show: true});
             $("#modalMessage").html("Book inserted in library successfully");
             document.getElementById("newBookTitle").style.display="none";
             document.getElementById("newBookDiv").style.display="none";
