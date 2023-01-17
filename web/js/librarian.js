@@ -128,9 +128,9 @@ function checkBook() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 201) {
+            $("#modalMessage").html("Book inserted in library successfully");
             document.getElementById("newBookTitle").style.display="none";
             document.getElementById("newBookDiv").style.display="none";
-            $("#modalMessage").html("Book inserted in library successfully");
             getBooks();
         } else if (xhr.readyState === 4 && xhr.status === 205) {
             $("#modalMessage").html("Book already exists");
