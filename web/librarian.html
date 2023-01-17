@@ -88,8 +88,69 @@
                     <button type="button" class="btn btn-danger" onclick="insertCancel(); return false;">Cancel</button>
                 </form>
 
-                <form action="">
-                    
+                <form action="" id="new_book" style="display: none;">
+                    <div class="mb-3">
+                        <label for="isbn" class="form-label"></label>
+                        <input type="text" class="form-control" id="isbn" name="isbn">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="authors" class="form-label">Authors</label>
+                        <input type="text" class="form-control" id="authors" name="authors">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="genre" class="form-label">Genre</label>
+                        <input type="text" class="form-control" id="genre" name="genre">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pages" class="form-label">Pages</label>
+                        <input type="text" class="form-control" id="pages" name="pages">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="publicationyear" class="form-label">Year</label>
+                        <input type="text" class="form-control" id="publicationyear" name="publicationyear">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="url" class="form-label">URL</label>
+                        <input type="text" class="form-control" id="url" name="url">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="photo" class="form-label">Photo</label>
+                        <input type="text" class="form-control" id="photo" name="photo">
+                    </div>
+
+                    <button type="button" id="registerButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal" onclick="registerBook(); return false;">
+                        Register
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="registerModalLabel">Cannot register book</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick=""></button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="registerMessage"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="registerCancel(); return false;">Cancel</button>
                 </form>
             </div>
 
