@@ -74,7 +74,7 @@ public class SearchIfBookExistsLibrarian extends HttpServlet {
             book2.setIsbn(isbn);
             book2.setLibrary_id(id);
 
-            if (book != null) {
+            if (book != null && elt.isBookin(isbn, id) == 0) {
                 elt.createNewBookInLibrary(book2);
                 response.setStatus(201);
             } else if (elt.isBookin(isbn, id) == 1) {
