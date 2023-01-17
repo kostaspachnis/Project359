@@ -150,3 +150,23 @@ function checkBook() {
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
+
+function InsertNewBook() {
+    let bookForm = document.getElementById('new_book');
+    let formData = new FormData(bookForm);
+    const data = {}
+    formData.forEach((value, key) => (data[key] = value));
+    var jsonData = JSON.stringify(data);
+    var xhr = new XMLHttpRequest();
+    
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+                $('#ajaxContent').html("Successful Book Insertion!");
+            } else if (xhr.status !== 200) {
+                $('#ajaxContent').html("ERROR!");
+            }
+        };
+    xhr.open('POST', 'InsertBookForLibrarian');
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send(jsonData);
+}
