@@ -88,6 +88,17 @@
             </div>
 
             <div class="mb-3">
+                <label for="student_type">Student Type:</label> <br> 
+                <select class="custom-select" id="student_type" name="student_type">
+                    <option selected>Select</option>
+                    <option value="BSc">Undergraduate</option>
+                    <option value="MSc">Postgraduate</option>
+                    <option value="PhD">PHD</option>
+                </select>
+                <span id="message5"></span> <br> <br>
+            </div>
+
+            <div class="mb-3">
                 <label for="student_id">Pass Number*</label> <br> 
                 <input type="text" class="form-control" id="student_id" name="student_id" pattern="[0-9]{12}" title="12 numbers" required> <br> <br>
             </div>
