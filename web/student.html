@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
 
+<html lang="en">
 <head>
     <title>MyLibrary - Student</title>
     <meta charset="utf-8">
     <meta name="description" content="Library site">
     <meta name="keywords" content="Library">
     <script src="js/ajax.js"></script>
+    <script src="js/student.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -34,6 +35,9 @@
 
         <div id="loginDiv">
             <form id="loginForm" onsubmit="getUser(); return false;">
+
+                <h1>Student Login</h1> <br>
+
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username">
