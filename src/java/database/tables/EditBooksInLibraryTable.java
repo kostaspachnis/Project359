@@ -246,4 +246,47 @@ public class EditBooksInLibraryTable {
         }
         return 0;
     }
+
+    // Returns an available book and its libraries(Project Function)
+    public ArrayList<Integer> databaseToBooksInLibraryAvailableLib(String isbn) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Integer> libs = new ArrayList<Integer>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT library_id FROM booksinlibraries WHERE available='true' AND isbn='" + isbn + "'");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Integer tr = gson.fromJson(json, Integer.class);
+                libs.add(tr);
+            }
+            return libs;
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public BookInLibrary retBook(String isbn, int libid) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM booksinlibraries WHERE library_id = '" + libid + "' AND isbn = '" + isbn + "'");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                BookInLibrary tr = gson.fromJson(json, BookInLibrary.class);
+                return tr;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 }
