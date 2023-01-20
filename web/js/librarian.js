@@ -20,6 +20,10 @@ function getUser() {
     xhr.send();
 }
 
+function signup() {
+    window.location = "signup_librarian.html";
+}
+
 function authenticate() {
 
     document.getElementById("loginDiv").style.display="none";
