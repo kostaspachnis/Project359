@@ -23,7 +23,7 @@ import mainClasses.Librarian;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "BookAvailabilityLibrarian", urlPatterns = {"/BookAvailabilityLibrarian"})
 public class BookAvailabilityLibrarian extends HttpServlet {

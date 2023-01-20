@@ -23,7 +23,7 @@ import mainClasses.Librarian;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "SearchIfBookExistsLibrarian", urlPatterns = {"/SearchIfBookExistsLibrarian"})
 public class SearchIfBookExistsLibrarian extends HttpServlet {

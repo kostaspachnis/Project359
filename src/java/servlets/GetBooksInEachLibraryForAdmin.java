@@ -28,7 +28,7 @@ import mainClasses.Librarian;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "GetBooksInEachLibraryForAdmin", urlPatterns = {"/GetBooksInEachLibraryForAdmin"})
 public class GetBooksInEachLibraryForAdmin extends HttpServlet {

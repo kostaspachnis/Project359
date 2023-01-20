@@ -24,7 +24,7 @@ import mainClasses.Borrowing;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "BorrowBookForStudent", urlPatterns = {"/BorrowBookForStudent"})
 public class BorrowBookForStudent extends HttpServlet {

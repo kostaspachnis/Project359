@@ -128,9 +128,9 @@ public class EditBooksTable {
 
         ArrayList<Book> booksList = new ArrayList<Book>();
         ResultSet res;
-        String query = null;
+        String query = "";
 
-        if (genre.equals("all")) {
+        if (genre.equals("all") || genre.equals("`ALL") || genre.equals("All")) {
             if (fromYear == 0 && toYear == 0) {
                 query = "SELECT * FROM books";
             } else if (fromYear != 0 && toYear == 0) {
@@ -267,6 +267,142 @@ public class EditBooksTable {
             Book book = gson.fromJson(json, Book.class);
             return book;
         } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    // Retrieves books based on assets (Project Function)
+    public ArrayList<Book> databaseToBooks(String genre, int fromYear, int toYear, String title,
+            String author, int fromPage, int toPage) throws SQLException, ClassNotFoundException {
+
+        ResultSet res;
+        ArrayList<Book> books = new ArrayList<Book>();
+        String query = "";
+
+        boolean isPage = false;
+        boolean isYear = false;
+        boolean hasNextAttr = false;
+
+        if (genre.equals("all") || genre.equals("ALL") || genre.equals("All")) {
+            query += "SELECT * FROM books";
+            if (fromYear == 0 && toYear == 0 && fromPage == 0 && toPage == 0 && title == null && author == null) {
+                query = "SELECT * FROM books";
+            }
+            if (fromYear != 0) {
+                isYear = true;
+                hasNextAttr = true;
+                query += " WHERE publicationyear >= '" + fromYear + "'";
+            }
+            if (toYear != 0) {
+                hasNextAttr = true;
+                if (isYear == true) {
+                    query += " AND publicationyear <= '" + toYear + "'";
+                } else {
+                    query += " WHERE publicationyear <= '" + toYear + "'";
+                }
+            }
+
+            if (title != null) {
+                if (hasNextAttr == true) {
+                    query += " AND title LIKE '%" + title + "%'";
+                } else {
+                    query += " WHERE title LIKE '%" + title + "%'";
+                }
+                hasNextAttr = true;
+            }
+            if (author != null) {
+                if (hasNextAttr == true) {
+                    query += " AND authors LIKE '%" + author + "%'";
+                } else {
+                    query += " WHERE authors LIKE '%" + author + "%'";
+                }
+                hasNextAttr = true;
+            }
+            if (fromPage != 0) {
+                isPage = true;
+                if (hasNextAttr == true) {
+                    query += " AND pages >= '" + fromPage + "'";
+                } else {
+                    hasNextAttr = true;
+                    query += " WHERE pages >= '" + fromPage + "'";
+                }
+            }
+            if (toPage != 0) {
+                if (isPage == true || hasNextAttr == true) {
+                    query += " AND pages <= '" + toPage + "'";
+                } else {
+                    query += " WHERE pages <= '" + toPage + "'";
+                }
+            }
+
+        } else {
+            query += "SELECT * FROM books WHERE genre ='" + genre + "'";
+            if (fromYear == 0 && toYear == 0 && fromPage == 0 && toPage == 0 && title == null && author == null) {
+                query = "SELECT * FROM books WHERE genre ='" + genre + "'";
+            }
+            if (fromYear != 0) {
+                isYear = true;
+                hasNextAttr = true;
+                query += " AND publicationyear >= '" + fromYear + "'";
+            }
+            if (toYear != 0) {
+                hasNextAttr = true;
+                if (isYear == true) {
+                    query += " AND publicationyear <= '" + toYear + "'";
+                } else {
+                    query += " AND publicationyear <= '" + toYear + "'";
+                }
+            }
+
+            if (title != null) {
+                if (hasNextAttr == true) {
+                    query += " AND title LIKE '%" + title + "%'";
+                } else {
+                    query += " AND title LIKE '%" + title + "%'";
+                }
+                hasNextAttr = true;
+            }
+            if (author != null) {
+                if (hasNextAttr == true) {
+                    query += " AND authors LIKE '%" + author + "%'";
+                } else {
+                    query += " AND authors LIKE '%" + author + "%'";
+                }
+                hasNextAttr = true;
+            }
+            if (fromPage != 0) {
+                isPage = true;
+                if (hasNextAttr == true) {
+                    query += " AND pages >= '" + fromPage + "'";
+                } else {
+                    hasNextAttr = true;
+                    query += " AND pages >= '" + fromPage + "'";
+                }
+            }
+            if (toPage != 0) {
+                if (isPage == true || hasNextAttr == true) {
+                    query += " AND pages <= '" + toPage + "'";
+                } else {
+                    query += " AND pages <= '" + toPage + "'";
+                }
+            }
+        }
+
+        try {
+            Connection con = DB_Connection.getConnection();
+            Statement stmt = con.createStatement();
+
+            res = stmt.executeQuery(query);
+            while (res.next()) {
+                String json = DB_Connection.getResultsToJSON(res);
+                Gson gson = new Gson();
+                Book book = gson.fromJson(json, Book.class);
+                books.add(book);
+            }
+            return books;
+        } catch (SQLException e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
