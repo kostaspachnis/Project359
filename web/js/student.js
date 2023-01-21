@@ -1,4 +1,33 @@
 
+
+var username;
+function getUser() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 202) {
+            // $("#ajaxContent1").html(createTableFromJSON(JSON.parse(xhr.responseText)));
+            authenticate();
+        } else if (xhr.status !== 202) {
+            // $("#ajaxContent1").html("User not exists or incorrect password");
+        }
+    };
+    username = document.getElementById("username").value;
+    var data = $('#loginForm').serialize();
+    console.log(data);
+    xhr.open('GET', 'GetStudent?'+data);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+function authenticate() {
+
+    document.getElementById("loginDiv").style.display="none";
+    document.getElementById("logoutOpt").style.display="block";
+    document.getElementById("student_div").style.display="block";
+    getBooks();
+}
+
+
 function signup() {
     window.location = "signup_student.html";
 }
@@ -111,9 +140,7 @@ function getCoordinates() {
         } else if (xhr.status === 403) {
             return false;
         }
-    };
-
-    var username = document.getElementById('username').value;
+    };    
 
     xhr.open('GET', 'ReturnCoordinatesForStudent?' + 'username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
