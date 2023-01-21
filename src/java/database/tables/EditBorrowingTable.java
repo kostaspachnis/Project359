@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,11 +67,31 @@ public class EditBorrowingTable {
     }
 
 
-    public void updateBorrowing(int borrowingID, int userID, String info, String status) throws SQLException, ClassNotFoundException {
+    public void updateBorrowing(int borrowingID, int userID, String status) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        String updateQuery = "UPDATE borrowing SET status";//...
+        String updateQuery = "UPDATE borrowing SET status='";//...
         
+        stmt.executeUpdate(updateQuery);
+        stmt.close();
+        con.close();
+    }
+
+    public void updateBor(int copyid, int userid, String status) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        String updateQuery = "UPDATE borrowing SET status='" + status + "' WHERE bookcopy_id = '" + copyid + "' AND user_id = '" + userid + "'";
+
+        stmt.executeUpdate(updateQuery);
+        stmt.close();
+        con.close();
+    }
+
+    public void updateBorrowingLib(int copyid, String status) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        String updateQuery = "UPDATE borrowing SET status='" + status + "' WHERE bookcopy_id='" + copyid + "'";
+
         stmt.executeUpdate(updateQuery);
         stmt.close();
         con.close();
@@ -137,5 +158,27 @@ public class EditBorrowingTable {
         } catch (SQLException ex) {
             Logger.getLogger(EditBorrowingTable.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public ArrayList<Borrowing> requestedBor() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Borrowing> bors = new ArrayList<Borrowing>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM librarians WHERE status='requested'");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Borrowing b = gson.fromJson(json, Borrowing.class);
+                bors.add(b);
+            }
+            return bors;
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
     }
 }

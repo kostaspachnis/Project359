@@ -5,11 +5,11 @@
  */
 package servlets;
 
-import database.tables.EditBooksTable;
+import database.tables.EditBooksInLibraryTable;
+import database.tables.EditBorrowingTable;
+import database.tables.EditLibrarianTable;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,14 +17,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mainClasses.Book;
+import mainClasses.BookInLibrary;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
-@WebServlet(name = "FindBookForStudent", urlPatterns = {"/FindBookForStudent"})
-public class FindBookForStudent extends HttpServlet {
+@WebServlet(name = "AcceptRequestedForLibrarian", urlPatterns = {"/AcceptRequestedForLibrarian"})
+public class AcceptRequestedForLibrarian extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,59 +51,9 @@ public class FindBookForStudent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        String genre = request.getParameter("genre");
-        String author = request.getParameter("author");
-        if (author.equals("")) {
-            author = null;
-        }
-        String title = request.getParameter("title");
-        if (title.equals("")) {
-            title = null;
-        }
-        int fY;
-        if (request.getParameter("fromYear").equals("")) {
-            fY = 0;
-        } else {
-            fY = Integer.parseInt(request.getParameter("fromYear"));
-        }
-        int tY;
-        if (request.getParameter("toYear").equals("")) {
-            tY = 0;
-        } else {
-            tY = Integer.parseInt(request.getParameter("toYear"));
-        }
-        int fP;
-        if (request.getParameter("fromPage").equals("")) {
-            fP = 0;
-        } else {
-            fP = Integer.parseInt(request.getParameter("fromPage"));
-        }
-        int tP;
-        if (request.getParameter("toPage").equals("")) {
-            tP = 0;
-        } else {
-            tP = Integer.parseInt(request.getParameter("toPage"));
-        }
-
-        EditBooksTable ebt = new EditBooksTable();
-        ArrayList<Book> res = new ArrayList<Book>();
-
-        try (PrintWriter out = response.getWriter()) {
-            res = ebt.databaseToBooks(genre, fY, tY, title, author, fP, tP);
-            if (res == null) {
-                response.setStatus(403);
-            } else {
-                response.setStatus(200);
-                out.println(ebt.booksToJson(res));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FindBookForStudent.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FindBookForStudent.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // processRequest(request, response);
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -115,7 +65,25 @@ public class FindBookForStudent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // processRequest(request, response);
+        String isbn = request.getParameter("isbn");
+        EditLibrarianTable lt = new EditLibrarianTable();
+        EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
+        EditBorrowingTable bortable = new EditBorrowingTable();
+        try {
+            int id = lt.databaseToLibrarianId(request.getParameter("libname")).getLibrary_id();
+            BookInLibrary bil = eblt.retBook(isbn, id);
+            if (bil.getAvailable().equals("false")) {
+                int bcid = bil.getBookcopy_id();
+                bortable.updateBorrowingLib(bcid, "borrowed");
+                response.setStatus(200);
+            } else
+                response.setStatus(403);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AcceptRequestedForLibrarian.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AcceptRequestedForLibrarian.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

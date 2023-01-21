@@ -5,7 +5,8 @@
  */
 package servlets;
 
-import database.tables.EditBooksTable;
+import com.google.gson.Gson;
+import database.tables.EditStudentsTable;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -17,14 +18,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mainClasses.Book;
+import mainClasses.Student;
 
 /**
  *
  * @author kdido
  */
-@WebServlet(name = "FindBookForStudent", urlPatterns = {"/FindBookForStudent"})
-public class FindBookForStudent extends HttpServlet {
+@WebServlet(name = "ReturnCoordinatesForStudent", urlPatterns = {"/ReturnCoordinatesForStudent"})
+public class ReturnCoordinatesForStudent extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,58 +53,30 @@ public class FindBookForStudent extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String genre = request.getParameter("genre");
-        String author = request.getParameter("author");
-        if (author.equals("")) {
-            author = null;
-        }
-        String title = request.getParameter("title");
-        if (title.equals("")) {
-            title = null;
-        }
-        int fY;
-        if (request.getParameter("fromYear").equals("")) {
-            fY = 0;
-        } else {
-            fY = Integer.parseInt(request.getParameter("fromYear"));
-        }
-        int tY;
-        if (request.getParameter("toYear").equals("")) {
-            tY = 0;
-        } else {
-            tY = Integer.parseInt(request.getParameter("toYear"));
-        }
-        int fP;
-        if (request.getParameter("fromPage").equals("")) {
-            fP = 0;
-        } else {
-            fP = Integer.parseInt(request.getParameter("fromPage"));
-        }
-        int tP;
-        if (request.getParameter("toPage").equals("")) {
-            tP = 0;
-        } else {
-            tP = Integer.parseInt(request.getParameter("toPage"));
-        }
-
-        EditBooksTable ebt = new EditBooksTable();
-        ArrayList<Book> res = new ArrayList<Book>();
-
+        String username = request.getParameter("username");
+        EditStudentsTable st = new EditStudentsTable();
         try (PrintWriter out = response.getWriter()) {
-            res = ebt.databaseToBooks(genre, fY, tY, title, author, fP, tP);
-            if (res == null) {
-                response.setStatus(403);
-            } else {
+            Student s = st.databaseToStudent_ret(username);
+            if (s != null) {
+                Double lat = s.getLat();
+                Double lon = s.getLon();
+                ArrayList<Double> res = new ArrayList<>();
+                res.add(lon);
+                res.add(lat);
+                Gson gson = new Gson();
+                String json = gson.toJson(res);
+                out.println(json);
                 response.setStatus(200);
-                out.println(ebt.booksToJson(res));
+            } else {
+                response.setStatus(403);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FindBookForStudent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReturnCoordinatesForStudent.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FindBookForStudent.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReturnCoordinatesForStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
