@@ -4,11 +4,10 @@ var username;
 function getUser() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
-        if (xhr.readyState === 4 && xhr.status === 202) {
+        if (xhr.readyState === 4 && xhr.status === 201) {
             // $("#ajaxContent1").html(createTableFromJSON(JSON.parse(xhr.responseText)));
-            console.log('AAAAAAAAAAAAAAA');
             authenticate();
-        } else if (xhr.status !== 202) {
+        } else if (xhr.status !== 201) {
             // $("#ajaxContent1").html("User not exists or incorrect password");
         }
     };
