@@ -39,22 +39,6 @@ function searchBook() {
     xhr.send();
 }
 
-function getCoordinates() {
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.onload = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            return JSON.parse(xhr.responseText);
-        } else if (xhr.status === 403) {
-            return false;
-        }
-    };
-
-    xhr.open('GET', 'ReturnCoordinatesForStudent?' + 'username=' + username);
-    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-    xhr.send();
-}
 
 
 function createBookListFromJSON(jsonData) {
@@ -98,41 +82,73 @@ function createBookListFromJSON(jsonData) {
 
 function requestBook(isbn) {
 
+    xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            createLibraryList(xhr.responseText);
+            //$('#librariesFoundTable').html(createLibraryList(xhr.responseText));
+            //document.getElementById('librariesFound').style.display = 'block';
+        } else if (xhr.status === 403) {
+            
+        }
+    }
+
+    xhr.open('GET', 'ShowLibrariesForStudent?' + 'isbn=' + isbn);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
 
 }
 
-function createLibraryList() {
+
+function getCoordinates() {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            return JSON.parse(xhr.responseText);
+        } else if (xhr.status === 403) {
+            return false;
+        }
+    };
+
+    xhr.open('GET', 'ReturnCoordinatesForStudent?' + 'username=' + username);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+
+function createLibraryList(jsonData) {
+
+    var bookList = JSON.parse(jsonData);
     let myCoordinates = getCoordinates();
     let lon = myCoordinates.lon;
     let lat = myCoordinates.lat;
 
-    let origins = '';
-    let destinations = '';
+    let origins = 'origins=';
+    let destinations = 'destinations=';
+
+    origins += lat + '&' + lon;
 
     for(var i = 0; i < bookList.length; i++) {
-        origins += i === bookList.length-1 ? lat + ',' + lon : lat + ',' + lon + ';';
-        destinations += i === bookList.length-1 ? bookList[i].lat + ',' + bookList[i] : bookList[i].lat + ',' + bookList[i].lon + ';';
+        destinations += i === bookList.length-1 ? bookList[i].lat + '&' + bookList[i] : bookList[i].lat + '&' + bookList[i].lon + '&';
     }
 
 
-    const options = {
-        method: 'GET',
-        url: 'https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix',
-        params: {
-          origins: origins,
-          destinations: destinations
-        },
-        headers: {
-          'X-RapidAPI-Key': 'd3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a',
-          'X-RapidAPI-Host': 'trueway-matrix.p.rapidapi.com'
+    const settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + origins + destinations, // + "units=km",
+        "method": "GET",
+        "headers": {
+            "X-RapidAPI-Key": "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a",
+            "X-RapidAPI-Host": "trueway-matrix.p.rapidapi.com"
         }
     };
-      
-    axios.request(options).then(function (response) {
-        console.log(response.data);
-    }).catch(function (error) {
-        console.error(error);
+    
+    $.ajax(settings).done(function (response) {
+        console.log(response);
     });
-
 }
 
