@@ -19,6 +19,7 @@ function searchBook() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 202) {
             console.log("success");
+            console.log(xhr.responseText);
         } else if (xhr.status !== 202) {
             console.log("error");
         }
