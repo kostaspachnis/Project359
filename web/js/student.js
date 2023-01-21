@@ -113,6 +113,8 @@ function getCoordinates() {
         }
     };
 
+    var username = document.getElementById('username').value;
+
     xhr.open('GET', 'ReturnCoordinatesForStudent?' + 'username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
