@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 
 
 function signup() {
@@ -28,15 +28,108 @@ function searchBook() {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("success");
-            console.log(xhr.responseText);
+            $('#booksFoundTable').html = createBookListFromJSON(xhr.responseText);
         } else if (xhr.status === 403) {
-            console.log("error");
+            
         }
     };
-
 
     xhr.open('GET', 'FindBookForStudent?'+data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
+
+function getCoordinates() {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            return JSON.parse(xhr.responseText);
+        } else if (xhr.status === 403) {
+            return false;
+        }
+    };
+
+    xhr.open('GET', 'ReturnCoordinatesForStudent?' + 'username=' + username);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+
+function createBookListFromJSON(jsonData) {
+
+    var books = JSON.parse(jsonData);
+    var html = '';
+
+    if(books.length === 0) return;
+
+    html += '<table class="table table-striped table-bordered table-hover table-sm">';
+    html += '<thead class="thead-dark text-center">';
+    html += '<th>' + 'ISBN' + '</th>';
+    html += '<th>' + 'Title' + '</th>';
+    html += '<th>' + 'Authors' + '</th>';
+    html += '<th>' + 'URL' + '</th>';
+    html += '<th>' + 'Photo' + '</th>';
+    html += '<th>' + 'Pages' + '</th>';
+    html += '<th>' + 'Publication Year' + '</th>';
+    html += '<th>' + 'Request' + '</th>';
+    html += '</thead>';
+    html += '<tbody>';
+
+    for(var i = 0; i < books.length; i++) {
+        html += "<tr>";
+        html += "<td>" + books[i].isbn + "</td>";
+        html += "<td>" + books[i].title + "</td>";
+        html += "<td>" + books[i].authors + "</td>";
+        html += "<td>" + books[i].url + "</td>";
+        html += '<td><img src="' + books[i].photo + '" alt="book photo" width="70" height="100"></td>';
+        html += "<td>" + books[i].pages + "</td>";
+        html += '<td>' + books[i].publicationyear + "</td>";
+        html += '<td><button type="button" class="btn btn-success" onclick="requestBook(' + books[i].isbn + ')">Find Libraries</button></td>';
+        html += "</tr>";
+    }
+
+    html += "</tbody></table>";
+    return html;
+}
+
+function requestBook(isbn) {
+
+
+}
+
+function createLibraryList() {
+    let myCoordinates = getCoordinates();
+    let lon = myCoordinates.lon;
+    let lat = myCoordinates.lat;
+
+    let origins = '';
+    let destinations = '';
+
+    for(var i = 0; i < bookList.length; i++) {
+        origins += i === bookList.length-1 ? lat + ',' + lon : lat + ',' + lon + ';';
+        destinations += i === bookList.length-1 ? bookList[i].lat + ',' + bookList[i] : bookList[i].lat + ',' + bookList[i].lon + ';';
+    }
+
+    const options = {
+        method: 'GET',
+        url: 'https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix',
+        params: {
+          origins: origins,
+          destinations: destinations
+        },
+        headers: {
+          'X-RapidAPI-Key': 'd3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a',
+          'X-RapidAPI-Host': 'trueway-matrix.p.rapidapi.com'
+        }
+    };
+      
+    axios.request(options).then(function (response) {
+        console.log(response.data);
+    }).catch(function (error) {
+        console.error(error);
+    });
+
+}
+
