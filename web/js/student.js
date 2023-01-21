@@ -26,6 +26,7 @@ function searchBook() {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            $('#booksFoundTable').html("");
             $('#booksFoundTable').html(createBookListFromJSON(xhr.responseText));
             document.getElementById('booksFound').style.display = 'block';
         } else if (xhr.status === 403) {
