@@ -5,28 +5,19 @@
  */
 package servlets;
 
-import com.google.gson.Gson;
-import database.tables.EditBooksInLibraryTable;
-import database.tables.EditLibrarianTable;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mainClasses.Librarian;
 
 /**
  *
- * @author kostas
+ * @author kdido
  */
-@WebServlet(name = "ShowLibrariesForStudent", urlPatterns = {"/ShowLibrariesForStudent"})
-public class ShowLibrariesForStudent extends HttpServlet {
+@WebServlet(name = "FindBookForStudent", urlPatterns = {"/FindBookForStudent"})
+public class FindBookForStudent extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,29 +45,6 @@ public class ShowLibrariesForStudent extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try (PrintWriter out = response.getWriter()) {
-            String isbn = request.getParameter("isbn");
-            EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
-            EditLibrarianTable lt = new EditLibrarianTable();
-            ArrayList<Integer> av_book_libs = eblt.databaseToBooksInLibraryAvailableLib(isbn);
-            ArrayList<Librarian> libs = new ArrayList<>();
-
-            int num = 0;
-            for (int i = 0; i < av_book_libs.size(); i++) {
-                num = av_book_libs.get(i);
-                Librarian l = lt.databaseToLibrarianID(num);
-                libs.add(l);
-            }
-
-            Gson gson = new Gson();
-            String json = gson.toJson(libs);
-            out.println(json);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowLibrariesForStudent.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShowLibrariesForStudent.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
