@@ -58,6 +58,8 @@ function getCoordinates() {
 
 function createBookListFromJSON(jsonData) {
 
+    console.log(jsonData);
+
     var books = JSON.parse(jsonData);
     var html = '';
 
