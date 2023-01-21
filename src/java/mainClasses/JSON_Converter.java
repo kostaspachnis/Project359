@@ -54,4 +54,10 @@ public class JSON_Converter {
         BookAvailabilityData msg = gson.fromJson(json, BookAvailabilityData.class);
         return msg;
     }
+
+    public BookForSearch jsonToSearchBook(BufferedReader json) {
+        Gson gson = new Gson();
+        BookForSearch msg = gson.fromJson(json, BookForSearch.class);
+        return msg;
+    }
 }

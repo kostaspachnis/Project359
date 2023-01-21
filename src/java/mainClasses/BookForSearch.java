@@ -46,4 +46,27 @@ public class BookForSearch {
         this.fromPn = fromPn;
     }
 
+    public int getToPn() {
+        return toPn;
+    }
+
+    public void setToPn(int toPn) {
+        this.toPn = toPn;
+    }
+
+    public int getFromY() {
+        return fromY;
+    }
+
+    public void setFromY(int fromY) {
+        this.fromY = fromY;
+    }
+
+    public int getToY() {
+        return toY;
+    }
+
+    public void setToY(int toY) {
+        this.toY = toY;
+    }
 }

@@ -5,12 +5,21 @@
  */
 package servlets;
 
+import database.tables.EditBooksTable;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mainClasses.Book;
+import mainClasses.BookForSearch;
+import mainClasses.JSON_Converter;
 
 /**
  *
@@ -44,9 +53,34 @@ public class FindBookForStudent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        JSON_Converter jc = new JSON_Converter();
+        BookForSearch searchBook = jc.jsonToSearchBook(request.getReader());
 
+        String genre = searchBook.getGenre();
+        String author = searchBook.getAuthor();
+        String title = searchBook.getTitle();
+        int fY = searchBook.getFromY();
+        int tY = searchBook.getToY();
+        int fP = searchBook.getFromPn();
+        int tP = searchBook.getToPn();
+
+        EditBooksTable ebt = new EditBooksTable();
+        ArrayList<Book> res = new ArrayList<Book>();
+
+        try (PrintWriter out = response.getWriter()) {
+            res = ebt.databaseToBooks(genre, fY, tY, title, author, fP, tP);
+            if (res == null) {
+                response.setStatus(403);
+            } else {
+                response.setStatus(200);
+                out.println(ebt.booksToJson(res));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FindBookForStudent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FindBookForStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
