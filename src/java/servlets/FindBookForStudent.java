@@ -52,19 +52,40 @@ public class FindBookForStudent extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        JSON_Converter jc = new JSON_Converter();
-//        System.out.println("------------- in");
-//        BookForSearch searchBook = jc.jsonToSearchBook(request.getReader());
-//        System.out.println("------------- in2");
 
         String genre = request.getParameter("genre");
-        System.out.println("------------- " + genre);
         String author = request.getParameter("author");
+        if (author.equals("")) {
+            author = null;
+        }
         String title = request.getParameter("title");
-        int fY = Integer.parseInt(request.getParameter("fromYear"));
-        int tY = Integer.parseInt(request.getParameter("toYear"));
-        int fP = Integer.parseInt(request.getParameter("fromPage"));
-        int tP = Integer.parseInt(request.getParameter("toPage"));
+        if (title.equals("")) {
+            title = null;
+        }
+        int fY;
+        if (request.getParameter("fromYear").equals("")) {
+            fY = 0;
+        } else {
+            fY = Integer.parseInt(request.getParameter("fromYear"));
+        }
+        int tY;
+        if (request.getParameter("toYear").equals("")) {
+            tY = 0;
+        } else {
+            tY = Integer.parseInt(request.getParameter("toYear"));
+        }
+        int fP;
+        if (request.getParameter("fromPage").equals("")) {
+            fP = 0;
+        } else {
+            fP = Integer.parseInt(request.getParameter("fromPage"));
+        }
+        int tP;
+        if (request.getParameter("toPage").equals("")) {
+            tP = 0;
+        } else {
+            tP = Integer.parseInt(request.getParameter("toPage"));
+        }
 
         EditBooksTable ebt = new EditBooksTable();
         ArrayList<Book> res = new ArrayList<Book>();
