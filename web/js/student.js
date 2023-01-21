@@ -6,6 +6,7 @@ function getUser() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 202) {
             // $("#ajaxContent1").html(createTableFromJSON(JSON.parse(xhr.responseText)));
+            console.log('AAAAAAAAAAAAAAA');
             authenticate();
         } else if (xhr.status !== 202) {
             // $("#ajaxContent1").html("User not exists or incorrect password");
@@ -24,7 +25,6 @@ function authenticate() {
     document.getElementById("loginDiv").style.display="none";
     document.getElementById("logoutOpt").style.display="block";
     document.getElementById("student_div").style.display="block";
-    getBooks();
 }
 
 
