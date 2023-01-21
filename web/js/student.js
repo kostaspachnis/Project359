@@ -27,10 +27,10 @@ function searchBook() {
     var xhr = new XMLHttpRequest();
 
     xhr.onload = function () {
-        if (xhr.readyState === 4 && xhr.status === 202) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
             console.log("success");
             console.log(xhr.responseText);
-        } else if (xhr.status !== 202) {
+        } else if (xhr.status === 403) {
             console.log("error");
         }
     };
