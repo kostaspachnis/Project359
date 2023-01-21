@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 
 function signup() {
     window.location = "signup_student.html";
@@ -111,6 +109,7 @@ function createLibraryList() {
         origins += i === bookList.length-1 ? lat + ',' + lon : lat + ',' + lon + ';';
         destinations += i === bookList.length-1 ? bookList[i].lat + ',' + bookList[i] : bookList[i].lat + ',' + bookList[i].lon + ';';
     }
+
 
     const options = {
         method: 'GET',
