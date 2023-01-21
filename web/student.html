@@ -52,7 +52,55 @@
         </div>
 
         <div id="student_div" style="display: none;">
-            <h1>PAPARIA</h1>
+            
+            <div id="search_book">
+
+                <h2>Search Book</h2>
+
+                <form id="bookSearchForm" onsubmit="searchBook(); return false;">
+
+                    <div class="mb-3">
+                        <label for="search_genre">Genre</label>
+                        <input type="text" class="form-control" id="search_genre" name="search_genre" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="search_title">Title</label>
+                        <input type="text" class="form-control" id="search_title" name="search_title">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="search_author">Author</label>
+                        <input type="text" class="form-control" id="search_author" name="search_author">
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="fromPageNumber">From Page Number</label>
+                            <input type="number" class="form-control" id="fromPageNumber" name="fromPageNumber">
+                        </div>
+                        <div class="col">
+                            <label for="toPageNumber">To page number</label>
+                            <input type="number" class="form-control" id="toPageNumber" name="toPageNumber">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="fromYear">From Year</label>
+                            <input type="number" class="form-control" id="fromYear" name="fromYear">
+                        </div>
+                        <div class="col">
+                            <label for="toYear">To Year</label>
+                            <input type="number" class="form-control" id="toYear" name="toYear">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+
+            </div>
+
         </div>
 
     </div>
