@@ -215,7 +215,7 @@ function createClosestLibrariesList(bookList) {
         html += "<td>" + bookList[i].libraryname + "</td>";
         html += "<td>" + bookList[i].distance + "</td>";
         html += "<td>" + bookList[i].duration + "</td>";
-        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + bookList[i].libraryid + ',' + bookList[i].isbn + ',' + username.valueOf() + ',' + this +')">Borrow</button></td>';
+        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + bookList[i].libraryid + ',' + bookList[i].isbn + ',' + this +')">Borrow</button></td>';
         html += "</tr>";
     }
 
@@ -225,7 +225,7 @@ function createClosestLibrariesList(bookList) {
 }
 
 
-function borrowBook(libraryid, isbn, username, btn) {
+function borrowBook(libraryid, isbn, btn) {
 
     xhr = new XMLHttpRequest();
 
