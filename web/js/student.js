@@ -173,33 +173,33 @@ function createLibraryList(jsonData) {
     console.log(origins);
     console.log(destinations);
 
-    // const data = null;
-    // const xhr = new XMLHttpRequest();
-    // xhr.withCredentials = true;
-    // xhr.addEventListener("readystatechange", 
-    // function () {
-    //     if (this.readyState === this.DONE) {
-    //         console.log(this.responseText);
-    //     }
-    // });
-    // xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + 'origins=' + origins + '&destinations=' + destinations);
-    // xhr.setRequestHeader("x-rapidapi-host", "trueway-matrix.p.rapidapi.com");
-    // xhr.setRequestHeader("x-rapidapi-key", "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a");
-    // xhr.send(data);
-
-
     const data = null;
     const xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
-    xhr.addEventListener("readystatechange", function () {
+    xhr.addEventListener("readystatechange", 
+    function () {
         if (this.readyState === this.DONE) {
             console.log(this.responseText);
         }
     });
-
-    xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?origins=35.335120%2C25.134450&destinations=35.335770%2C25.118920%3B35.329600%2C25.081010");
+    xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + 'origins=' + origins + '&destinations=' + destinations);
     xhr.setRequestHeader("x-rapidapi-host", "trueway-matrix.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a");
     xhr.send(data);
+
+
+    // const data = null;
+    // const xhr = new XMLHttpRequest();
+    // xhr.withCredentials = true;
+    // xhr.addEventListener("readystatechange", function () {
+    //     if (this.readyState === this.DONE) {
+    //         console.log(this.responseText);
+    //     }
+    // });
+
+    // xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?origins=35.335120%2C25.134450&destinations=35.335770%2C25.118920%3B35.329600%2C25.081010");
+    // xhr.setRequestHeader("x-rapidapi-host", "trueway-matrix.p.rapidapi.com");
+    // xhr.setRequestHeader("x-rapidapi-key", "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a");
+    // xhr.send(data);
 }
 
