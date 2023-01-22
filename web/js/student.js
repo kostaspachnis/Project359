@@ -200,11 +200,12 @@ function createClosestLibrariesList(bookList) {
     var html = '';
 
     html += '<table class="table table-striped table-bordered table-hover table-sm">';
-    html += '<thead class="thead-dark text-center">';
+    html += '<thead class="thead-dark">';
     html += '<th>' + 'Library' + '</th>';
     html += '<th>' + 'Distance' + '</th>';
     html += '<th>' + 'Duration' + '</th>';
     html += '<th>' + 'Request' + '</th>';
+    html += '<th>' + 'Return' + '</th>';
     html += '</thead>';
     html += '<tbody>';
 
@@ -213,11 +214,29 @@ function createClosestLibrariesList(bookList) {
         html += "<td>" + bookList[i].libraryname + "</td>";
         html += "<td>" + bookList[i].distance + "</td>";
         html += "<td>" + bookList[i].duration + "</td>";
-        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + bookList[i].isbn + ')">Borrow</button></td>';
+        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + bookList[i].libraryid, bookList[i].isbn, username + ')">Borrow</button></td>';
         html += "</tr>";
     }
 
     html += "</tbody></table>";
     $('#closestLibraries').html(html);
     document.getElementById('closestLibraries').style.display = 'block';
+}
+
+
+function borrowBook(libraryid, isbn, username) {
+
+    xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log('AAAAAAAAAAA');
+        } else if (xhr.status === 403) {
+            
+        }
+    }
+
+    xhr.open('GET', 'BorrowBooksForStudent?' + 'libraryid=' + libraryid + '&isbn=' + isbn + '&username=' + username);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
 }
