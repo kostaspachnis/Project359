@@ -41,6 +41,16 @@ public class EditLibrarianTable {
         return json;
     }
 
+    public ArrayList<String> librariansToJSON(ArrayList<Librarian> lts) {
+        ArrayList<String> libs = new ArrayList<String>();
+        for (int i = 0; i < lts.size(); i++) {
+            Gson gson = new Gson();
+            String json = gson.toJson(lts.get(i), Librarian.class);
+            libs.add(json);
+        }
+        return libs;
+    }
+
     public void updateLibrarian(String username, String personalpage) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
