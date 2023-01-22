@@ -151,8 +151,8 @@ function createLibraryList(jsonData) {
 
     var bookList = JSON.parse(jsonData);
     let myCoordinates = JSON.parse(getCoordinates());
-    let lon = myCoordinates.lon;
-    let lat = myCoordinates.lat;
+    let lat = myCoordinates[0];
+    let lon = myCoordinates[1];
 
     let origins = 'origins=';
     let destinations = 'destinations=';
@@ -160,7 +160,7 @@ function createLibraryList(jsonData) {
     origins += lat + '&' + lon;
 
     for(var i = 0; i < bookList.length; i++) {
-        destinations += i === bookList.length-1 ? bookList[i].lat + '&' + bookList[i] : bookList[i].lat + '&' + bookList[i].lon + '&';
+        destinations += i === bookList.length-1 ? bookList[i].lat + '&' + bookList[i].lon : bookList[i].lat + '&' + bookList[i].lon + '&';
     }
 
 
