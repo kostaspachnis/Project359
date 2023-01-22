@@ -197,6 +197,8 @@ function createClosestLibrariesList(bookList) {
 
     bookList.sort((a, b) => (a.distance*a.duration > b.distance*b.duration) ? 1 : -1);
 
+    let user = document.getElementById('username').value;
+
     var html = '';
 
     html += '<table class="table table-striped table-bordered table-hover table-sm">';
@@ -213,7 +215,7 @@ function createClosestLibrariesList(bookList) {
         html += "<td>" + bookList[i].libraryname + "</td>";
         html += "<td>" + bookList[i].distance + "</td>";
         html += "<td>" + bookList[i].duration + "</td>";
-        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + bookList[i].libraryid + ',' + bookList[i].isbn + ',' + username + ')">Borrow</button></td>';
+        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + bookList[i].libraryid + ',' + bookList[i].isbn + ',' + user + ')">Borrow</button></td>';
         html += "</tr>";
     }
 
