@@ -60,9 +60,9 @@ public class ReturnCoordinatesForStudent extends HttpServlet {
             if (s != null) {
                 Double lat = s.getLat();
                 Double lon = s.getLon();
-                ArrayList<Double> res = new ArrayList<>();
-                res.add(lon);
-                res.add(lat);
+                ArrayList<String> res = new ArrayList<>();
+                res.add(lat.toString());
+                res.add(lon.toString());
                 Gson gson = new Gson();
                 String json = gson.toJson(res);
                 out.println(json);
