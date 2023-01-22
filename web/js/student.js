@@ -166,11 +166,15 @@ function createLibraryList(jsonData) {
     let origins = 'origins=';
     let destinations = '&destinations=';
 
-    origins += mylat + '&' + mylon;
+    
 
     for(var i = 0; i < bookList.length; i++) {
-        destinations += i === bookList.length-1 ? bookList[i].lat + '&' + bookList[i].lon : bookList[i].lat + '&' + bookList[i].lon + '&';
+        origins += i===bookList.length-1 ? mylat + '&' + mylon : mylat + '&' + mylon + '&';
+        destinations += i===bookList.length-1 ? bookList[i].lat + '&' + bookList[i].lon : bookList[i].lat + '&' + bookList[i].lon + '&';
     }
+
+    console.log(origins);
+    console.log(destinations);
 
     const settings = {
         "async": true,
