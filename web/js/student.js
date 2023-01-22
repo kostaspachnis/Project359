@@ -127,16 +127,15 @@ function requestBook(isbn) {
     xhr.send();
 }
 
-
+var myCoordinates;
 function getCoordinates() {
 
     var xhr = new XMLHttpRequest();
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            let myCoordinates = JSON.parse(xhr.responseText);
-            console.log(myCoordinates, ' ', myCoordinates.lat, ' ', myCoordinates.lon);
-            return JSON.parse(xhr.responseText);
+            myCoordinates = JSON.parse(xhr.responseText);
+            // console.log(myCoordinates, ' ', myCoordinates.lat, ' ', myCoordinates.lon); 
         } else if (xhr.status === 403) {
             return false;
         }
@@ -153,11 +152,12 @@ function createLibraryList(jsonData) {
     console.log(jsonData);
 
     var bookList = JSON.parse(jsonData);
-    let myCoordinates = getCoordinates();
+    getCoordinates();
+
     let lat = myCoordinates.lat;
     let lon = myCoordinates.lon;
 
-    // console.log(myCoordinates);
+    console.log(lat, ' ', lon);
 
     let origins = 'origins=';
     let destinations = 'destinations=';
