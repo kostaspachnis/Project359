@@ -172,11 +172,10 @@ function createLibraryList(jsonData) {
         destinations += i === bookList.length-1 ? bookList[i].lat + '&' + bookList[i].lon : bookList[i].lat + '&' + bookList[i].lon + '&';
     }
 
-
     const settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + origins + destinations, // + "units=km",
+        "url": "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?origins=40.629041%2C-74.025606%3B40.630099%2C-73.993521%3B40.644895%2C-74.013818%3B40.627177%2C-73.980853&destinations=40.629041%2C-74.025606%3B40.630099%2C-73.993521%3B40.644895%2C-74.013818%3B40.627177%2C-73.980853",
         "method": "GET",
         "headers": {
             "X-RapidAPI-Key": "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a",
@@ -187,5 +186,20 @@ function createLibraryList(jsonData) {
     $.ajax(settings).done(function (response) {
         console.log(response);
     });
+
+    // const settings = {
+    //     "async": true,
+    //     "crossDomain": true,
+    //     "url": "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + origins + destinations, // + "units=km",
+    //     "method": "GET",
+    //     "headers": {
+    //         "X-RapidAPI-Key": "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a",
+    //         "X-RapidAPI-Host": "trueway-matrix.p.rapidapi.com"
+    //     }
+    // };
+    
+    // $.ajax(settings).done(function (response) {
+    //     console.log(response);
+    // });
 }
 
