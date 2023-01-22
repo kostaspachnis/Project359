@@ -8,6 +8,14 @@
         <servlet-name>GetStudent</servlet-name>
         <url-pattern>/GetStudent</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ShowLibrariesForStudent</servlet-name>
+        <servlet-class>servlets.ShowLibrariesForStudent</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowLibrariesForStudent</servlet-name>
+        <url-pattern>/ShowLibrariesForStudent</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
