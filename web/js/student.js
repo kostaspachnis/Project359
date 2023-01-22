@@ -220,7 +220,7 @@ function createClosestLibrariesList(bookList) {
     }
 
     html += "</tbody></table>";
-    $('#closestLibraries').html(html);
+    $('#closestLibrariesTable').html(html);
     document.getElementById('closestLibraries').style.display = 'block';
 }
 
