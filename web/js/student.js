@@ -177,9 +177,11 @@ function createLibraryList(jsonData) {
     function () {
         if (this.readyState === this.DONE) {
             results=JSON.parse(this.responseText);
+            distances = results.distances;
+            durations = results.durations;
             for(var i = 0; i < bookList.length; i++) {
-                bookList[i].distance = results.distances[i];
-                bookList[i].duration = results.durations[i];
+                bookList[i].distance = distances[i];
+                bookList[i].duration = durations[i];
             }
             createClosestLibrariesList(bookList);
         }
