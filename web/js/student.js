@@ -163,14 +163,10 @@ function createLibraryList(jsonData) {
     var mylon = y;
     console.log(mylat, ' ', mylon);
 
-    let origins = 'origins=';
-    let destinations = '&destinations=';
-
-    origins += mylat + '%2C' + mylon;
-    destinations += bookList[0].lat + '%2C' + bookList[0].lon;
+    let origins = mylat + '%2C' + mylon;
+    let destinations = bookList[0].lat + '%2C' + bookList[0].lon;
 
     for(var i = 1; i < bookList.length; i++) {
-        console.log(bookList[i].lat + ' ' + bookList[i].lon);
         destinations += '%3B' + bookList[i].lat + '%2C' + bookList[i].lon;
     }
 
@@ -186,7 +182,7 @@ function createLibraryList(jsonData) {
             console.log(this.responseText);
         }
     });
-    xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + origins + destinations);
+    xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + 'origins=' + origins + '&destinations=' + destinations);
     xhr.setRequestHeader("x-rapidapi-host", "trueway-matrix.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a");
     xhr.send(data);
