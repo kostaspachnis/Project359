@@ -166,7 +166,7 @@ function createLibraryList(jsonData) {
     let origins = 'origins=';
     let destinations = '&destinations=';
 
-    origins += mylat + '%2C-' + mylon;
+    origins += mylat + '%2C' + mylon;
     destinations += bookList[0].lat + '%2C' + bookList[0].lon + '%';
 
     for(var i = 1; i < bookList.length; i++) {
@@ -176,34 +176,18 @@ function createLibraryList(jsonData) {
     console.log(origins);
     console.log(destinations);
 
-    // const settings = {
-    //     "async": true,
-    //     "crossDomain": true,
-    //     "url": "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?origins=40.629041%2C-74.025606%3B40.630099%2C-73.993521%3B40.644895%2C-74.013818%3B40.627177%2C-73.980853&destinations=40.629041%2C-74.025606%3B40.630099%2C-73.993521%3B40.644895%2C-74.013818%3B40.627177%2C-73.980853",
-    //     "method": "GET",
-    //     "headers": {
-    //         "X-RapidAPI-Key": "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a",
-    //         "X-RapidAPI-Host": "trueway-matrix.p.rapidapi.com"
-    //     }
-    // };
-    
-    // $.ajax(settings).done(function (response) {
-    //     console.log(response);
-    // });
-
-    const settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + origins + destinations, // + "units=km",
-        "method": "GET",
-        "headers": {
-            "X-RapidAPI-Key": "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a",
-            "X-RapidAPI-Host": "trueway-matrix.p.rapidapi.com"
+    const data = null;
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    xhr.addEventListener("readystatechange", 
+        function () {
+            if (this.readyState === this.DONE) {
+            console.log(this.responseText);
         }
-    };
-    
-    $.ajax(settings).done(function (response) {
-        console.log(response);
     });
+    xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + origins + destinations);
+    xhr.setRequestHeader("x-rapidapi-host", "trueway-matrix.p.rapidapi.com");
+    xhr.setRequestHeader("x-rapidapi-key", "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a");
+    xhr.send(data);
 }
 
