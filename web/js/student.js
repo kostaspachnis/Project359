@@ -169,8 +169,8 @@ function createLibraryList(jsonData) {
     
 
     for(var i = 0; i < bookList.length; i++) {
-        origins += i===bookList.length-1 ? mylat + '&' + mylon : mylat + '&' + mylon + '&';
-        destinations += i===bookList.length-1 ? bookList[i].lat + '&' + bookList[i].lon : bookList[i].lat + '&' + bookList[i].lon + '&';
+        origins += i===bookList.length-1 ? mylat + '%' + mylon : mylat + '%' + mylon + '%';
+        destinations += i===bookList.length-1 ? bookList[i].lat + '%' + bookList[i].lon : bookList[i].lat + '%' + bookList[i].lon + '%';
     }
 
     console.log(origins);
