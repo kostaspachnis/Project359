@@ -7,6 +7,7 @@ package servlets;
 
 import database.tables.EditBooksInLibraryTable;
 import database.tables.EditBorrowingTable;
+import database.tables.EditStudentsTable;
 import java.io.IOException;
 import java.util.Date;
 import java.sql.SQLException;
@@ -84,11 +85,12 @@ public class BorrowBookForStudent extends HttpServlet {
             throws ServletException, IOException {
 
         try {
+            EditStudentsTable st = new EditStudentsTable();
             String ids = request.getParameter("libid");
             int id = Integer.parseInt(ids);
             String isbn = request.getParameter("isbn");
-            String idStud = request.getParameter("studentid");
-            int idSStud = Integer.parseInt(idStud);
+            String idStud = request.getParameter("username");
+            int idSStud = st.databaseToStudent_ret(idStud).getUser_id();
             EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
             EditBorrowingTable brt = new EditBorrowingTable();
             Date today = new Date();
