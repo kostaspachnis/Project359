@@ -193,10 +193,7 @@ function createLibraryList(jsonData) {
 
 function createClosestLibrariesList(bookList) {
 
-    for(var i = 0; i < bookList.length; i++) {
-
-        console.log(bookList[i]);
-    }
+    console.log(bookList);
 
     // var html = '';
 
