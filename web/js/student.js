@@ -115,7 +115,7 @@ function requestBook(isbn) {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             
-            createLibraryList(xhr.responseText);
+            createLibraryList(xhr.responseText, isbn);
             //$('#librariesFoundTable').html(createLibraryList(xhr.responseText));
             //document.getElementById('librariesFound').style.display = 'block';
         } else if (xhr.status === 403) {
@@ -153,7 +153,7 @@ function getCoordinates() {
 }
 
 
-function createLibraryList(jsonData) {
+function createLibraryList(jsonData, isbn) {
     
     var libraryList = JSON.parse(jsonData);
    
@@ -181,7 +181,7 @@ function createLibraryList(jsonData) {
                 libraryList[i].distance = results.distances[0][i];
                 libraryList[i].duration = results.durations[0][i];
             }
-            createClosestLibrariesList(libraryList);
+            createClosestLibrariesList(libraryList, isbn);
         }
     });
     xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + 'origins=' + origins + '&destinations=' + destinations);
@@ -191,7 +191,7 @@ function createLibraryList(jsonData) {
 }
 
 
-function createClosestLibrariesList(libraryList) {
+function createClosestLibrariesList(libraryList, isbn) {
 
     console.log(libraryList);
 
@@ -215,7 +215,7 @@ function createClosestLibrariesList(libraryList) {
         html += "<td>" + libraryList[i].libraryname + "</td>";
         html += "<td>" + libraryList[i].distance + "</td>";
         html += "<td>" + libraryList[i].duration + "</td>";
-        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + libraryList[i].library_id + ',' + libraryList[i].isbn + ',' + this +')">Borrow</button></td>';
+        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + libraryList[i].library_id + ',' + isbn + ',' + this +')">Borrow</button></td>';
         html += "</tr>";
     }
 
