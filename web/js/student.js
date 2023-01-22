@@ -170,6 +170,7 @@ function createLibraryList(jsonData) {
     destinations += bookList[0].lat + '%2C' + bookList[0].lon;
 
     for(var i = 1; i < bookList.length; i++) {
+        console.log(bookList[i].lat + ' ' + bookList[i].lon);
         destinations += '%3B' + bookList[i].lat + '%2C' + bookList[i].lon;
     }
 
