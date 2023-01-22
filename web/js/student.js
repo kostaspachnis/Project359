@@ -152,7 +152,7 @@ function createLibraryList(jsonData) {
     console.log(jsonData);
 
     var bookList = JSON.parse(jsonData);
-    let myCoordinates = JSON.parse(getCoordinates());
+    let myCoordinates = (getCoordinates());
     let lat = myCoordinates.lat;
     let lon = myCoordinates.lon;
 
