@@ -156,7 +156,7 @@ function createLibraryList(jsonData) {
     let lat = myCoordinates.lat;
     let lon = myCoordinates.lon;
 
-    console.log(lat, ' ', lon);
+    console.log(myCoordinates);
 
     let origins = 'origins=';
     let destinations = 'destinations=';
