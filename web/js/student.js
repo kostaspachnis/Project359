@@ -114,7 +114,7 @@ function requestBook(isbn) {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            createLibraryList(stringify(xhr.responseText));
+            createLibraryList(JSON.stringify(xhr.responseText));
             //$('#librariesFoundTable').html(createLibraryList(xhr.responseText));
             //document.getElementById('librariesFound').style.display = 'block';
         } else if (xhr.status === 403) {
