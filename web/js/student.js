@@ -136,8 +136,8 @@ function getCoordinates() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var myCoordinates = JSON.parse(xhr.responseText);
-            lat = myCoordinates.lat;
-            lon = myCoordinates.lon;
+            $('#lat').html(myCoordinates.lat);
+            $('#lon').html(myCoordinates.lon);
             // console.log(myCoordinates, ' ', myCoordinates.lat, ' ', myCoordinates.lon); 
         } else if (xhr.status === 403) {
             return false;
@@ -157,8 +157,8 @@ function createLibraryList(jsonData) {
     var bookList = JSON.parse(jsonData);
     getCoordinates();
 
-    let mylat = lat;
-    let mylon = lon;
+    let mylat = document.getElementById('lat').innerHTML;
+    let mylon = document.getElementById('lon').innerHTML;
 
     console.log(mylat, ' ', mylon);
 
