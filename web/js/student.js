@@ -122,10 +122,9 @@ function requestBook(isbn) {
         }
     }
 
-    xhr.open('GET', 'ShowLibrariesForStudent?' + 'isbn=' + isbn);
+    xhr.open('GET', 'ShowLibrariesForStudent?' + 'isbn=' + sbn);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
-
 }
 
 
@@ -150,7 +149,7 @@ function getCoordinates() {
 function createLibraryList(jsonData) {
 
     var bookList = JSON.parse(jsonData);
-    let myCoordinates = JSON.parse(getCoordinates());
+    let myCoordinates = getCoordinates();
     let lon = myCoordinates.lon;
     let lat = myCoordinates.lat;
 
