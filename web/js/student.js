@@ -215,7 +215,7 @@ function createClosestLibrariesList(bookList) {
         html += "<td>" + bookList[i].libraryname + "</td>";
         html += "<td>" + bookList[i].distance + "</td>";
         html += "<td>" + bookList[i].duration + "</td>";
-        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + bookList[i].libraryid + ',' + bookList[i].isbn + ',' + user + ')">Borrow</button></td>';
+        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + bookList[i].libraryid + ',' + bookList[i].isbn + ',' + username.valueOf() + ',' + this +')">Borrow</button></td>';
         html += "</tr>";
     }
 
@@ -225,19 +225,20 @@ function createClosestLibrariesList(bookList) {
 }
 
 
-function borrowBook(libraryid, isbn, username) {
+function borrowBook(libraryid, isbn, username, btn) {
 
     xhr = new XMLHttpRequest();
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log('AAAAAAAAAAA');
+            btn.disabled = true;
+            btn.value = 'Requested';
         } else if (xhr.status === 403) {
             
         }
     }
 
-    xhr.open('GET', 'BorrowBooksForStudent?' + 'libraryid=' + libraryid + '&isbn=' + isbn + '&username=' + username);
+    xhr.open('GET', 'BorrowBooksForStudent?' + 'libid=' + libraryid + '&isbn=' + isbn + '&username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
