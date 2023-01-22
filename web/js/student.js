@@ -155,16 +155,16 @@ function getCoordinates() {
 
 function createLibraryList(jsonData) {
     
-    var bookList = JSON.parse(jsonData);
+    var libraryList = JSON.parse(jsonData);
    
     var mylat = x;
     var mylon = y;
 
     let origins = mylat + '%2C' + mylon;
-    let destinations = bookList[0].lat + '%2C' + bookList[0].lon;
+    let destinations = libraryList[0].lat + '%2C' + libraryList[0].lon;
 
-    for(var i = 1; i < bookList.length; i++) {
-        destinations += '%3B' + bookList[i].lat + '%2C' + bookList[i].lon;
+    for(var i = 1; i < libraryList.length; i++) {
+        destinations += '%3B' + libraryList[i].lat + '%2C' + libraryList[i].lon;
     }
 
     console.log(origins);
@@ -177,11 +177,11 @@ function createLibraryList(jsonData) {
     function () {
         if (this.readyState === this.DONE) {
             results=JSON.parse(this.responseText);
-            for(var i = 0; i < bookList.length; i++) {
-                bookList[i].distance = results.distances[0][i];
-                bookList[i].duration = results.durations[0][i];
+            for(var i = 0; i < libraryList.length; i++) {
+                libraryList[i].distance = results.distances[0][i];
+                libraryList[i].duration = results.durations[0][i];
             }
-            createClosestLibrariesList(bookList);
+            createClosestLibrariesList(libraryList);
         }
     });
     xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + 'origins=' + origins + '&destinations=' + destinations);
@@ -191,11 +191,11 @@ function createLibraryList(jsonData) {
 }
 
 
-function createClosestLibrariesList(bookList) {
+function createClosestLibrariesList(libraryList) {
 
-    console.log(bookList);
+    console.log(libraryList);
 
-    bookList.sort((a, b) => (a.distance*a.duration > b.distance*b.duration) ? 1 : -1);
+    libraryList.sort((a, b) => (a.distance*a.duration > b.distance*b.duration) ? 1 : -1);
 
     let user = document.getElementById('username').value;
 
@@ -210,12 +210,12 @@ function createClosestLibrariesList(bookList) {
     html += '</thead>';
     html += '<tbody>';
 
-    for(var i = 0; i < bookList.length; i++) {
+    for(var i = 0; i < libraryList.length; i++) {
         html += "<tr>";
-        html += "<td>" + bookList[i].libraryname + "</td>";
-        html += "<td>" + bookList[i].distance + "</td>";
-        html += "<td>" + bookList[i].duration + "</td>";
-        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + bookList[i].libraryid + ',' + bookList[i].isbn + ',' + this +')">Borrow</button></td>';
+        html += "<td>" + libraryList[i].libraryname + "</td>";
+        html += "<td>" + libraryList[i].distance + "</td>";
+        html += "<td>" + libraryList[i].duration + "</td>";
+        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + libraryList[i].library_id + ',' + libraryList[i].isbn + ',' + this +')">Borrow</button></td>';
         html += "</tr>";
     }
 
