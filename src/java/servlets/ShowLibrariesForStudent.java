@@ -5,7 +5,6 @@
  */
 package servlets;
 
-import com.google.gson.Gson;
 import database.tables.EditBooksInLibraryTable;
 import database.tables.EditLibrarianTable;
 import java.io.IOException;
@@ -71,9 +70,7 @@ public class ShowLibrariesForStudent extends HttpServlet {
                 libs.add(l);
             }
 
-            Gson gson = new Gson();
-            String json = gson.toJson(libs);
-            out.println(json);
+            out.println(lt.librariansToJSON(libs));
             response.setStatus(200);
 
         } catch (SQLException ex) {
