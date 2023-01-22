@@ -176,7 +176,12 @@ function createLibraryList(jsonData) {
     xhr.addEventListener("readystatechange", 
     function () {
         if (this.readyState === this.DONE) {
-            createClosestLibrariesList(this.responseText, bookList);
+            results=JSON.parse(this.responseText);
+            for(var i = 0; i < bookList.length; i++) {
+                bookList[i].distance = results.distances[i];
+                bookList[i].duration = results.durations[i];
+            }
+            createClosestLibrariesList(bookList);
         }
     });
     xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + 'origins=' + origins + '&destinations=' + destinations);
@@ -186,12 +191,12 @@ function createLibraryList(jsonData) {
 }
 
 
-function createClosestLibrariesList(jsonData, bookList) {
-    var result = JSON.parse(jsonData);
-    var distances = result.distances;
-    var durations = result.durations;
+function createClosestLibrariesList(bookList) {
 
-    console.log(distances, ' ', durations);
+    for(var i = 0; i < bookList.length; i++) {
+
+        console.log(bookList[i]);
+    }
 
     // var html = '';
 
