@@ -166,11 +166,11 @@ function createLibraryList(jsonData) {
     let origins = 'origins=';
     let destinations = '&destinations=';
 
-    
+    origins += mylat + '%2C-' + mylon;
+    destinations += bookList[0].lat + '%2C-' + bookList[0].lon + '%';
 
     for(var i = 0; i < bookList.length; i++) {
-        origins += i===bookList.length-1 ? mylat + '%' + mylon : mylat + '%' + mylon + '%';
-        destinations += i===bookList.length-1 ? bookList[i].lat + '%' + bookList[i].lon : bookList[i].lat + '%' + bookList[i].lon + '%';
+        destinations += i===bookList.length-1 ? '3B' + bookList[i].lat + '%2C-' + bookList[i].lon : '3B' + bookList[i].lat + '%2C-' + bookList[i].lon + '%';
     }
 
     console.log(origins);
