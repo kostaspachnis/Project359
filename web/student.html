@@ -49,8 +49,8 @@
                 <button type="button" class="btn btn-link" onclick="signup(); return false;">Sign up</button>
             </form>
 
-            <input id="lat" style="display: none;"></input>
-            <input id="lon" style="display: none;"></input>
+            <input id="lat" style="display: none;">
+            <input id="lon" style="display: none;">
         </div>
 
         <div id="student_div" style="display: none;">
@@ -59,7 +59,7 @@
 
                 <h2>Search Book</h2>
 
-                <form id="bookSearchForm" onsubmit="searchBook(); return false;">
+                <form id="bookSearchForm" onsubmit="getCoordinates();searchBook(); return false;">
 
                     <div class="mb-3">
                         <label for="search_genre">Genre</label>

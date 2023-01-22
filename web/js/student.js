@@ -114,6 +114,7 @@ function requestBook(isbn) {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            
             createLibraryList(xhr.responseText);
             //$('#librariesFoundTable').html(createLibraryList(xhr.responseText));
             //document.getElementById('librariesFound').style.display = 'block';
@@ -127,29 +128,20 @@ function requestBook(isbn) {
     xhr.send();
 }
 
-var lat;
-var lon;
-function coordinates(lat, lon) {
-    this.lat = lat;
-    this.lon = lon; 
-}
-
+var lat=0;
+var lon=0;
 var myCoordinates;
-
+var Coordinates,x="",y="";
 function getCoordinates() {
 
     var xhr = new XMLHttpRequest();
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            var Coordinates = JSON.parse(xhr.responseText);
-            document.getElementById('lat').value = Coordinates.lat;
-            document.getElementById('lon').value = Coordinates.lon;
-
-            myCoordinates = new coordinates(Coordinates.lat, Coordinates.lon);
-            // myCoordinates.lat = Coordinates.lat;
-            // myCoordinates.lon = Coordinates.lon;
-            // console.log(myCoordinates, ' ', myCoordinates.lat, ' ', myCoordinates.lon); 
+            Coordinates = JSON.parse(xhr.responseText);
+            x=Coordinates.lat;
+            y=Coordinates.lon;
+            console.log(x, ' ', y,"test");
         } else if (xhr.status === 403) {
             return false;
         }
@@ -162,16 +154,12 @@ function getCoordinates() {
 
 
 function createLibraryList(jsonData) {
-
     console.log(jsonData);
-    console.log(myCoordinates, ' ', myCoordinates.lat, ' ', myCoordinates.lon);
-
     var bookList = JSON.parse(jsonData);
-    getCoordinates();
-
-    let mylat = document.getElementById('lat').value;
-    let mylon = document.getElementById('lon').value;
-
+   
+    console.log(x, ' ', y);
+    var mylat = x;
+    var mylon = y;
     console.log(mylat, ' ', mylon);
 
     let origins = 'origins=';
