@@ -178,8 +178,8 @@ function createLibraryList(jsonData) {
         if (this.readyState === this.DONE) {
             results=JSON.parse(this.responseText);
             for(var i = 0; i < bookList.length; i++) {
-                bookList[i].distance = results.distances[1][i];
-                bookList[i].duration = results.durations[1][i];
+                bookList[i].distance = results.distances[0][i];
+                bookList[i].duration = results.durations[0][i];
             }
             createClosestLibrariesList(bookList);
         }
