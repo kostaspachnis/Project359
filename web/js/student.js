@@ -136,8 +136,8 @@ function getCoordinates() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var myCoordinates = JSON.parse(xhr.responseText);
-            $('#lat').value(myCoordinates.lat);
-            $('#lon').value(myCoordinates.lon);
+            document.getElementById('lat').value(myCoordinates.lat);
+            document.getElementById('lon').value(myCoordinates.lon);
             // console.log(myCoordinates, ' ', myCoordinates.lat, ' ', myCoordinates.lon); 
         } else if (xhr.status === 403) {
             return false;
