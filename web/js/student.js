@@ -205,7 +205,6 @@ function createClosestLibrariesList(bookList) {
     html += '<th>' + 'Distance' + '</th>';
     html += '<th>' + 'Duration' + '</th>';
     html += '<th>' + 'Request' + '</th>';
-    html += '<th>' + 'Return' + '</th>';
     html += '</thead>';
     html += '<tbody>';
 
@@ -215,7 +214,6 @@ function createClosestLibrariesList(bookList) {
         html += "<td>" + bookList[i].distance + "</td>";
         html += "<td>" + bookList[i].duration + "</td>";
         html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + bookList[i].libraryid, bookList[i].isbn, username + ')">Borrow</button></td>';
-        html += '<td></td>';
         html += "</tr>";
     }
 
