@@ -195,6 +195,12 @@ function createClosestLibrariesList(bookList) {
 
     console.log(bookList);
 
+    bookList.sort((a, b) => (a.distance < b.distance) ? 1 : -1);
+
+    for(var i = 0; i < bookList.length; i++) {
+        console.log(bookList[i].distance);
+    }
+
     // var html = '';
 
     // html += '<table class="table table-striped table-bordered table-hover table-sm">';
