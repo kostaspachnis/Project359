@@ -248,17 +248,17 @@ public class EditBooksInLibraryTable {
     }
 
     // Returns an available book and its libraries(Project Function)
-    public ArrayList<Integer> databaseToBooksInLibraryAvailableLib(String isbn) throws SQLException, ClassNotFoundException {
+    public ArrayList<BookInLibrary> databaseToBooksInLibraryAvailableLib(String isbn) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        ArrayList<Integer> libs = new ArrayList<Integer>();
+        ArrayList<BookInLibrary> libs = new ArrayList<BookInLibrary>();
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT library_id FROM booksinlibraries WHERE available='true' AND isbn='" + isbn + "'");
+            rs = stmt.executeQuery("SELECT * FROM booksinlibraries WHERE available='true' AND isbn='" + isbn + "'");
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 Gson gson = new Gson();
-                Integer tr = gson.fromJson(json, Integer.class);
+                BookInLibrary tr = gson.fromJson(json, BookInLibrary.class);
                 libs.add(tr);
             }
             return libs;
