@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mainClasses.BookInLibrary;
 import mainClasses.Librarian;
 
 /**
@@ -56,21 +57,24 @@ public class ShowLibrariesForStudent extends HttpServlet {
 
         try (PrintWriter out = response.getWriter()) {
             String isbn = request.getParameter("isbn");
+            System.out.println(isbn);
             EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
             EditLibrarianTable lt = new EditLibrarianTable();
-            ArrayList<Integer> av_book_libs = eblt.databaseToBooksInLibraryAvailableLib(isbn);
+            ArrayList<BookInLibrary> av_book_libs = eblt.databaseToBooksInLibraryAvailableLib(isbn);
             ArrayList<Librarian> libs = new ArrayList<>();
 
             int num = 0;
             for (int i = 0; i < av_book_libs.size(); i++) {
-                num = av_book_libs.get(i);
+                num = av_book_libs.get(i).getLibrary_id();
                 Librarian l = lt.databaseToLibrarianID(num);
+                System.out.println(l.getLibrary_id());
                 libs.add(l);
             }
 
             Gson gson = new Gson();
             String json = gson.toJson(libs);
             out.println(json);
+            response.setStatus(200);
 
         } catch (SQLException ex) {
             Logger.getLogger(ShowLibrariesForStudent.class.getName()).log(Level.SEVERE, null, ex);
