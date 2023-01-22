@@ -122,7 +122,7 @@ function requestBook(isbn) {
         }
     }
 
-    xhr.open('GET', 'ShowLibrariesForStudent?' + 'isbn=' + sbn);
+    xhr.open('GET', 'ShowLibrariesForStudent?' + 'isbn=' + isbn);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
