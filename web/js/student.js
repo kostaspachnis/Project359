@@ -135,12 +135,12 @@ function getCoordinates() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let myCoordinates = JSON.parse(xhr.responseText);
-            console.log(myCoordinates);
+            console.log(myCoordinates, ' ', myCoordinates.lat, ' ', myCoordinates.lon);
             return JSON.parse(xhr.responseText);
         } else if (xhr.status === 403) {
             return false;
         }
-    };    
+    };  
 
     xhr.open('GET', 'ReturnCoordinatesForStudent?' + 'username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
