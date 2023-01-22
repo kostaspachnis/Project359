@@ -215,7 +215,7 @@ function createClosestLibrariesList(libraryList, isbn) {
         html += "<td>" + libraryList[i].libraryname + "</td>";
         html += "<td>" + libraryList[i].distance + "</td>";
         html += "<td>" + libraryList[i].duration + "</td>";
-        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + libraryList[i].library_id + ',' + isbn + ',' + this +')">Borrow</button></td>';
+        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + libraryList[i].library_id + ',' + isbn + ')">Borrow</button></td>';
         html += "</tr>";
     }
 
@@ -225,14 +225,15 @@ function createClosestLibrariesList(libraryList, isbn) {
 }
 
 
-function borrowBook(libraryid, isbn, btn) {
+function borrowBook(libraryid, isbn) {
 
     xhr = new XMLHttpRequest();
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            btn.disabled = true;
-            btn.value = 'Requested';
+            // btn.disabled = true;
+            // btn.value = 'Requested';
+            console.log('AAAAAAAAAAAAAAAa');
         } else if (xhr.status === 403) {
             
         }
