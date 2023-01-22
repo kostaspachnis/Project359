@@ -156,12 +156,9 @@ function getCoordinates() {
 function createLibraryList(jsonData) {
     
     var bookList = JSON.parse(jsonData);
-
-    // console.log(bookList);
    
     var mylat = x;
     var mylon = y;
-    console.log(mylat, ' ', mylon);
 
     let origins = mylat + '%2C' + mylon;
     let destinations = bookList[0].lat + '%2C' + bookList[0].lon;
@@ -179,27 +176,42 @@ function createLibraryList(jsonData) {
     xhr.addEventListener("readystatechange", 
     function () {
         if (this.readyState === this.DONE) {
-            console.log(this.responseText);
+            createClosestLibrariesList(this.responseText, bookList);
         }
     });
     xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?" + 'origins=' + origins + '&destinations=' + destinations);
     xhr.setRequestHeader("x-rapidapi-host", "trueway-matrix.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a");
     xhr.send(data);
-
-
-    // const data = null;
-    // const xhr = new XMLHttpRequest();
-    // xhr.withCredentials = true;
-    // xhr.addEventListener("readystatechange", function () {
-    //     if (this.readyState === this.DONE) {
-    //         console.log(this.responseText);
-    //     }
-    // });
-
-    // xhr.open("GET", "https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix?origins=35.335120%2C25.134450&destinations=35.335770%2C25.118920%3B35.329600%2C25.081010");
-    // xhr.setRequestHeader("x-rapidapi-host", "trueway-matrix.p.rapidapi.com");
-    // xhr.setRequestHeader("x-rapidapi-key", "d3da8ffb6emshf934200861c165cp134e9ajsn04cf19b7aa6a");
-    // xhr.send(data);
 }
 
+
+function createClosestLibrariesList(jsonData, bookList) {
+    var result = JSON.parse(jsonData);
+    var distances = result.distances;
+    var durations = result.durations;
+
+    console.log(distances, ' ', durations);
+
+    // var html = '';
+
+    // html += '<table class="table table-striped table-bordered table-hover table-sm">';
+    // html += '<thead class="thead-dark text-center">';
+    // html += '<th>' + 'Library' + '</th>';
+    // html += '<th>' + 'Distance' + '</th>';
+    // html += '<th>' + 'Request' + '</th>';
+    // html += '</thead>';
+    // html += '<tbody>';
+
+    // for(var i = 0; i < bookList.length; i++) {
+    //     html += "<tr>";
+    //     html += "<td>" + bookList[i].libraryname + "</td>";
+    //     html += "<td>" + distances.rows[0].elements[i].distance.text + "</td>";
+    //     html += '<td><button type="button" class="btn btn-success" onclick="requestBook(' + bookList[i].isbn + ')">Request Book</button></td>';
+    //     html += "</tr>";
+    // }
+
+    // html += "</tbody></table>";
+    // $('#librariesFoundTable').html(html);
+    // document.getElementById('librariesFound').style.display = 'block';
+}
