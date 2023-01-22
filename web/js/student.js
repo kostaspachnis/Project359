@@ -134,7 +134,8 @@ function getCoordinates() {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            return JSON.parse(xhr.responseText);
+            console.log(xhr.responseText);
+            return xhr.responseText;
         } else if (xhr.status === 403) {
             return false;
         }
@@ -149,7 +150,7 @@ function getCoordinates() {
 function createLibraryList(jsonData) {
 
     var bookList = JSON.parse(jsonData);
-    let myCoordinates = getCoordinates();
+    let myCoordinates = JSON.parse(getCoordinates());
     let lon = myCoordinates.lon;
     let lat = myCoordinates.lat;
 
