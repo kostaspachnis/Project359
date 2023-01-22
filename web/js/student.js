@@ -219,5 +219,5 @@ function createClosestLibrariesList(bookList) {
 
     html += "</tbody></table>";
     $('#closestLibraries').html(html);
-    document.getElementById('librariesFound').style.display = 'block';
+    document.getElementById('closestLibraries').style.display = 'block';
 }
