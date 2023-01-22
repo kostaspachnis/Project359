@@ -10,7 +10,8 @@ import database.tables.EditStudentsTable;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -55,14 +56,14 @@ public class ReturnCoordinatesForStudent extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String username = request.getParameter("username");
         EditStudentsTable st = new EditStudentsTable();
+        Dictionary res = new Hashtable();
         try (PrintWriter out = response.getWriter()) {
             Student s = st.databaseToStudent_ret(username);
             if (s != null) {
                 Double lat = s.getLat();
                 Double lon = s.getLon();
-                ArrayList<String> res = new ArrayList<>();
-                res.add(lat.toString());
-                res.add(lon.toString());
+                res.put("lat", lat.toString());
+                res.put("lon", lon.toString());
                 Gson gson = new Gson();
                 String json = gson.toJson(res);
                 out.println(json);
