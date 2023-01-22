@@ -155,7 +155,7 @@ function getCoordinates() {
 
 function createLibraryList(jsonData) {
     
-    var bookList = JSON.parse(jsonData);
+    // var bookList = JSON.parse(jsonData);
 
     console.log(bookList);
    
@@ -164,7 +164,7 @@ function createLibraryList(jsonData) {
     console.log(mylat, ' ', mylon);
 
     let origins = 'origins=';
-    let destinations = 'destinations=';
+    let destinations = '&destinations=';
 
     origins += mylat + '&' + mylon;
 
