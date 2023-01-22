@@ -195,31 +195,29 @@ function createClosestLibrariesList(bookList) {
 
     console.log(bookList);
 
-    bookList.sort((a, b) => (a.distance < b.distance) ? 1 : -1);
+    bookList.sort((a, b) => (a.distance*a.duration > b.distance*b.duration) ? 1 : -1);
+
+    var html = '';
+
+    html += '<table class="table table-striped table-bordered table-hover table-sm">';
+    html += '<thead class="thead-dark text-center">';
+    html += '<th>' + 'Library' + '</th>';
+    html += '<th>' + 'Distance' + '</th>';
+    html += '<th>' + 'Duration' + '</th>';
+    html += '<th>' + 'Request' + '</th>';
+    html += '</thead>';
+    html += '<tbody>';
 
     for(var i = 0; i < bookList.length; i++) {
-        console.log(bookList[i].distance);
+        html += "<tr>";
+        html += "<td>" + bookList[i].libraryname + "</td>";
+        html += "<td>" + bookList[i].distance + "</td>";
+        html += "<td>" + bookList[i].duration + "</td>";
+        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + bookList[i].isbn + ')">Borrow</button></td>';
+        html += "</tr>";
     }
 
-    // var html = '';
-
-    // html += '<table class="table table-striped table-bordered table-hover table-sm">';
-    // html += '<thead class="thead-dark text-center">';
-    // html += '<th>' + 'Library' + '</th>';
-    // html += '<th>' + 'Distance' + '</th>';
-    // html += '<th>' + 'Request' + '</th>';
-    // html += '</thead>';
-    // html += '<tbody>';
-
-    // for(var i = 0; i < bookList.length; i++) {
-    //     html += "<tr>";
-    //     html += "<td>" + bookList[i].libraryname + "</td>";
-    //     html += "<td>" + distances.rows[0].elements[i].distance.text + "</td>";
-    //     html += '<td><button type="button" class="btn btn-success" onclick="requestBook(' + bookList[i].isbn + ')">Request Book</button></td>';
-    //     html += "</tr>";
-    // }
-
-    // html += "</tbody></table>";
-    // $('#librariesFoundTable').html(html);
-    // document.getElementById('librariesFound').style.display = 'block';
+    html += "</tbody></table>";
+    $('#closestLibraries').html(html);
+    document.getElementById('librariesFound').style.display = 'block';
 }
