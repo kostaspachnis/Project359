@@ -30,7 +30,7 @@ import mainClasses.Librarian;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "BorrowingStatusForStudent1", urlPatterns = {"/BorrowingStatusForStudent1"})
 public class BorrowingStatusForStudent1 extends HttpServlet {

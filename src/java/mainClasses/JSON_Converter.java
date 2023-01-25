@@ -65,4 +65,10 @@ public class JSON_Converter {
         }
         return books;
     }
+
+    public String bookborToJson(BorrowingBook b) {
+        Gson gson = new Gson();
+        String json = gson.toJson(b, BorrowingBook.class);
+        return json;
+    }
 }

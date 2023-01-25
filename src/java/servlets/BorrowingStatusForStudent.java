@@ -88,7 +88,6 @@ public class BorrowingStatusForStudent extends HttpServlet {
                 res.add(bb);
             }
             JSON_Converter jc = new JSON_Converter();
-            System.out.println(jc.booksBorToJson(res));
             out.println(jc.booksBorToJson(res));
             response.setStatus(200);
         } catch (SQLException ex) {
