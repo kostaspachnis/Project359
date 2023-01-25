@@ -8,6 +8,7 @@ package mainClasses;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -53,5 +54,15 @@ public class JSON_Converter {
         Gson gson = new Gson();
         BookAvailabilityData msg = gson.fromJson(json, BookAvailabilityData.class);
         return msg;
+    }
+
+    public ArrayList<String> booksBorToJson(ArrayList<BorrowingBook> bts) {
+        ArrayList<String> books = new ArrayList<String>();
+        for (int i = 0; i < bts.size(); i++) {
+            Gson gson = new Gson();
+            String json = gson.toJson(bts.get(i), BorrowingBook.class);
+            books.add(json);
+        }
+        return books;
     }
 }

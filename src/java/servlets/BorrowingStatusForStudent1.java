@@ -5,7 +5,6 @@
  */
 package servlets;
 
-import com.google.gson.Gson;
 import database.tables.EditBooksInLibraryTable;
 import database.tables.EditBooksTable;
 import database.tables.EditBorrowingTable;
@@ -15,8 +14,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -27,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import mainClasses.Book;
 import mainClasses.BookInLibrary;
 import mainClasses.Borrowing;
+import mainClasses.BorrowingBook;
+import mainClasses.JSON_Converter;
 import mainClasses.Librarian;
 
 /**
@@ -68,20 +67,28 @@ public class BorrowingStatusForStudent1 extends HttpServlet {
         EditLibrarianTable lt = new EditLibrarianTable();
         EditBooksInLibraryTable blt = new EditBooksInLibraryTable();
         EditBooksTable bbt = new EditBooksTable();
-        Dictionary res = new Hashtable();
         try (PrintWriter out = response.getWriter()) {
             int userid = st.databaseToStudent_ret(username).getUser_id();
             ArrayList<Borrowing> bors = bt.borrowedBorUser(userid);
-            ArrayList<BookInLibrary> books = new ArrayList<>();
+            ArrayList<BorrowingBook> res = new ArrayList<>();
             for (int i = 0; i < bors.size(); i++) {
                 BookInLibrary book = blt.databaseToBookInLibraryBasedBCID(bors.get(i).getBookcopy_id());
+                System.out.println("book isbn" + book.getIsbn());
                 Librarian l = lt.databaseToLibrarianID(book.getLibrary_id());
+                System.out.println("lib name" + l.getLibraryname());
                 Book b = bbt.databaseToBooksISBNBook(book.getIsbn());
-                res.put(b, l.getLibraryname());
+                System.out.println("title " + b.getTitle());
+                BorrowingBook bb = new BorrowingBook();
+                bb.setAuthors(b.getAuthors());
+                bb.setIsbn(b.getIsbn());
+                bb.setLibrary(l.getLibraryname());
+                bb.setPhoto(b.getPhoto());
+                bb.setStatus("requested");
+                bb.setTitle(b.getTitle());
+                res.add(bb);
             }
-            Gson gson = new Gson();
-            String json = gson.toJson(res);
-            out.println(json);
+            JSON_Converter jc = new JSON_Converter();
+            out.println(jc.booksBorToJson(res));
             response.setStatus(200);
         } catch (SQLException ex) {
             Logger.getLogger(BorrowingStatusForStudent.class.getName()).log(Level.SEVERE, null, ex);
