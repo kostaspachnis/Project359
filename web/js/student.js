@@ -124,7 +124,7 @@ function requestBook(isbn) {
         } else if (xhr.status === 403) {
             
         }
-    }
+    };
 
     xhr.open('GET', 'ShowLibrariesForStudent?' + 'isbn=' + isbn);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
@@ -236,7 +236,7 @@ function borrowBook(libraryid, isbn) {
         } else if (xhr.status === 403) {
             
         }
-    }
+    };
 
     xhr.open('POST', 'BorrowBookForStudent?' + 'libid=' + libraryid + '&isbn=' + isbn + '&username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
@@ -253,11 +253,11 @@ function getRequestedBooks() {
             console.log(xhr.responseText);
             // var books = JSON.parse(xhr.responseText);
             // createRequestedBooksTable(books);
-            document.getElementById('p').innerHTML = xhr.responseText;
+            console.log(xhr.responseText);
         } else if (xhr.status === 403) {
             
         }
-    }
+    };
 
     xhr.open('GET', 'BorrowingStatusForStudent?' + 'username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
@@ -270,12 +270,11 @@ function getBorrowedBooks() {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            // console.log(xhr.responseText);
-            
+            console.log(xhr.responseText);
         } else if (xhr.status === 403) {
             
         }
-    }
+    };
 
     xhr.open('GET', 'BorrowingStatusForStudent1?' + 'username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
