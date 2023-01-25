@@ -266,7 +266,7 @@ function getBorrowedBooks() {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
+            createBorrowedBooksTable(xhr.responseText);
         } else if (xhr.status === 403) {
             
         }
@@ -284,10 +284,11 @@ function createRequestedBooksTable(books) {
 
     html += '<table class="table table-striped table-bordered table-hover table-sm">';
     html += '<thead class="thead-dark">';
-    html += '<th>' + 'Library' + '</th>';
     html += '<th>' + 'ISBN' + '</th>';
     html += '<th>' + 'Title' + '</th>';
-    html += '<th>' + 'Author' + '</th>';
+    html += '<th>' + 'Authors' + '</th>';
+    html += '<th>' + 'Library' + '</th>';
+    html += '<th>' + 'Photo' + '</th>';
     html += '</thead>';
     html += '<tbody>';
 
@@ -304,14 +305,56 @@ function createRequestedBooksTable(books) {
     html += "</tbody></table>";
     $('#requestedBooksTable').html(html);
     document.getElementById('requestedBooksTable').style.display = 'block';
-    var btn = $('#requestButton');
+    var btn = $('#requestedButton');
     btn.value = 'Hide Requested Books';
     btn.attr('onclick', 'hideRequestedBooks()');
 }
 
+function createBorrowedBooksTable(books) {
+    
+        books = JSON.parse(books);
+        var html = '';
+    
+        html += '<table class="table table-striped table-bordered table-hover table-sm">';
+        html += '<thead class="thead-dark">';
+        html += '<th>' + 'ISBN' + '</th>';
+        html += '<th>' + 'Title' + '</th>';
+        html += '<th>' + 'Authors' + '</th>';
+        html += '<th>' + 'Library' + '</th>';
+        html += '<th>' + 'Photo' + '</th>';
+        html += '<th>' + 'Return' + '</th>';
+        html += '</thead>';
+        html += '<tbody>';
+    
+        for(var i = 0; i < books.length; i++) {
+            html += "<tr>";
+            html += "<td>" + books[i].isbn + "</td>";
+            html += "<td>" + books[i].title + "</td>";
+            html += "<td>" + books[i].authors + "</td>";
+            html += "<td>" + books[i].library + "</td>";
+            html += '<td><img src="' + books[i].photo + '" alt="book photo" width="70" height="100"></td>'
+            html += '<td><button type="button" class="btn btn-danger" onclick="">Return</button></td>';
+            html += "</tr>";
+        }
+    
+        html += "</tbody></table>";
+        $('#borrowedBooksTable').html(html);
+        document.getElementById('borrowedBooksTable').style.display = 'block';
+        var btn = $('#borrowedButton');
+        btn.value = 'Hide Borrowed Books';
+        btn.attr('onclick', 'hideBorrowedBooks()');
+}
+
 function hideRequestedBooks() {
     document.getElementById('requestedBooksTable').style.display = 'none';
-    var btn = $('#requestButton');
+    var btn = $('#requestedButton');
     btn.value = 'Requested Books';
     btn.attr('onclick', 'getRequestedBooks()');
+}
+
+function hideBorrowedBooks() {
+    document.getElementById('borrowedBooksTable').style.display = 'none';
+    var btn = $('#borrowedButton');
+    btn.value = 'Borrowed Books';
+    btn.attr('onclick', 'getBorrowedBooks()');
 }
