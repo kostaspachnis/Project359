@@ -6,13 +6,13 @@ function getUser() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 201) {
-            // $("#ajaxContent1").html(createTableFromJSON(JSON.parse(xhr.responseText)));
+            username = document.getElementById("username").value;
             authenticate();
         } else if (xhr.status !== 201) {
-            // $("#ajaxContent1").html("User not exists or incorrect password");
+
         }
     };
-    username = document.getElementById("username").value;
+    
     var data = $('#loginForm').serialize();
     console.log(data);
     xhr.open('GET', 'GetStudent?'+data);
@@ -251,9 +251,7 @@ function getRequestedBooks() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             $('#okay').html(xhr.responseText);
-            // var books = JSON.parse(xhr.responseText);
-            // createRequestedBooksTable(books);
-            console.log(xhr.responseText);
+            createRequestedBooksTable(xhr.responseText);
         } else if (xhr.status === 403) {
             
         }
@@ -283,6 +281,7 @@ function getBorrowedBooks() {
 
 function createRequestedBooksTable(books) {
 
+    books = JSON.parse(books);
     var html = '';
 
     html += '<table class="table table-striped table-bordered table-hover table-sm">';
@@ -291,21 +290,30 @@ function createRequestedBooksTable(books) {
     html += '<th>' + 'ISBN' + '</th>';
     html += '<th>' + 'Title' + '</th>';
     html += '<th>' + 'Author' + '</th>';
-    html += '<th>' + 'Return' + '</th>';
     html += '</thead>';
     html += '<tbody>';
 
     for(var i = 0; i < books.length; i++) {
         html += "<tr>";
+        html += "<td>" + books[i].isbn + "</td>";
+        html += "<td>" + books[i].title + "</td>";
+        html += "<td>" + books[i].authors + "</td>";
         html += "<td>" + books[i].library + "</td>";
-        html += "<td>" + books[i].book.isbn + "</td>";
-        html += "<td>" + books[i].book.title + "</td>";
-        html += "<td>" + books[i].book.author + "</td>";
+        html += '<td><img src="' + books[i].photo + '" alt="book photo" width="70" height="100"></td>'
         html += "</tr>";
     }
 
     html += "</tbody></table>";
-    $('#requestedBorrowedBooksTable').html(html);
-    document.getElementById('requestedBorrowedBooks').style.display = 'block';
+    $('#requestedBooksTable').html(html);
+    document.getElementById('requestedBooksTable').style.display = 'block';
+    var btn = $('#requestButton');
+    btn.value = 'Hide Requested Books';
+    btn.attr('onclick', 'hideRequestedBooks()');
+}
 
+function hideRequestedBooks() {
+    document.getElementById('requestedBooksTable').style.display = 'none';
+    var btn = $('#requestButton');
+    btn.value = 'Show Requested Books';
+    btn.attr('onclick', 'getRequestedBooks()');
 }
