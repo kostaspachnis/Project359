@@ -31,10 +31,10 @@ import mainClasses.Librarian;
 
 /**
  *
- * @author kostas
+ * @author kdido
  */
-@WebServlet(name = "BorrowingStatusForStudent", urlPatterns = {"/BorrowingStatusForStudent"})
-public class BorrowingStatusForStudent extends HttpServlet {
+@WebServlet(name = "BorrowingStatusForStudent1", urlPatterns = {"/BorrowingStatusForStudent1"})
+public class BorrowingStatusForStudent1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -71,7 +71,7 @@ public class BorrowingStatusForStudent extends HttpServlet {
         Dictionary res = new Hashtable();
         try (PrintWriter out = response.getWriter()) {
             int userid = st.databaseToStudent_ret(username).getUser_id();
-            ArrayList<Borrowing> bors = bt.requestedBorUser(userid);
+            ArrayList<Borrowing> bors = bt.borrowedBorUser(userid);
             ArrayList<BookInLibrary> books = new ArrayList<>();
             for (int i = 0; i < bors.size(); i++) {
                 BookInLibrary book = blt.databaseToBookInLibraryBasedBCID(bors.get(i).getBookcopy_id());
