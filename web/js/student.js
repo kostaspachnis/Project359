@@ -22,6 +22,8 @@ function getUser() {
 
 function authenticate() {
 
+    getRequestedBooks();
+    getBorrowedBooks();
     document.getElementById("loginDiv").style.display="none";
     document.getElementById("logoutOpt").style.display="block";
     document.getElementById("student_div").style.display="block";
@@ -205,30 +207,16 @@ function createClosestLibrariesList(libraryList, isbn) {
     html += '<th>' + 'Library' + '</th>';
     html += '<th>' + 'Distance' + '</th>';
     html += '<th>' + 'Duration' + '</th>';
-    html += '<th>' + 'Request' + '</th>';
+    html += '<th>' + 'Borrow' + '</th>';
     html += '</thead>';
     html += '<tbody>';
 
     for(var i = 0; i < libraryList.length; i++) {
-        getBorrowingStatus(libraryList[i].library_id, isbn, borrowingStatus);
         html += "<tr>";
         html += "<td>" + libraryList[i].libraryname + "</td>";
         html += "<td>" + libraryList[i].distance + "</td>";
         html += "<td>" + libraryList[i].duration + "</td>";
-        switch (borrowingStatus) {
-            case 'requested':
-                html += '<td><button type="button" class="btn btn-primary" disabled>Requested</button></td>';
-                break;
-            case 'borrowed':
-                html += '<td><button type="button" class="btn btn-primary">Return</button></td>';
-                break;
-            case 'available':
-                html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + libraryList[i].library_id + ',' + isbn + ')">Borrow</button></td>';
-                break;
-            default:
-                html += '<td><button type="button" class="btn btn-danger" disabled>Unavailable</button></td>';
-                break;
-        }
+        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + libraryList[i].library_id + ', ' + isbn + '); this.disable=true">Borrow</button></td>';
         html += "</tr>";
     }
 
@@ -244,9 +232,7 @@ function borrowBook(libraryid, isbn) {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            // btn.disabled = true;
-            // btn.value = 'Requested';
-            console.log("success");
+            // add to requested books table
         } else if (xhr.status === 403) {
             
         }
@@ -258,26 +244,67 @@ function borrowBook(libraryid, isbn) {
 }
 
 
-function getBorrowingStatus(library_id, isbn, borrowingStatus) {
+function getRequestedBooks() {
 
     xhr = new XMLHttpRequest();
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            // requested
-            borrowingStatus = 'requested';
-        } else if(xhr.readyState === 4 && xhr.status === 201) {
-            // borrowed
-            borrowingStatus =  'borrowed';
-        } else if(xhr.readyState === 4 && xhr.status === 202) {
-            // nothing
-            borrowingStatus = 'nothing';
+            console.log(xhr.responseText);
+            // var books = JSON.parse(xhr.responseText);
+            // createRequestedBooksTable(books);
         } else if (xhr.status === 403) {
             
         }
     }
 
-    xhr.open('GET', 'BorrowingStatusForStudent?' + 'libid=' + library_id + '&isbn=' + isbn + '&username=' + username);
+    xhr.open('GET', 'BorrowingStatusForStudent?' + 'username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
+}
+
+function getBorrowedBooks() {
+
+    xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+        } else if (xhr.status === 403) {
+            
+        }
+    }
+
+    xhr.open('GET', 'BorrowingStatusForStudent1?' + 'username=' + username);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+function createRequestedBooksTable(books) {
+
+    var html = '';
+
+    html += '<table class="table table-striped table-bordered table-hover table-sm">';
+    html += '<thead class="thead-dark">';
+    html += '<th>' + 'Library' + '</th>';
+    html += '<th>' + 'ISBN' + '</th>';
+    html += '<th>' + 'Title' + '</th>';
+    html += '<th>' + 'Author' + '</th>';
+    html += '<th>' + 'Return' + '</th>';
+    html += '</thead>';
+    html += '<tbody>';
+
+    for(var i = 0; i < books.length; i++) {
+        html += "<tr>";
+        html += "<td>" + books[i].library + "</td>";
+        html += "<td>" + books[i].book.isbn + "</td>";
+        html += "<td>" + books[i].book.title + "</td>";
+        html += "<td>" + books[i].book.author + "</td>";
+        html += "</tr>";
+    }
+
+    html += "</tbody></table>";
+    $('#requestedBorrowedBooksTable').html(html);
+    document.getElementById('requestedBorrowedBooks').style.display = 'block';
+
 }
