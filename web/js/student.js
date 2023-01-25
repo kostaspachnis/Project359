@@ -269,7 +269,8 @@ function getBorrowedBooks() {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(JSON.parse(xhr.responseText));
+            // console.log(xhr.responseText);
+            document.getElementById('p').innerHTML = xhr.responseText;
         } else if (xhr.status === 403) {
             
         }
