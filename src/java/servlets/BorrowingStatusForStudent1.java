@@ -77,7 +77,7 @@ public class BorrowingStatusForStudent1 extends HttpServlet {
                 BookInLibrary book = blt.databaseToBookInLibraryBasedBCID(bors.get(i).getBookcopy_id());
                 Librarian l = lt.databaseToLibrarianID(book.getLibrary_id());
                 Book b = bbt.databaseToBooksISBNBook(book.getIsbn());
-                res.put(b, l.getLibraryname());
+                res.put(bbt.bookToJSON(b), l.getLibraryname());
             }
             Gson gson = new Gson();
             String json = gson.toJson(res);

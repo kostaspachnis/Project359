@@ -72,15 +72,18 @@ public class BorrowingStatusForStudent extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             int userid = st.databaseToStudent_ret(username).getUser_id();
             ArrayList<Borrowing> bors = bt.requestedBorUser(userid);
-            ArrayList<BookInLibrary> books = new ArrayList<>();
             for (int i = 0; i < bors.size(); i++) {
                 BookInLibrary book = blt.databaseToBookInLibraryBasedBCID(bors.get(i).getBookcopy_id());
+                System.out.println("book isbn" + book.getIsbn());
                 Librarian l = lt.databaseToLibrarianID(book.getLibrary_id());
+                System.out.println("lib name" + l.getLibraryname());
                 Book b = bbt.databaseToBooksISBNBook(book.getIsbn());
-                res.put(b, l.getLibraryname());
+                System.out.println("title " + b.getTitle());
+                BorrowingBook bb = new BorrowingBook();
             }
             Gson gson = new Gson();
             String json = gson.toJson(res);
+            System.out.println("json = " + json);
             out.println(json);
             response.setStatus(200);
         } catch (SQLException ex) {
