@@ -22,8 +22,6 @@ function getUser() {
 
 function authenticate() {
 
-    getRequestedBooks();
-    getBorrowedBooks();
     document.getElementById("loginDiv").style.display="none";
     document.getElementById("logoutOpt").style.display="block";
     document.getElementById("student_div").style.display="block";
@@ -314,6 +312,6 @@ function createRequestedBooksTable(books) {
 function hideRequestedBooks() {
     document.getElementById('requestedBooksTable').style.display = 'none';
     var btn = $('#requestButton');
-    btn.value = 'Show Requested Books';
+    btn.value = 'Requested Books';
     btn.attr('onclick', 'getRequestedBooks()');
 }
