@@ -1,6 +1,7 @@
 
 
 var username;
+var borrowingStatus;
 function getUser() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -197,8 +198,6 @@ function createClosestLibrariesList(libraryList, isbn) {
 
     libraryList.sort((a, b) => (a.distance*a.duration > b.distance*b.duration) ? 1 : -1);
 
-    let user = document.getElementById('username').value;
-
     var html = '';
 
     html += '<table class="table table-striped table-bordered table-hover table-sm">';
@@ -211,11 +210,25 @@ function createClosestLibrariesList(libraryList, isbn) {
     html += '<tbody>';
 
     for(var i = 0; i < libraryList.length; i++) {
+        getBorrowingStatus(libraryList[i].library_id, isbn, borrowingStatus);
         html += "<tr>";
         html += "<td>" + libraryList[i].libraryname + "</td>";
         html += "<td>" + libraryList[i].distance + "</td>";
         html += "<td>" + libraryList[i].duration + "</td>";
-        html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + libraryList[i].library_id + ',' + isbn + ')">Borrow</button></td>';
+        switch (borrowingStatus) {
+            case 'requested':
+                html += '<td><button type="button" class="btn btn-primary" disabled>Requested</button></td>';
+                break;
+            case 'borrowed':
+                html += '<td><button type="button" class="btn btn-primary">Return</button></td>';
+                break;
+            case 'available':
+                html += '<td><button type="button" class="btn btn-success" onclick="borrowBook(' + libraryList[i].library_id + ',' + isbn + ')">Borrow</button></td>';
+                break;
+            default:
+                html += '<td><button type="button" class="btn btn-danger" disabled>Unavailable</button></td>';
+                break;
+        }
         html += "</tr>";
     }
 
@@ -240,6 +253,31 @@ function borrowBook(libraryid, isbn) {
     }
 
     xhr.open('POST', 'BorrowBookForStudent?' + 'libid=' + libraryid + '&isbn=' + isbn + '&username=' + username);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+
+function getBorrowingStatus(library_id, isbn, borrowingStatus) {
+
+    xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // requested
+            borrowingStatus = 'requested';
+        } else if(xhr.readyState === 4 && xhr.status === 201) {
+            // borrowed
+            borrowingStatus =  'borrowed';
+        } else if(xhr.readyState === 4 && xhr.status === 202) {
+            // nothing
+            borrowingStatus = 'nothing';
+        } else if (xhr.status === 403) {
+            
+        }
+    }
+
+    xhr.open('GET', 'BorrowingStatusForStudent?' + 'libid=' + library_id + '&isbn=' + isbn + '&username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
