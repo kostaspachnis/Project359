@@ -253,6 +253,7 @@ function getRequestedBooks() {
             console.log(xhr.responseText);
             // var books = JSON.parse(xhr.responseText);
             // createRequestedBooksTable(books);
+            document.getElementById('p').innerHTML = xhr.responseText;
         } else if (xhr.status === 403) {
             
         }
@@ -270,7 +271,7 @@ function getBorrowedBooks() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // console.log(xhr.responseText);
-            document.getElementById('p').innerHTML = xhr.responseText;
+            
         } else if (xhr.status === 403) {
             
         }
