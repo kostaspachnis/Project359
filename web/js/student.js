@@ -233,13 +233,13 @@ function borrowBook(libraryid, isbn) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // btn.disabled = true;
             // btn.value = 'Requested';
-            console.log('AAAAAAAAAAAAAAAa');
+            console.log("success");
         } else if (xhr.status === 403) {
             
         }
     }
 
-    xhr.open('GET', 'BorrowBooksForStudent?' + 'libid=' + libraryid + '&isbn=' + isbn + '&username=' + username);
+    xhr.open('POST', 'BorrowBookForStudent?' + 'libid=' + libraryid + '&isbn=' + isbn + '&username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }

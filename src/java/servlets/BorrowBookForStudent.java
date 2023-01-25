@@ -85,29 +85,39 @@ public class BorrowBookForStudent extends HttpServlet {
             throws ServletException, IOException {
 
         try {
+            System.out.println("Inside the servlet");
             EditStudentsTable st = new EditStudentsTable();
             String ids = request.getParameter("libid");
             int id = Integer.parseInt(ids);
+            System.out.print("libid= ");
+            System.out.println(id);
             String isbn = request.getParameter("isbn");
+            System.out.println("isbn= " + isbn);
             String idStud = request.getParameter("username");
             int idSStud = st.databaseToStudent_ret(idStud).getUser_id();
+            System.out.print("studid= ");
+            System.out.println(idSStud);
             EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
             EditBorrowingTable brt = new EditBorrowingTable();
             Date today = new Date();
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
+            SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");
             String date = formatter.format(today);
+            System.out.println("date = " + date);
 
             if (!isbn.equals("")) {
                 eblt.updateBookAv(isbn, "false", id);
                 BookInLibrary bil = eblt.retBook(isbn, id);
                 Borrowing bor = new Borrowing();
+
                 bor.setBookcopy_id(bil.getBookcopy_id());
                 bor.setUser_id(idSStud);
                 bor.setFromDate(date);
-                bor.setToDate(nextMonth(today).toString());
+                bor.setToDate(formatter.format(nextMonth(today)));
                 bor.setStatus("requested");
+
                 brt.createNewBorrowing(bor);
                 response.setStatus(200);
+                System.out.println("Successful Insertion!");
             } else {
                 response.setStatus(403);
             }
