@@ -83,7 +83,7 @@ public class BorrowingStatusForStudent1 extends HttpServlet {
                 bb.setIsbn(b.getIsbn());
                 bb.setLibrary(l.getLibraryname());
                 bb.setPhoto(b.getPhoto());
-                bb.setStatus("requested");
+                bb.setStatus("borrowed");
                 bb.setTitle(b.getTitle());
                 res.add(bb);
             }
