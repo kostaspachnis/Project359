@@ -123,6 +123,32 @@
                     </div>
                 </div>
 
+                <button type="button" class="btn btn-primary" id="commentButton" onclick="showComment();">Leave a comment for a book you have borrowed</button>
+                <div id="commentDiv" style="display: none;">
+                    <form id="commentForm" onsubmit="leaveComment(); return false;">
+                        <div class="mb-3">
+                            <label for="comment_isbn">ISBN</label>
+                            <input type="number" class="form-control" id="comment_isbn" name="comment_isbn">
+                        </div>
+
+                        <select class="custom-select" name="rating" id="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5" selected>5</option>
+                        </select>
+
+                        <div class="mb-3">
+                            <label for="comment">Comment</label>
+                            <input type="text" class="form-control" id="comment" name="comment">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideComment();">Cancel</button>
+                    </form>
+                </div>
+
+
             </div>
 
         </div>

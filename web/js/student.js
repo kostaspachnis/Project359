@@ -375,3 +375,34 @@ function returnBook(isbn, libraryid) {
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
+
+function showComment() {
+    document.getElementById('commentDiv').style.display = 'block';
+    document.getElementById('commentButton').style.display = 'none';
+}
+
+function hideComment() {
+    document.getElementById('commentDiv').style.display = 'none';
+    document.getElementById('commentButton').style.display = 'block';
+}
+
+function leaveComment(){
+
+    let isbn = document.getElementById('comment_isbn').value;
+    var comment = document.getElementById('comment').value;
+    var rating = document.getElementById('rating').value;
+
+    xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            hideComment();
+        } else if (xhr.status === 403) {
+            
+        }
+    };
+
+    xhr.open('POST', 'LeaveComment?' + 'username=' + username + '&review=' + comment + '&score=' + rating + '&isbn=' + isbn);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
