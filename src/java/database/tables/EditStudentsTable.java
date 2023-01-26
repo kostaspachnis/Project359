@@ -411,4 +411,24 @@ public class EditStudentsTable {
         }
         return null;
     }
+
+    public Student idToStud(int id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM students WHERE student_id = '" + id + "'");
+            System.out.println("SELECT * FROM students WHERE student_id = '" + id + "'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            Student user = gson.fromJson(json, Student.class);
+            return user;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 }
