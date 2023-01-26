@@ -369,7 +369,7 @@ function showUpdateLibrarian() {
     document.getElementById('updateLibrarianDiv').style.display = 'block';   
 }
 
-function hideUpdateLibrarian() {
+function cancelUpdateLibrarian() {
     document.getElementById('librarian_div').style.display = 'block';
     document.getElementById('updateLibrarianDiv').style.display = 'none';   
     document.getElementById('myForm').reset();

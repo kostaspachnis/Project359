@@ -407,7 +407,7 @@ function showUpdateStudent() {
     document.getElementById('updateStudentDiv').style.display = 'block';
 }
 
-function hideUpdateStudent() {
+function cancelUpdateStudent() {
     document.getElementById('student_div').style.display = 'block';
     document.getElementById('updateStudentDiv').style.display = 'none';
     document.getElementById('myForm').reset();
