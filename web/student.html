@@ -27,7 +27,7 @@
                     <a class="nav-link" id="logoutOpt" href="index.html" style="display: none;">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="updateOpt" href="return false;" onclick="showUpdateStudent();" style="display: none;">Update</a>
+                    <a class="nav-link" id="updateOpt" href="javascript:void(0)" onclick="showUpdateStudent();" style="display: none;">Update</a>
                 </li>
             </ul>
         </div>
@@ -157,7 +157,7 @@
 
         <div id="updateStudentDiv" style="display: none;">
 
-            <form id="myForm" name="myForm" onsubmit="">
+            <form id="myForm" name="myForm" onsubmit="updateStudent(); return false;">
 
                 <h1>Student Update</h1> <br> <br>
     
@@ -518,7 +518,7 @@
                     <input type="text" class="form-control" id="telephone" name="telephone" pattern="[0-9]+.{10,14}" title="10-14 numbers" required> <br> <br> 
                 </div>
     
-                <button type="submit" class="btn btn-primary" id="submit" onclick="updateStudent(); return false;">Update</button>
+                <button type="submit" class="btn btn-primary" id="submit">Update</button>
                 <button type="button" class="btn btn-secondary" onclick="cancelUpdateStudent();">Cancel</button>
                 <span id="message2"></span>
             </form>
