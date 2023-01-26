@@ -402,7 +402,7 @@ function leaveComment(){
         }
     };
 
-    xhr.open('POST', 'LeaveComment?' + 'username=' + username + '&review=' + comment + '&score=' + rating + '&isbn=' + isbn);
+    xhr.open('POST', 'AddReviewForStudent?' + 'username=' + username + '&review=' + comment + '&score=' + rating + '&isbn=' + isbn);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
