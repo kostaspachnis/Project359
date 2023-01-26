@@ -418,8 +418,8 @@ public class EditStudentsTable {
 
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM students WHERE student_id = '" + id + "'");
-            System.out.println("SELECT * FROM students WHERE student_id = '" + id + "'");
+            rs = stmt.executeQuery("SELECT * FROM students WHERE user_id = '" + id + "'");
+            System.out.println("SELECT * FROM students WHERE user_id = '" + id + "'");
             rs.next();
             String json = DB_Connection.getResultsToJSON(rs);
             Gson gson = new Gson();

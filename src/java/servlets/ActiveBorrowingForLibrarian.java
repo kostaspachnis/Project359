@@ -18,6 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,8 +76,10 @@ public class ActiveBorrowingForLibrarian extends HttpServlet {
         ArrayList<Borrowing> borst = new ArrayList<>();
         ArrayList<Student> sts = new ArrayList<>();
         ArrayList<String> stats = new ArrayList<>();
+        SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");
         try {
             int id = lt.databaseToLibrarianId(libname).getLibrary_id();
+            System.out.println(id);
             bors = bt.borrowed_returnedBor();
             for (int i = 0; i < bors.size(); i++) {
                 BookInLibrary bil = eblt.databaseToBookInLibraryBasedBCID(bors.get(i).getBookcopy_id());
@@ -98,20 +101,23 @@ public class ActiveBorrowingForLibrarian extends HttpServlet {
                 doc.open();
                 for (int i = 0; i < bbs.size(); i++) {
                     String first_name = sts.get(i).getFirstname();
+                    System.out.println("fn= " + first_name);
                     String last_name = sts.get(i).getLastname();
                     String university = sts.get(i).getUniversity();
                     String email = sts.get(i).getEmail();
                     String tel = sts.get(i).getTelephone();
                     String isbn = bbs.get(i).getIsbn();
+                    System.out.println(isbn);
                     Book b = ebt.databaseToBooksISBNBook(isbn);
                     String title = b.getTitle();
+                    System.out.println("title= " + title);
                     String photo = b.getPhoto();
                     String status = stats.get(i);
                     String fromdate = borst.get(i).getFromDate();
                     String todate = borst.get(i).getToDate();
                     String pdfout = "";
                     int identifier = i + 1;
-                    pdfout += "Library " + identifier + "\n";
+                    pdfout += "Borrowing Status " + identifier + "\n";
                     pdfout += "Student's First Name: " + first_name + "\n";
                     pdfout += "Student's Last Name: " + last_name + "\n";
                     pdfout += "Student's University: " + university + "\n";
@@ -122,7 +128,7 @@ public class ActiveBorrowingForLibrarian extends HttpServlet {
                     pdfout += "Book's Photo: " + photo + "\n";
                     pdfout += "Book's Borrowing Status: " + status + "\n";
                     pdfout += "Book's From Date: " + fromdate + "\n";
-                    pdfout += "Book's To Date: " + todate + "\n";
+                    pdfout += "Book's To Date: " + todate + "\n\n";
 
                     doc.add(new Paragraph(pdfout));
                 }
