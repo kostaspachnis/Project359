@@ -72,7 +72,7 @@ public class ReturnBookForStudent extends HttpServlet {
         EditStudentsTable st = new EditStudentsTable();
         int id;
         try {
-            id = lt.databaseToLibrarianId(lib).getLibrary_id();
+            id = lt.databaseToLibrarianLibName(lib).getLibrary_id();
             EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
             BookInLibrary book = eblt.retBook(isbn, id);
             int user_id = st.databaseToStudent_ret(request.getParameter("username")).getUser_id();
