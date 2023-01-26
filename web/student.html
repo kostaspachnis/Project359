@@ -121,7 +121,7 @@
                         <button id="borrowedButton" type="button" class="btn btn-primary" onclick="getBorrowedBooks(); return false;">Borrowed Books</button>
                         <div id="borrowedBooksTable" style="display: none;"></div>
                     </div>
-                </div>
+                </div> <br>
 
                 <button type="button" class="btn btn-primary" id="commentButton" onclick="showComment();">Leave a comment for a book you have borrowed</button>
                 <div id="commentDiv" style="display: none;">
@@ -131,6 +131,7 @@
                             <input type="number" class="form-control" id="comment_isbn" name="comment_isbn">
                         </div>
 
+                        <label for="rating">Rating</label>
                         <select class="custom-select" name="rating" id="rating">
                             <option value="1">1</option>
                             <option value="2">2</option>
