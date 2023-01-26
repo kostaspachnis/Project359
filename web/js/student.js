@@ -424,6 +424,8 @@ function updateStudent() {
         }
     };
 
+    var data = $('#myForm').serialize();
+
     xhr.open('POST', 'UpdateUser?' + data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
