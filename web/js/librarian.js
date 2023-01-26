@@ -28,6 +28,7 @@ function authenticate() {
 
     document.getElementById("loginDiv").style.display="none";
     document.getElementById("logoutOpt").style.display="block";
+    document.getElementById("updateOpt").style.display="block";
     document.getElementById("librarian_div").style.display="block";
     document.getElementById("book_insert").style.display="block";
     getBooks();
