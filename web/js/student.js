@@ -408,3 +408,4 @@ function leaveComment(){
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
+

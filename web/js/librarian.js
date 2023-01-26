@@ -344,3 +344,20 @@ function acceptReturn(isbn) {
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
+
+function exportPdf() {
+
+    xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            
+        } else if (xhr.status === 403) {
+            
+        }
+    };
+
+    xhr.open('GET', 'ActiveBorrowingForLibrarian?' + 'libname=' + username);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
