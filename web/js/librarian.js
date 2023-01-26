@@ -382,7 +382,6 @@ function updateLibrarian() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             hideUpdateLibrarian();
         } else if (xhr.status === 403) {
-            
         }
     };
 

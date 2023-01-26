@@ -421,7 +421,6 @@ function updateStudent() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             hideUpdateStudent();
         } else if (xhr.status === 403) {
-            $('#wrong_password').html('Wrong password');
         }
     };
 
