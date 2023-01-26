@@ -24,6 +24,7 @@ function authenticate() {
 
     document.getElementById("loginDiv").style.display="none";
     document.getElementById("logoutOpt").style.display="block";
+    document.getElementById("updateOpt").style.display="block";
     document.getElementById("student_div").style.display="block";
 }
 
@@ -34,12 +35,6 @@ function signup() {
 
 
 function searchBook() {
-
-    // let myForm = document.getElementById('bookSearchForm');
-    // let formData = new FormData(myForm);
-    // const data = {};
-    // formData.forEach((value, key) => (data[key] = value));
-    // var jsonData = JSON.stringify(data);
 
     let genre = document.getElementById('search_genre').value;
     let title = document.getElementById('search_title').value;
@@ -115,10 +110,7 @@ function requestBook(isbn) {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            
             createLibraryList(xhr.responseText, isbn);
-            //$('#librariesFoundTable').html(createLibraryList(xhr.responseText));
-            //document.getElementById('librariesFound').style.display = 'block';
         } else if (xhr.status === 403) {
             
         }
@@ -409,3 +401,30 @@ function leaveComment(){
     xhr.send();
 }
 
+
+function showUpdateStudent() {
+    document.getElementById('student_div').style.display = 'none';
+    document.getElementById('updateStudentDiv').style.display = 'block';
+}
+
+function hideUpdateStudent() {
+    document.getElementById('student_div').style.display = 'block';
+    document.getElementById('updateStudentDiv').style.display = 'none';
+    document.getElementById('myForm').reset();
+}
+
+function updateStudent() {
+
+    xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            hideUpdateStudent();
+        } else if (xhr.status === 403) {
+        }
+    };
+
+    xhr.open('POST', 'UpdateUser?' + data);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
