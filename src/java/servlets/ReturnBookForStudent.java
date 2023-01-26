@@ -8,6 +8,7 @@ package servlets;
 import database.tables.EditBooksInLibraryTable;
 import database.tables.EditBorrowingTable;
 import database.tables.EditLibrarianTable;
+import database.tables.EditStudentsTable;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -68,12 +69,13 @@ public class ReturnBookForStudent extends HttpServlet {
         String isbn = request.getParameter("isbn");
         String lib = request.getParameter("libname");
         EditLibrarianTable lt = new EditLibrarianTable();
+        EditStudentsTable st = new EditStudentsTable();
         int id;
         try {
             id = lt.databaseToLibrarianId(lib).getLibrary_id();
             EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
             BookInLibrary book = eblt.retBook(isbn, id);
-            int user_id = Integer.parseInt(request.getParameter("user_id"));
+            int user_id = st.databaseToStudent_ret(request.getParameter("username")).getUser_id();
             int copyId = book.getBookcopy_id();
 
             EditBorrowingTable bt = new EditBorrowingTable();
