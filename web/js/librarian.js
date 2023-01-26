@@ -196,3 +196,33 @@ function registerCancel() {
     document.getElementById("registerBookTitle").style.display="none";
     document.getElementById("registerBookForm").style.display="none";
 }
+
+function getreq() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+            $("#okay").html(xhr.responseText);
+        } else if (xhr.status !== 200) {
+             $("#okay").html("Error!");
+        }
+    };
+    xhr.open('GET', 'RequestedForLibrarian?libname=' + username);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+function getret() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+            $("#okay").html(xhr.responseText);
+        } else if (xhr.status !== 200) {
+             $("#okay").html("Error!");
+        }
+    };
+    xhr.open('GET', 'ReturnedForLibrarian?libname=' + username);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}

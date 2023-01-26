@@ -5,7 +5,6 @@
  */
 package servlets;
 
-import com.google.gson.Gson;
 import database.tables.EditBooksInLibraryTable;
 import database.tables.EditBooksTable;
 import database.tables.EditBorrowingTable;
@@ -27,10 +26,10 @@ import mainClasses.Borrowing;
 
 /**
  *
- * @author kostas
+ * @author kdido
  */
-@WebServlet(name = "ChangeRequestedForLibrarian", urlPatterns = {"/ChangeRequestedForLibrarian"})
-public class ShowRequestedForLibrarian extends HttpServlet {
+@WebServlet(name = "ReturnedForLibrarian", urlPatterns = {"/ReturnedForLibrarian"})
+public class ReturnedForLibrarian extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -57,7 +56,47 @@ public class ShowRequestedForLibrarian extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        EditLibrarianTable lt = new EditLibrarianTable();
+        EditBorrowingTable bt = new EditBorrowingTable();
+        EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
+        EditBooksTable ebt = new EditBooksTable();
+        try (PrintWriter out = response.getWriter()) {
+            ArrayList<Borrowing> bors = bt.returnedBor();
+
+            ArrayList<BookInLibrary> ids = new ArrayList<>();
+            int id = lt.databaseToLibrarianId(request.getParameter("libname")).getLibrary_id();
+            System.out.print("libid= ");
+            System.out.println(id);
+
+            ArrayList<BookInLibrary> books = eblt.retBooksFalse(id);
+            ArrayList<Book> res = new ArrayList<>();
+
+            int i;
+            for (i = 0; i < bors.size(); i++) {
+                for (int j = 0; j < books.size(); j++) {
+                    if (books.get(j).getBookcopy_id() == bors.get(i).getBookcopy_id()) {
+                        System.out.println(books.get(j).getBookcopy_id());
+                        System.out.println(bors.get(i).getBookcopy_id());
+                        ids.add(books.get(j));
+                    }
+                }
+            }
+
+            System.out.println(i);
+
+            for (int j = 0; j < ids.size(); j++) {
+                Book bk = ebt.databaseToBooksISBNBook(ids.get(j).getIsbn());
+                System.out.println("title= " + bk.getTitle());
+                res.add(bk);
+            }
+            out.println(ebt.booksToJson(res));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReturnedForLibrarian.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ReturnedForLibrarian.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -71,46 +110,7 @@ public class ShowRequestedForLibrarian extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String isbn = request.getParameter("isbn");
-        EditLibrarianTable lt = new EditLibrarianTable();
-        EditBorrowingTable bt = new EditBorrowingTable();
-        EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
-        EditBooksTable ebt = new EditBooksTable();
-        try (PrintWriter out = response.getWriter()) {
-            ArrayList<Borrowing> bors = bt.requestedBor();
-            ArrayList<Integer> ids = new ArrayList<>();
-            int id = lt.databaseToLibrarianId(request.getParameter("libname")).getLibrary_id();
-            ArrayList<BookInLibrary> books = eblt.retBooksFalse(id);
-            ArrayList<BookInLibrary> store = new ArrayList<>();
-            ArrayList<Book> res = new ArrayList<>();
-
-            for (int i = 0; i < bors.size(); i++) {
-                for (int j = 0; j < books.size(); j++) {
-                    if (books.get(j).getBookcopy_id() == bors.get(i).getBookcopy_id()) {
-                        ids.add(books.get(j).getBookcopy_id());
-                    }
-                }
-            }
-
-            for (int i = 0; i < ids.size(); i++) {
-                BookInLibrary b = eblt.databaseToBookInLibraryBasedBCID(ids.get(i));
-                store.add(b);
-            }
-
-            for (int i = 0; i < store.size(); i++) {
-                Book bk = ebt.databaseToBooksISBNBook(store.get(i).getIsbn());
-                res.add(bk);
-            }
-
-            Gson gson = new Gson();
-            String json = gson.toJson(res);
-            out.println(json);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowRequestedForLibrarian.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ShowRequestedForLibrarian.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // processRequest(request, response);
     }
 
     /**
