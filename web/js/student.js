@@ -333,7 +333,7 @@ function createBorrowedBooksTable(books) {
             html += "<td>" + books[i].authors + "</td>";
             html += "<td>" + books[i].library + "</td>";
             html += '<td><img src="' + books[i].photo + '" alt="book photo" width="70" height="100"></td>';
-            html += '<td><button type="button" class="btn btn-danger" onclick="returnBook(' + books[i].isbn + ', ' + library + ');">Return</button></td>';
+            html += '<td><button type="button" class="btn btn-danger" onclick="returnBook(' + books[i].isbn + ', ' + '\'' + library + '\'' + ');">Return</button></td>';
             html += "</tr>";
         }
     
