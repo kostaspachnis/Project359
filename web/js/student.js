@@ -326,13 +326,14 @@ function createBorrowedBooksTable(books) {
         html += '<tbody>';
     
         for(var i = 0; i < books.length; i++) {
+            let library = books[i].library;
             html += "<tr>";
             html += "<td>" + books[i].isbn + "</td>";
             html += "<td>" + books[i].title + "</td>";
             html += "<td>" + books[i].authors + "</td>";
             html += "<td>" + books[i].library + "</td>";
             html += '<td><img src="' + books[i].photo + '" alt="book photo" width="70" height="100"></td>'
-            html += '<td><button type="button" class="btn btn-danger" onclick="returnBook(' + books[i].isbn + ',' + books[i].library.value + ');">Return</button></td>';
+            html += '<td><button type="button" class="btn btn-danger" onclick="returnBook(' + books[i].isbn + ',' + library + ');">Return</button></td>';
             html += "</tr>";
         }
     
