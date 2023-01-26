@@ -384,6 +384,8 @@ function showComment() {
 function hideComment() {
     document.getElementById('commentDiv').style.display = 'none';
     document.getElementById('commentButton').style.display = 'block';
+    document.getElementById('comment').value = '';
+    document.getElementById('wrong_isbn').value = '';
 }
 
 function leaveComment(){
@@ -398,7 +400,7 @@ function leaveComment(){
         if (xhr.readyState === 4 && xhr.status === 200) {
             hideComment();
         } else if (xhr.status === 403) {
-            
+            $('#wrong_isbn').html('Wrong ISBN, you have not borrowed this book');
         }
     };
 
