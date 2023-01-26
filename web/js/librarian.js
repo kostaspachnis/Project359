@@ -383,7 +383,7 @@ function updateLibrarian() {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            hideUpdateLibrarian();
+            cancelUpdateLibrarian();
         } else if (xhr.status === 403) {
         }
     };

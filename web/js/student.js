@@ -419,7 +419,7 @@ function updateStudent() {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            hideUpdateStudent();
+            cancelUpdateStudent();
         } else if (xhr.status === 403) {
         }
     };
