@@ -252,7 +252,7 @@ function createRequestBooksTable(books) {
         html += "<td>" + books[i].title + "</td>";
         html += "<td>" + books[i].authors + "</td>";
         html += '<td><img src="' + books[i].photo + '" alt="book photo" width="70" height="100"></td>'
-        html += '<td><button type="button" class="btn btn-success" onclick="acceptRequest(' + books[i].isbn + ')">Accept</button></td>';
+        html += '<td><button type="button" class="btn btn-success" onclick="acceptRequest(' + books[i].isbn + ')">Accept Request</button></td>';
         html += "</tr>";
     }
 
@@ -285,7 +285,7 @@ function createReturnBooksTable(books) {
             html += "<td>" + books[i].title + "</td>";
             html += "<td>" + books[i].authors + "</td>";
             html += '<td><img src="' + books[i].photo + '" alt="book photo" width="70" height="100"></td>'
-            html += '<td><button type="button" class="btn btn-danger" onclick="acceptReturn(' + books[i].isbn + ');">Return</button></td>';
+            html += '<td><button type="button" class="btn btn-danger" onclick="acceptReturn(' + books[i].isbn + ');">Accept Return</button></td>';
             html += "</tr>";
         }
     
@@ -300,14 +300,14 @@ function createReturnBooksTable(books) {
 function hideRequestBooks() {
     document.getElementById('requestBooksTable').style.display = 'none';
     var btn = $('#requestButton');
-    btn.value = 'Request Books';
+    btn.value = 'Requested Books';
     btn.attr('onclick', 'getRequestBooks()');
 }
 
 function hideReturnBooks() {
     document.getElementById('returnBooksTable').style.display = 'none';
     var btn = $('#returnButton');
-    btn.value = 'return Books';
+    btn.value = 'Returned Books';
     btn.attr('onclick', 'getReturnBooks()');
 }
 
