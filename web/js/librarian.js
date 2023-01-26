@@ -209,7 +209,7 @@ function getRequestBooks() {
         }
     };
 
-    xhr.open('GET', 'RequestForLibrarian?libname=' + username);
+    xhr.open('GET', 'RequestedForLibrarian?libname=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
@@ -323,7 +323,7 @@ function acceptRequest(isbn) {
         }
     }
 
-    xhr.open('POST', 'AcceptRequestForLibrarian?isbn=' + isbn + '&libname=' + username);
+    xhr.open('POST', 'AcceptRequestedForLibrarian?isbn=' + isbn + '&libname=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
