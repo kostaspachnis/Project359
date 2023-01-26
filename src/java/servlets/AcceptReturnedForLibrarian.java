@@ -75,7 +75,7 @@ public class AcceptReturnedForLibrarian extends HttpServlet {
             if (bil.getAvailable().equals("false")) {
                 int bcid = bil.getBookcopy_id();
                 bortable.updateBorrowingLib(bcid, "successEnd");
-                bil.setAvailable("true");
+                eblt.updateBookAv(isbn, "true", bil.getLibrary_id());
                 response.setStatus(200);
             } else {
                 response.setStatus(403);
