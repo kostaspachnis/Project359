@@ -209,7 +209,7 @@ function getRequestBooks() {
         }
     };
 
-    xhr.open('GET', 'RequestedForLibrarian?libname=' + username);
+    xhr.open('GET', 'RequestForLibrarian?libname=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
@@ -257,11 +257,11 @@ function createRequestBooksTable(books) {
     }
 
     html += "</tbody></table>";
-    $('#requestedBooksTable').html(html);
-    document.getElementById('requestedBooksTable').style.display = 'block';
-    var btn = $('#requestedButton');
-    btn.value = 'Hide Requested Books';
-    btn.attr('onclick', 'hideRequestedBooks()');
+    $('#requestBooksTable').html(html);
+    document.getElementById('requestBooksTable').style.display = 'block';
+    var btn = $('#requestButton');
+    btn.value = 'Hide Request Books';
+    btn.attr('onclick', 'hideRequestBooks()');
 }
 
 function createReturnBooksTable(books) {
@@ -290,25 +290,25 @@ function createReturnBooksTable(books) {
         }
     
         html += "</tbody></table>";
-        $('#borrowedBooksTable').html(html);
-        document.getElementById('borrowedBooksTable').style.display = 'block';
-        var btn = $('#borrowedButton');
-        btn.value = 'Hide Borrowed Books';
-        btn.attr('onclick', 'hideBorrowedBooks()');
+        $('#returnBooksTable').html(html);
+        document.getElementById('returnBooksTable').style.display = 'block';
+        var btn = $('#returnButton');
+        btn.value = 'Hide return Books';
+        btn.attr('onclick', 'hidereturnBooks()');
 }
 
-function hideRequestedBooks() {
-    document.getElementById('requestedBooksTable').style.display = 'none';
-    var btn = $('#requestedButton');
-    btn.value = 'Requested Books';
-    btn.attr('onclick', 'getRequestedBooks()');
+function hideRequestBooks() {
+    document.getElementById('requestBooksTable').style.display = 'none';
+    var btn = $('#requestButton');
+    btn.value = 'Request Books';
+    btn.attr('onclick', 'getRequestBooks()');
 }
 
-function hideBorrowedBooks() {
-    document.getElementById('borrowedBooksTable').style.display = 'none';
-    var btn = $('#borrowedButton');
-    btn.value = 'Borrowed Books';
-    btn.attr('onclick', 'getBorrowedBooks()');
+function hideReturnBooks() {
+    document.getElementById('returnBooksTable').style.display = 'none';
+    var btn = $('#returnButton');
+    btn.value = 'return Books';
+    btn.attr('onclick', 'getreturnBooks()');
 }
 
 function acceptRequest(isbn) {
@@ -323,7 +323,7 @@ function acceptRequest(isbn) {
         }
     }
 
-    xhr.open('POST', 'AcceptRequestedForLibrarian?isbn=' + isbn + '&libname=' + username);
+    xhr.open('POST', 'AcceptRequestForLibrarian?isbn=' + isbn + '&libname=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
