@@ -23,7 +23,7 @@ import mainClasses.Student;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "ReturnCoordinatesForStudent", urlPatterns = {"/ReturnCoordinatesForStudent"})
 public class ReturnCoordinatesForStudent extends HttpServlet {

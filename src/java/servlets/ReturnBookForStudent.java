@@ -21,7 +21,7 @@ import mainClasses.BookInLibrary;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "ReturnBookForStudent", urlPatterns = {"/ReturnBookForStudent"})
 public class ReturnBookForStudent extends HttpServlet {

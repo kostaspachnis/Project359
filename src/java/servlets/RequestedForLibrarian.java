@@ -26,7 +26,7 @@ import mainClasses.Borrowing;
 
 /**
  *
- * @author kdido
+ * @author kostas
  */
 @WebServlet(name = "RequestedForLibrarian", urlPatterns = {"/RequestedForLibrarian"})
 public class RequestedForLibrarian extends HttpServlet {

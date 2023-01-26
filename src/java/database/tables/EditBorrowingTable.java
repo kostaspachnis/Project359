@@ -269,4 +269,26 @@ public class EditBorrowingTable {
         }
         return null;
     }
+
+    public ArrayList<Borrowing> requested_borrowedBorUser(int userid) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Borrowing> bors = new ArrayList<Borrowing>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM borrowing WHERE user_id='" + userid + "' AND status='requested' OR status='borrowed'");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Borrowing b = gson.fromJson(json, Borrowing.class);
+                bors.add(b);
+            }
+            return bors;
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
 }
