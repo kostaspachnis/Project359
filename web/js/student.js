@@ -332,7 +332,7 @@ function createBorrowedBooksTable(books) {
             html += "<td>" + books[i].authors + "</td>";
             html += "<td>" + books[i].library + "</td>";
             html += '<td><img src="' + books[i].photo + '" alt="book photo" width="70" height="100"></td>'
-            html += '<td><button type="button" class="btn btn-danger" onclick="">Return</button></td>';
+            html += '<td><button type="button" class="btn btn-danger" onclick="returnBook(' + books[i].isbn + ',' + books[i].library + ');">Return</button></td>';
             html += "</tr>";
         }
     
@@ -356,4 +356,21 @@ function hideBorrowedBooks() {
     var btn = $('#borrowedButton');
     btn.value = 'Borrowed Books';
     btn.attr('onclick', 'getBorrowedBooks()');
+}
+
+function returnBook(isbn, libraryid) {
+
+    xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            getBorrowedBooks();
+        } else if (xhr.status === 403) {
+            
+        }
+    };
+
+    xhr.open('POST', 'ReturnBookForStudent?' + 'libname=' + libraryid + '&isbn=' + isbn + '&username=' + username);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
 }
