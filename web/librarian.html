@@ -188,34 +188,34 @@
 
                 <div class="mb-3">
                     <label for="email">E-mail*</label> <br> 
-                    <input type="text" class="form-control" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Valid e-mail address" required>
+                    <input type="text" class="form-control" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Valid e-mail address">
                     <span id="message3"></span> <br> <br>
                 </div>
 
                 <div class="mb-3">
                     <label for="password">Password*</label> <br> 
-                    <input type="password" class="form-control" id="password" name="password" pattern="(?=^.{8,12}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="8" maxlength="12" title="8 to 12 characters, with at least one character, one number and one symbol" required/> 
+                    <input type="password" class="form-control" id="password" name="password" pattern="(?=^.{8,12}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="8" maxlength="12" title="8 to 12 characters, with at least one character, one number and one symbol"/> 
                     <span id="message1"></span> <br> <br>
                 </div>
 
                 <div class="mb-3">
                     <label for="firstname">Firstname*</label> <br> 
-                    <input type="text" class="form-control" id="firstname" name="firstname" pattern="[a-zA-Z]{3,30}" title="3-30 characters" required> <br> <br> 
+                    <input type="text" class="form-control" id="firstname" name="firstname" pattern="[a-zA-Z]{3,30}" title="3-30 characters"> <br> <br> 
                 </div>
 
                 <div class="mb-3">
                     <label for="lastname">Lastname*</label> <br> 
-                    <input type="text" class="form-control" id="lastname" name="lastname" pattern="[a-zA-Z]{3,30}" title="3-30 characters" required> <br> <br> 
+                    <input type="text" class="form-control" id="lastname" name="lastname" pattern="[a-zA-Z]{3,30}" title="3-30 characters"> <br> <br> 
                 </div>
 
                 <div class="mb-3">
                     <label for="birthdate">Birthday*</label> <br> 
-                    <input type="date" class="form-control" id="birthdate" name="birthdate" value="1980-01-01" min="1920-01-01" max="2006-12-31" required> <br> <br> 
+                    <input type="date" class="form-control" id="birthdate" name="birthdate" value="1980-01-01" min="1920-01-01" max="2006-12-31"> <br> <br> 
                 </div>
 
                 <div class="mb-3">
                     <label for="gender">Gender*</label> <br> 
-                    <select class="custom-select" id="gender" name="gender" required>
+                    <select class="custom-select" id="gender" name="gender">
                         <option selected>Select</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -225,21 +225,21 @@
 
                 <div class="mb-3">
                     <label for="personalpage">Social Media*</label> <br>
-                    <input type="url" class="form-control" id="personalpage" name="personalpage" required> <br> <br>
+                    <input type="url" class="form-control" id="personalpage" name="personalpage"> <br> <br>
                 </div>
 
                 <div class="mb-3">
                     <label for="libraryname">Library Name*</label> <br>
-                    <input type="text" class="form-control" id="libraryname" name="libraryname" required> <br> <br>
+                    <input type="text" class="form-control" id="libraryname" name="libraryname"> <br> <br>
                 </div>
 
                 <div class="mb-3">
                     <label for="libraryinfo">Info and Timetable*</label> <br>
-                    <textarea class="form-control" id="libraryinfo" name="libraryinfo" rows="4" cols="50" required></textarea>
+                    <textarea class="form-control" id="libraryinfo" name="libraryinfo" rows="4" cols="50"></textarea>
                 </div>
 
                 <label for="country">Country*</label> <br> 
-                <select class="custom-select" id="country" name="country" required>
+                <select class="custom-select" id="country" name="country">
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Åland Islands">Åland Islands</option>
                     <option value="Albania">Albania</option>
@@ -488,28 +488,28 @@
 
                 <div class="mb-3">
                     <label for="city">Town*</label> <br> 
-                    <input type="text" class="form-control" id="city" name="city" pattern="[a-zA-Z]+.{3,20}" title="3-20 characters" required> <br> <br>
+                    <input type="text" class="form-control" id="city" name="city" pattern="[a-zA-Z]+.{3,20}" title="3-20 characters"> <br> <br>
                 </div>
 
                 <div class="mb-3">
                     <label for="address">Home Address*</label> <br> 
-                    <input type="text" class="form-control" id="address" name="address" pattern="[a-zA-Z]+.{5,50}" title="5-50 characters" required/>
+                    <input type="text" class="form-control" id="address" name="address" pattern="[a-zA-Z]+.{5,50}" title="5-50 characters"/>
                     <span id="message6"></span> <br> <br>
                 </div>
 
                 <div class="mb-3">
                     <label for="lon">Lon*</label> <br>
-                    <input type="text" class="form-control" id="lon" name="lon" required> <br> <br>
+                    <input type="text" class="form-control" id="lon" name="lon"> <br> <br>
                 </div>
 
                 <div class="mb-3">
                     <label for="lat">Lat*</label> <br>
-                    <input type="text" class="form-control" id="lat" name="lat" required> <br> <br>
+                    <input type="text" class="form-control" id="lat" name="lat"> <br> <br>
                 </div>
                 
                 <div class="mb-3">
                     <label for="telephone">Phone Number*</label> <br> 
-                    <input type="text" class="form-control" id="telephone" name="telephone" pattern="[0-9]+.{10,14}" title="10-14 numbers" required> <br> <br> 
+                    <input type="text" class="form-control" id="telephone" name="telephone" pattern="[0-9]+.{10,14}" title="10-14 numbers"> <br> <br> 
                 </div>
 
                 <button type="submit" class="btn btn-primary" id="submit">Update</button>
