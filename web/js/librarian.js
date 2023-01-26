@@ -390,7 +390,7 @@ function updateLibrarian() {
 
     var data = $('#myForm').serialize();
 
-    xhr.open('POST', 'UpdateLibrarian?' + data);
+    xhr.open('POST', 'UpdateLibrarian?' + data + '&username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send(data);
 }

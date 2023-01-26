@@ -162,12 +162,6 @@
                 <h1>Student Update</h1> <br> <br>
     
                 <div class="mb-3">
-                    <label for="email">E-mail*</label> <br> 
-                    <input type="text" class="form-control" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Valid e-mail address" >
-                    <span id="message3"></span> <br> <br>
-                </div>
-    
-                <div class="mb-3">
                     <label for="password">Password*</label> <br> 
                     <input type="password" class="form-control" id="password" name="password" pattern="(?=^.{8,12}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="8" maxlength="12" title="8 to 12 characters, with at least one character, one number and one symbol" /> 
                     <span id="message1"></span> <br> <br>
@@ -196,46 +190,6 @@
                         <option value="female">Female</option>
                         <option value="other">Other</option>
                     </select> <br> <br>
-                </div>
-    
-                <div class="mb-3">
-                    <label for="student_type">Student Type:</label> <br> 
-                    <select class="custom-select" id="student_type" name="student_type">
-                        <option selected>Select</option>
-                        <option value="BSc">Undergraduate</option>
-                        <option value="MSc">Postgraduate</option>
-                        <option value="PhD">PHD</option>
-                    </select>
-                    <span id="message5"></span> <br> <br>
-                </div>
-    
-                <div class="mb-3">
-                    <label for="student_id">Pass Number*</label> <br> 
-                    <input type="text" class="form-control" id="student_id" name="student_id" pattern="[0-9]{12}" title="12 numbers" > <br> <br>
-                </div>
-    
-                <div class="mb-3">
-                    <label for="student_id_from_date">Pass Start*</label> <br> 
-                    <input type="date" class="form-control" id="student_id_from_date" name="student_id_from_date" min="2016-01-01" > <br> <br>
-                </div>
-    
-                <div class="mb-3">
-                    <label for="student_id_to_date">Pass End*</label> <br> 
-                    <input type="date" class="form-control" id="student_id_to_date" name="student_id_to_date" min="2023-01-01" >
-                    <span id="message4"></span> <br> <br>
-                </div>
-    
-                <label for="university">Uni in Crete*</label> <br>
-                <select class="custom-select" id="university"  name="university" > 
-                    <option selected>Select</option>
-                    <option value="UOC">UOC</option>
-                    <option value="HELMEPA">HELMEPA</option>
-                    <option value="TUC">TUC</option>
-                </select> <br> <br>
-    
-                <div class="mb-3">
-                    <label for="department">Department*</label> <br> 
-                    <input type="text" class="form-control" id="department" name="department" pattern="[a-zA-Z]{3,50}" title="3-50 characters" > <br> <br>
                 </div>
     
                 <div class="mb-3">
@@ -502,15 +456,15 @@
                     <input type="text" class="form-control" id="address" name="address" pattern="[a-zA-Z]+.{5,50}" title="5-50 characters" />
                     <span id="message6"></span> <br> <br>
                 </div>
+
+                <div class="mb-3">
+                    <label for="lat">Lat*</label> <br>
+                    <input type="text" class="form-control" id="lat" name="lat" > <br> <br>
+                </div>
     
                 <div class="mb-3">
                     <label for="lon">Lon*</label> <br>
                     <input type="text" class="form-control" id="lon" name="lon" > <br> <br>
-                </div>
-    
-                <div class="mb-3">
-                    <label for="lat">Lat*</label> <br>
-                    <input type="text" class="form-control" id="lat" name="lat" > <br> <br>
                 </div>
                 
                 <div class="mb-3">
