@@ -415,23 +415,17 @@ function hideUpdateStudent() {
 
 function updateStudent() {
 
-    var name = document.getElementById('name').value;
-    var surname = document.getElementById('surname').value;
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-
     xhr = new XMLHttpRequest();
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             hideUpdateStudent();
-            getStudent();
         } else if (xhr.status === 403) {
             $('#wrong_password').html('Wrong password');
         }
     };
 
-    xhr.open('POST', 'UpdateUser?' + 'username=' + username + '&name=' + name + '&surname=' + surname + '&email=' + email + '&password=' + password);
+    xhr.open('POST', 'UpdateUser?' + data);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }

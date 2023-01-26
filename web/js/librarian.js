@@ -361,3 +361,34 @@ function exportPdf() {
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
+
+
+function showUpdateLibrarian() {
+    document.getElementById('librarian_div').style.display = 'none';
+    document.getElementById('updateLibrarianDiv').style.display = 'block';   
+}
+
+function hideUpdateLibrarian() {
+    document.getElementById('librarian_div').style.display = 'block';
+    document.getElementById('updateLibrarianDiv').style.display = 'none';   
+    document.getElementById('myForm').reset();
+}
+
+function updateLibrarian() {
+
+    xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            hideUpdateLibrarian();
+        } else if (xhr.status === 403) {
+            
+        }
+    };
+
+    var data = $('#myForm').serialize();
+
+    xhr.open('POST', 'UpdateLibrarian' + data);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send(data);
+}

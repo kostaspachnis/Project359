@@ -26,7 +26,7 @@
                 <li class="nav-item">
                     <a class="nav-link" id="logoutOpt" href="index.html" style="display: none;">Logout</a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a class="nav-link" id="updateOpt" href="" onclick="showUpdateStudent();" style="display: none;">Update</a>
                 </li>
             </ul>
@@ -155,7 +155,7 @@
             </div>
         </div>
 
-        <div id="updateStudent" style="display: none;">
+        <div id="updateStudentDiv" style="display: none;">
 
             <form id="myForm" name="myForm" onsubmit="updateStudent(); return false;">
 
@@ -521,7 +521,6 @@
                 <button type="submit" class="btn btn-primary" id="submit">Update</button>
                 <button type="button" class="btn btn-secondary" onclick="cancelUpdateStudent();">Cancel</button>
                 <span id="message2"></span>
-                <div id="ajaxContent"></div>
             </form>
 
         </div>
