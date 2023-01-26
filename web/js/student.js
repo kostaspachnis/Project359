@@ -426,7 +426,7 @@ function updateStudent() {
 
     var data = $('#myForm').serialize();
 
-    xhr.open('POST', 'UpdateUser?' + data);
+    xhr.open('POST', 'UpdateUser?' + data + '&username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
 }
