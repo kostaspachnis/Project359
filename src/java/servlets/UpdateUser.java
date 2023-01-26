@@ -62,20 +62,20 @@ public class UpdateUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username_new");
-        String password = request.getParameter("password_new");
-        String address = request.getParameter("address_new");
-        String personalpage = request.getParameter("personalpage_new");
-        String gender = request.getParameter("gender_new");
-        String birthdate = request.getParameter("birthdate_new");
-        String country = request.getParameter("country_new");
-        String city = request.getParameter("city_new");
-        String phone = request.getParameter("telephone_new");
-        String firstname = request.getParameter("firstname_new");
-        String lastname = request.getParameter("lastname_new");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String address = request.getParameter("address");
+        String personalpage = request.getParameter("personalpage");
+        String gender = request.getParameter("gender");
+        String birthdate = request.getParameter("birthdate");
+        String country = request.getParameter("country");
+        String city = request.getParameter("city");
+        String phone = request.getParameter("telephone");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
         System.out.print(firstname + "----------------" + lastname);
-        String lon = request.getParameter("lon_new");
-        String lat = request.getParameter("lat_new");
+        String lon = request.getParameter("lon");
+        String lat = request.getParameter("lat");
         PrintWriter out = response.getWriter();
         Student student = new Student();
 

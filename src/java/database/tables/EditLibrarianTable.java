@@ -295,10 +295,10 @@ public class EditLibrarianTable {
     }
 
     // Update Librarian Functions (Project Functions)
-    public void updateLibrarianEmail(String username, String email) throws SQLException, ClassNotFoundException {
+    public void updateLibrarianBirthdate(String username, String birthdate) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        String update = "UPDATE librarians SET email='" + email + "' WHERE username = '" + username + "'";
+        String update = "UPDATE librarians SET birthdate='" + birthdate + "' WHERE username = '" + username + "'";
         stmt.executeUpdate(update);
     }
 

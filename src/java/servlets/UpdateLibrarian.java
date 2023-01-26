@@ -62,21 +62,21 @@ public class UpdateLibrarian extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username_new");
-        String email = request.getParameter("email_new");
-        String password = request.getParameter("password_new");
-        String address = request.getParameter("address_new");
-        String personalpage = request.getParameter("personalpage_new");
-        String gender = request.getParameter("gender_new");
-        String libname = request.getParameter("libname_new");
-        String libinfo = request.getParameter("libinfo_new");
-        String country = request.getParameter("country_new");
-        String city = request.getParameter("city_new");
-        String phone = request.getParameter("telephone_new");
-        String firstname = request.getParameter("firstname_new");
-        String lastname = request.getParameter("lastname_new");
-        String lon = request.getParameter("lon_new");
-        String lat = request.getParameter("lat_new");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String address = request.getParameter("address");
+        String personalpage = request.getParameter("personalpage");
+        String gender = request.getParameter("gender");
+        String libname = request.getParameter("libraryname");
+        String libinfo = request.getParameter("libraryinfo");
+        String country = request.getParameter("country");
+        String city = request.getParameter("city");
+        String phone = request.getParameter("telephone");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String lon = request.getParameter("lon");
+        String lat = request.getParameter("lat");
+        String birthdate = request.getParameter("birthdate");
         PrintWriter out = response.getWriter();
         Librarian librarian = new Librarian();
 
@@ -84,8 +84,9 @@ public class UpdateLibrarian extends HttpServlet {
 
         try {
             
-            if(!email.equals(""))
-                   libTable.updateLibrarianEmail(username, email);
+            if (!birthdate.equals("")) {
+                libTable.updateLibrarianBirthdate(username, birthdate);
+            }
             
             if (!password.equals("")) {
                 libTable.updateLibrarianPass(username, password);
