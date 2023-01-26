@@ -210,7 +210,7 @@ public class EditBorrowingTable {
         ArrayList<Borrowing> bors = new ArrayList<Borrowing>();
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM borrowing WHERE status='successEnd' AND userid='" + userid + "'");
+            rs = stmt.executeQuery("SELECT * FROM borrowing WHERE status='successEnd' AND user_id='" + userid + "'");
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 Gson gson = new Gson();

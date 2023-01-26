@@ -73,6 +73,7 @@ public class AddReviewForStudent extends HttpServlet {
         String isbn = request.getParameter("isbn");
         String student_username = request.getParameter("username");
         String reviewtxt = request.getParameter("review");
+        System.out.println(reviewtxt);
         String score = request.getParameter("score");
         EditStudentsTable st = new EditStudentsTable();
         EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
