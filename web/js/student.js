@@ -248,7 +248,6 @@ function getRequestedBooks() {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            $('#okay').html(xhr.responseText);
             createRequestedBooksTable(xhr.responseText);
         } else if (xhr.status === 403) {
             
