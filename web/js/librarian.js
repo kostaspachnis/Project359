@@ -294,7 +294,7 @@ function createReturnBooksTable(books) {
         document.getElementById('returnBooksTable').style.display = 'block';
         var btn = $('#returnButton');
         btn.value = 'Hide return Books';
-        btn.attr('onclick', 'hidereturnBooks()');
+        btn.attr('onclick', 'hideReturnBooks()');
 }
 
 function hideRequestBooks() {
@@ -308,7 +308,7 @@ function hideReturnBooks() {
     document.getElementById('returnBooksTable').style.display = 'none';
     var btn = $('#returnButton');
     btn.value = 'return Books';
-    btn.attr('onclick', 'getreturnBooks()');
+    btn.attr('onclick', 'getReturnBooks()');
 }
 
 function acceptRequest(isbn) {
