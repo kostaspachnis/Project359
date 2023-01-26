@@ -79,20 +79,29 @@ public class AddReviewForStudent extends HttpServlet {
         EditReviewsTable rt = new EditReviewsTable();
         EditBorrowingTable bt = new EditBorrowingTable();
         try {
+            int no_match = 0;
             int id = st.databaseToStudent_ret(student_username).getUser_id();
             ArrayList<Borrowing> bors = bt.successUserBor(id);
-            ArrayList<BookInLibrary> bls = new ArrayList<>();
             for (int i = 0; i < bors.size(); i++) {
-                if (bors.get(i).getUser_id() == id) {
-                    
+                int search_id = bors.get(i).getBookcopy_id();
+                BookInLibrary b = eblt.databaseToBookInLibraryBasedBCID(search_id);
+                if (b.getIsbn().equals(isbn) && b.getAvailable().equals("true")) {
+                    Review rev = new Review();
+                    rev.setIsbn(isbn);
+                    rev.setReviewScore(score);
+                    rev.setReviewText(reviewtxt);
+                    rev.setUser_id(id);
+                    rt.createNewReview(rev);
+                    break;
+                } else {
+                    no_match += 1;
                 }
             }
-            Review rev = new Review();
-            rev.setIsbn(isbn);
-            rev.setReviewScore(score);
-            rev.setReviewText(reviewtxt);
-            rev.setUser_id(id);
-            rt.createNewReview(rev);
+            if (no_match == 0) {
+                response.setStatus(200);
+            } else {
+                response.setStatus(403);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(AddReviewForStudent.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
