@@ -77,7 +77,7 @@ public class ThreeDaysNoticeForStudent extends HttpServlet {
                 Date datetodate = formatter.parse(todate);
                 long millies = Math.abs(datetodate.getTime() - today.getTime());
                 long diffdays = TimeUnit.DAYS.convert(millies, TimeUnit.MILLISECONDS);
-                if (diffdays == 3) {
+                if (diffdays <= 3) {
                     Book b = bt.databaseToBooksISBNBook(eblt.databaseToBookInLibraryBasedBCID(bors.get(i).getBookcopy_id()).getIsbn());
                     res.add(b);
                 }
