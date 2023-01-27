@@ -366,13 +366,13 @@ function exportPdf() {
 
 function showUpdateLibrarian() {
     document.getElementById('librarian_div').style.display = 'none';
-    document.getElementById('book_instert').style.display = 'none';
+    document.getElementById('book_insert').style.display = 'none';
     document.getElementById('updateLibrarianDiv').style.display = 'block';   
 }
 
 function cancelUpdateLibrarian() {
     document.getElementById('librarian_div').style.display = 'block';
-    document.getElementById('book_instert').style.display = 'block';
+    document.getElementById('book_insert').style.display = 'block';
     document.getElementById('updateLibrarianDiv').style.display = 'none';   
     document.getElementById('myForm').reset();
 }
