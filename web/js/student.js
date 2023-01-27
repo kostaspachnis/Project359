@@ -443,6 +443,8 @@ function getNotifications() {
             console.log(xhr.responseText);
             console.log('AAAAAAA');
             createNotificationsTable(xhr.responseText);
+        } else if (xhr.status === 200) {
+            console.log('BBBBBBB');
         } else if (xhr.status === 403) {
         }
     };
