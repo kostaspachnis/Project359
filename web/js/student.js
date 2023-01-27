@@ -440,6 +440,7 @@ function getNotifications() {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 201) {
+            console.log(xhr.responseText);
             createNotificationsTable(xhr.responseText);
         } else if (xhr.status === 403) {
         }
