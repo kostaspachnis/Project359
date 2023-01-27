@@ -279,8 +279,21 @@ public class EditBorrowingTable {
             rs = stmt.executeQuery("SELECT * FROM borrowing WHERE user_id='" + userid + "' AND status='requested' OR status='borrowed'");
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
+                int fr = json.indexOf("fromdate");
+                int to = json.indexOf("todate");
+                int i = fr + 11, j = to + 9;
+                int i_end = fr + 21, j_end = to + 19;
+                String fromdate = "", todate = "";
+                while (i < i_end && j < j_end) {
+                    fromdate += json.charAt(i);
+                    todate += json.charAt(j);
+                    i++;
+                    j++;
+                }
                 Gson gson = new Gson();
                 Borrowing b = gson.fromJson(json, Borrowing.class);
+                b.setFromDate(fromdate);
+                b.setToDate(todate);
                 bors.add(b);
             }
             return bors;
