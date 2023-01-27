@@ -276,7 +276,7 @@ public class EditBorrowingTable {
         ArrayList<Borrowing> bors = new ArrayList<Borrowing>();
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM borrowing WHERE user_id='" + userid + "' AND status='requested' OR status='borrowed'");
+            rs = stmt.executeQuery("SELECT * FROM borrowing WHERE user_id='" + userid + "' AND (status='requested' OR status='borrowed')");
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 int fr = json.indexOf("fromdate");
