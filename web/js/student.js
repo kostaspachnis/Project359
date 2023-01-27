@@ -110,6 +110,7 @@ function requestBook(isbn) {
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
             createLibraryList(xhr.responseText, isbn);
         } else if (xhr.status === 403) {
             
