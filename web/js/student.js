@@ -26,6 +26,7 @@ function authenticate() {
     document.getElementById("logoutOpt").style.display="block";
     document.getElementById("updateOpt").style.display="block";
     document.getElementById("student_div").style.display="block";
+    getNotifications();
 }
 
 
@@ -430,4 +431,46 @@ function updateStudent() {
     xhr.open('POST', 'UpdateUser?' + data + '&username=' + username);
     xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xhr.send();
+}
+
+
+function getNotifications() {
+
+    xhr = new XMLHttpRequest();
+
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 201) {
+            createNotificationsTable(xhr.responseText);
+        } else if (xhr.status === 403) {
+        }
+    };
+
+    xhr.open('GET', 'ThreeDaysNoticeForStudent?' + 'username=' + username);
+    xhr.send();
+}
+
+
+function createNotificationsTable(books) {
+
+    books = JSON.parse(books);
+
+    var html = '';
+
+    html += '<table class="table table-striped table-bordered table-hover table-sm">';
+    html += '<thead class="thead-dark">';
+    html += '<th>' + 'ISBN' + '</th>';
+    html += '<th>' + 'Title' + '</th>';
+    html += '</thead>';
+    html += '<tbody>';
+
+    for(var i = 0; i < books.length; i++) {
+        html += '<tr class="table-danger">';
+        html += "<td>" + books[i].isbn + "</td>";
+        html += "<td>" + books[i].title + "</td>";
+        html += "</tr>";
+    }
+
+    html += "</tbody></table>";
+    $('#notificationsTable').html(html);
+    document.getElementById('notifications').style.display = 'block';
 }
