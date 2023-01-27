@@ -100,7 +100,7 @@ public class BorrowBookForStudent extends HttpServlet {
             EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
             EditBorrowingTable brt = new EditBorrowingTable();
             Date today = new Date();
-            SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String date = formatter.format(today);
             System.out.println("date = " + date);
 

@@ -68,17 +68,21 @@ public class ThreeDaysNoticeForStudent extends HttpServlet {
         EditBooksTable bt = new EditBooksTable();
         EditBooksInLibraryTable eblt = new EditBooksInLibraryTable();
         Date today = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try (PrintWriter out = response.getWriter()) {
             int id = st.databaseToStudent_ret(username).getUser_id();
+            System.out.println(id);
             bors = ebt.requested_borrowedBorUser(id);
             for (int i = 0; i < bors.size(); i++) {
+                System.out.println(bors.get(i).getUser_id());
                 String todate = bors.get(i).getToDate();
+                System.out.println("date= " + todate);
                 Date datetodate = formatter.parse(todate);
                 long millies = Math.abs(datetodate.getTime() - today.getTime());
                 long diffdays = TimeUnit.DAYS.convert(millies, TimeUnit.MILLISECONDS);
                 if (diffdays <= 3) {
                     Book b = bt.databaseToBooksISBNBook(eblt.databaseToBookInLibraryBasedBCID(bors.get(i).getBookcopy_id()).getIsbn());
+                    System.out.println("title= " + b.getTitle());
                     res.add(b);
                 }
             }
