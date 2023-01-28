@@ -9,7 +9,7 @@ function getUser() {
             username = document.getElementById("username").value;
             authenticate();
         } else if (xhr.status !== 201) {
-
+            alert("Wrong username or password");
         }
     };
     

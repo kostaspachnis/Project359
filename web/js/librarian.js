@@ -6,10 +6,9 @@ function getUser() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 202) {
-            // $("#ajaxContent1").html(createTableFromJSON(JSON.parse(xhr.responseText)));
             authenticate();
         } else if (xhr.status !== 202) {
-            // $("#ajaxContent1").html("User not exists or incorrect password");
+            alert('Wrong username or password');
         }
     };
     username = document.getElementById("username").value;

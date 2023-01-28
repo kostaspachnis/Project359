@@ -15,6 +15,8 @@ function authenticate() {
         document.getElementById("loginDiv").style.display="none";
         document.getElementById("adminDiv").style.display="block";
         document.getElementById("logoutOpt").style.display="block";
+    } else {
+        alert("Wrong username or password!");
     }
 }
 
