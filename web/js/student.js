@@ -522,33 +522,12 @@ function passwordStrength() {
 }
 
 
-function passCheck() {
-
-    var start = document.getElementById('student_id_from_date').value;
-    var end = document.getElementById('student_id_to_date').value;
-
-    if(start > end) {
-        alert('Start date cannot be after end date!');
-        return false;
-    }
-
-    if(end.getFullYear() - start.getFullYear() >= 7) {
-        alert('You cannot have a period longer than 6 years!');
-        return false;
-    }
-
-    return true;
-}
 
 
 function validate() {
 
     if(!passwordStrength()) {
         alert('Password is too weak!');
-        return false;
-    }
-
-    if(!passCheck()) {
         return false;
     }
 
