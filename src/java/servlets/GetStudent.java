@@ -54,7 +54,7 @@ public class GetStudent extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String password = request.getParameter("password_in");
         try (PrintWriter out = response.getWriter()) {
             EditStudentsTable eut = new EditStudentsTable();
             EditLibrarianTable elt = new EditLibrarianTable();
