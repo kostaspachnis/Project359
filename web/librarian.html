@@ -187,9 +187,11 @@
                 <h1>Librarian Update</h1><br><br>
 
                 <div class="mb-3">
-                    <label for="password">Password*</label> <br> 
-                    <input type="password" class="form-control" id="password" name="password" pattern="(?=^.{8,12}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="8" maxlength="12" title="8 to 12 characters, with at least one character, one number and one symbol" /> 
-                    <span id="message1"></span> <br> <br>
+                    <label>Password:</label><br>
+                    <input type="password" class="form-control" id="password" pattern="(?=^.{8,12}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Za-z]).*$" title="Password should be 8 to 12 characters, at least one upper and one lower, one number and one sympol" onkeyup="passwordStrength();" required>
+                    <i class="fa-regular fa-eye" id="toggle" onclick="passwordToggle();"></i>
+                    <br>
+                    <span id="strength"></span>
                 </div>
 
                 <div class="mb-3">
@@ -489,6 +491,12 @@
                     <label for="address">Home Address*</label> <br> 
                     <input type="text" class="form-control" id="address" name="address" pattern="[a-zA-Z]+.{5,50}" title="5-50 characters"/>
                     <span id="message6"></span> <br> <br>
+                </div>
+
+                <div class="label-input">
+                    <button type="button" class="btn btn-primary" id="map-button" onclick="request();">Show map</button>
+                    <label id="map-message"></label>
+                    <div id="map"></div>
                 </div>
 
                 <div class="mb-3">

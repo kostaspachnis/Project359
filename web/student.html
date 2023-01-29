@@ -8,6 +8,8 @@
     <meta name="keywords" content="Library">
     <script src="js/student.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script src="https://kit.fontawesome.com/cf577ef12d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
@@ -41,12 +43,12 @@
                 <h1>Student Login</h1> <br>
 
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username">
+                    <label for="username_in" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username_in" name="username_in">
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <label for="password_in" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password_in" name="password_in">
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
                 <button type="button" class="btn btn-link" onclick="signup(); return false;">Sign up</button>
@@ -162,14 +164,16 @@
 
         <div id="updateStudentDiv" style="display: none;">
 
-            <form id="myForm" name="myForm" onsubmit="updateStudent(); return false;">
+            <form id="myForm" name="myForm" onsubmit="if(validate()) updateStudent(); return false;">
 
                 <h1>Student Update</h1> <br> <br>
     
                 <div class="mb-3">
-                    <label for="password">Password*</label> <br> 
-                    <input type="password" class="form-control" id="password" name="password" pattern="(?=^.{8,12}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="8" maxlength="12" title="8 to 12 characters, with at least one character, one number and one symbol" /> 
-                    <span id="message1"></span> <br> <br>
+                    <label>Password:</label><br>
+                    <input type="password" class="form-control" id="password" pattern="(?=^.{8,12}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Za-z]).*$" title="Password should be 8 to 12 characters, at least one upper and one lower, one number and one sympol" onkeyup="passwordStrength();" required>
+                    <i class="fa-regular fa-eye" id="toggle" onclick="passwordToggle();"></i>
+                    <br>
+                    <span id="strength"></span>
                 </div>
     
                 <div class="mb-3">
@@ -460,6 +464,12 @@
                     <label for="address">Home Address*</label> <br> 
                     <input type="text" class="form-control" id="address" name="address" pattern="[a-zA-Z]+.{5,50}" title="5-50 characters" />
                     <span id="message6"></span> <br> <br>
+                </div>
+
+                <div class="label-input">
+                    <button type="button" class="btn btn-primary" id="map-button" onclick="request();">Show map</button>
+                    <label id="map-message"></label>
+                    <div id="map"></div>
                 </div>
 
                 <div class="mb-3">
