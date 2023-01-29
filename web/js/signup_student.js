@@ -76,19 +76,19 @@ function mailCheck() {
 
     switch(uni) {
         case 'UOC':
-            if(!document.getElementById('email').value.includes('@uoc.gr')) {
+            if(!document.getElementById('email').value.includes('uoc.gr')) {
                 alert('Email is not from UOC!');
                 return false;
             }
             break;
         case 'TUC':
-            if(!document.getElementById('email').value.includes('@tuc.gr')) {
+            if(!document.getElementById('email').value.includes('tuc.gr')) {
                 alert('Email is not from TUC!');
                 return false;
             }
             break;
         case 'HELMEPA':
-            if(!document.getElementById('email').value.includes('@helmepa.gr')) {
+            if(!document.getElementById('email').value.includes('helmepa.gr')) {
                 alert('Email is not from HELMEP!');
                 return false;
             }
