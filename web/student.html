@@ -170,7 +170,7 @@
     
                 <div class="mb-3">
                     <label>Password:</label><br>
-                    <input type="password" class="form-control" id="password" pattern="(?=^.{8,12}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Za-z]).*$" title="Password should be 8 to 12 characters, at least one upper and one lower, one number and one sympol" onkeyup="passwordStrength();" required>
+                    <input type="password" class="form-control" id="password" name="password" pattern="(?=^.{8,12}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Za-z]).*$" title="Password should be 8 to 12 characters, at least one upper and one lower, one number and one sympol" onkeyup="passwordStrength();" required>
                     <i class="fa-regular fa-eye" id="toggle" onclick="passwordToggle();"></i>
                     <br>
                     <span id="strength"></span>
