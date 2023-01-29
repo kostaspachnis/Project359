@@ -108,10 +108,10 @@ function passCheck() {
         return false;
     }
 
-    if(end.getFullYear() - start.getFullYear() >= 7) {
-        alert('You cannot have a period longer than 6 years!');
-        return false;
-    }
+    // if(end.getFullYear() - start.getFullYear() >= 7) {
+    //     alert('You cannot have a period longer than 6 years!');
+    //     return false;
+    // }
 
     return true;
 }
